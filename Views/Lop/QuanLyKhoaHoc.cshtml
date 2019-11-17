@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Quản lý Khóa học";
+}
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/LopStyles.css" rel="stylesheet">
+<h2 class="bold-center">QUẢN LÝ KHÓA HỌC</h2>
+<hr />
+<button id="themKhoaHoc" class="btn btn-primary " style="font-size: 2rem">Thêm khóa học</button>
+<hr />
+<table class="table table-bordered table-striped" id="danhSachKhoaHoc" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Tên khóa</th>
+            <th>Năm bắt đầu</th>
+            <th>Năm kết thúc</th>
+            <th>Quản lý</th>
+        </tr>
+    </thead>
+</table>
+<hr />
+<h2>Danh sách lớp</h2>
+<table class="table table-bordered table-striped" id="danhSachLop" style="width: 50%;margin:auto">
+    <thead>
+        <tr>
+            <th>Tên lớp</th>
+            <th>Ghi chú</th>
+        </tr>
+    </thead>
+</table>
+<hr />
+<div class="modal fade" id="SaveKhoaHocModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SaveKhoaHocModal-title" style="font-size: 35px"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="khoaHocForm">
+                    <div hidden>
+                        <input type="text" value="0" id="khoaHocId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="tenKhoaHoc" style="font-size: 30px;">Tên Khóa học</label>
+                        <input value="" name="tenKhoaHoc" id="tenKhoaHoc" type="text" class="form-control" style="max-width: 50%;" maxlength="50"/>                        
+                        <small id="tenKhoaHocLimit"></small>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <label for="namBatDau" style="font-size: 30px; display: block;margin-bottom: 0">Năm bắt đầu</label>
+                            <small>Năm học thường bắt đầu từ 15/08 của năm</small>
+                            <div class="form-group">
+                                <input type="date" name="namBatDau" id="namBatDau" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <label for="namKetThuc" style="font-size: 30px;display: block;margin-bottom: 0">Năm kết thúc</label>
+                            <small>Năm học thường kết thúc vào 30/07 của năm</small>
+                            <div class="form-group">
+                                <input type="date" name="namKetThuc" id="namKetThuc" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="saveKhoaHoc">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/SiteScript/services/LopService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/LopController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            showTabQuanLy("quanLyLopMenu", 0);
+            QuanLyKhoaHocController.initTrang();
+        });
+    </script>
+}

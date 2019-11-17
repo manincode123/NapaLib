@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Quản lý chung đơn vị";
+}    
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/DonViStyles.css" rel="stylesheet">   
+<link href="/Content/croppie/croppie.css" rel="stylesheet">
+<div class="HeaderContainer">
+    <span class="Header">Đơn vị</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText">Quản lý chung</span>
+</div>
+
+<hr />
+<div class="bold-center">
+    <button class="btn btn-primary" id="thenDonViBtn" style="font-size: 2rem">Thêm đơn vị mới</button>
+</div>
+<hr />
+<div>
+    <h3>Danh sách đơn vị</h3>
+    <table class="table table-bordered table-striped" id="danhSachDonVi" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Ảnh bìa</th>
+                <th>Tên đơn vị</th>
+                <th>Ngày thành lập</th>
+                <th>Số thành viên</th>
+                <th>Trực thuộc</th>
+                <th>Quản lý</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div class="modal fade" id="SaveDonViModal" tabindex="-1" role="dialog" aria-labelledby="SaveDonViModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="SaveDonViModal-title" style="font-weight: bold"></h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="SaveDonViModal-body">
+                <form id="donViForm">
+                    <div hidden>
+                        <input type="text" value="0" id="donViId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="tenDonVi" style="font-size: 30px;">Tên đơn vị</label>
+                        <input value="" name="tenDonVi" id="tenDonVi" type="text" class="form-control input-25px input-80width" maxlength="100" />
+                        <small id="tenDonViLimit"></small>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="ngayThanhLap" style="font-size: 30px">Ngày thành lập</label>
+                        <input type="date" name="ngayThanhLap" id="ngayThanhLap" class="form-control input-25px" style="max-width: 35%">
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="loaiDonVi" style="font-size: 30px;">Đơn vị trực thuộc</label>
+                        <select data-placeholder="Chọn đơn vị trực thuộc" name="loaiDonVi"  id="loaiDonVi" class="form-control input-25px" style="max-width: 35%">
+                            <option value="1">Đoàn Phân viện</option>
+                            <option value="2">Hội Sinh viên Phân viện</option>
+                        </select>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="gioiThieu" style="font-size: 30px;">Giới thiệu</label>
+                        <textarea value="" name="gioiThieu" id="gioiThieu" type="text" class="form-control" style="max-width: 80%; height: 100px"></textarea>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="anhBiaDonVi_input" style="font-size: 30px; font-weight: bold">Ảnh bìa</label>
+                        <input id="anhBiaDonVi_input" type="file" style="display: none" />
+                        <small id="anhBiaDonVi-helpText">Chỉ có thể chỉnh sửa ảnh bìa sau khi tạo đơn vị.</small>
+                        <img id="anhBiaDonVi" src="/Content/AnhBiaDonVi/AnhBiaHocVien.png" />
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cropImagePop" id="editAnhBiaBtn">
+                            Chỉnh sửa ảnh
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="saveDonVi">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>    
+<div class="modal fade" id="cropImagePop" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"><strong>Chỉnh sửa ảnh</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="anhBiaDonVi-Wrapper"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" id="cropImageBtn" class="btn btn-primary">Up ảnh bìa</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="XoaDonViModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Xóa đơn vị</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa đơn vị <span id="tenDonViMuonXoa"></span>? <br />
+                Mọi thông tin, danh sách thành viên, chức vụ của đơn vị đều bị xóa. <br />
+                Hoạt động và bài viết có liên quan đến đơn vị được giữ lại nhưng không còn thông tin của đơn vị. <br />  
+                Bạn không thể hồi phục đơn vị sau khi xóa.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" id="xoaDonVi" class="btn btn-danger">Xóa đơn vị</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{                                                                                                                 
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/croppie/croppie.min.js")" type="text/javascript"></script>        
+    <script src="@Url.Content("~/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/ckfinder/ckfinder.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/services/DonViService.js")" type="text/javascript"></script>        
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/DonViController.js")" type="text/javascript"></script>        
+
+    <script>
+        $(document).ready(function () {
+            showTabQuanLy("quanLyDonViMenu", 0);
+            QuanLyChungDonViController.initTrangQuanLyChungDonVi();
+        });
+    </script>
+}

@@ -1,0 +1,88 @@
+﻿@model NAPASTUDENT.Controllers.QuanLyChucVuLopViewModel
+
+@{
+    ViewBag.Title = "Quản lý sinh viên lớp";
+}
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/LopStyles.css" rel="stylesheet">   
+<div class="HeaderContainer">
+    <span class="Header">Lớp</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Quản lý sinh viên lớp</span>
+</div>
+<div class="body_80percent">
+    <div class="anhBiaContainer">
+        <img src="@Model.AnhBia" alt="Ảnh bìa lớp" class="anhBia anhBia-DanhSachBaiViet">
+        <div class="anhBiaTextBox">
+            <div style="font-size: 3vw;font-weight: bold">@Model.TenLop</div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row" style="margin-bottom: 20px">
+    <div class="col-6 col-md-6 col-lg-6 align-vertically">
+        <a href="@Url.Action("ChiTietLop", "Lop", Model.LopId)" class="btn btn-success" style="font-size: 30px">
+            <i class="fas fa-edit"></i>
+            Quản lý lớp
+        </a>
+    </div>
+    <div class="col-6 col-md-6 col-lg-6 align-vertically">
+        <a href="@Url.Action("QuanLyChucVuLop", "Lop", Model.LopId)" class="btn btn-primary" style="font-size: 30px; color: white">
+            <i class="fas fa-sitemap"></i>
+            Quản lý chức vụ lớp
+        </a>
+    </div>
+</div>
+<hr />
+<div class="form-group">
+    <input type="text" value="" class="form-control" id="input-TrangQuanLySinhVienLop" />      
+    <small class="form-text text-muted helpBlock">
+        Nhập Mã số sinh viên, họ tên để thêm vào lớp
+    </small>
+</div> 
+<table class="table table-bordered table-striped" id="danhSachSv-TrangQuanLySinhVienLop">
+    <thead>
+    <tr>
+        <th>Ảnh</th>
+        <th>MSSV</th>
+        <th>Họ và tên</th>
+        <th>Ngày sinh</th>
+        <th>Giới tính</th>
+        <th>Xóa</th>
+    </tr>
+    </thead>
+</table>     
+<div class="modal fade" id="XoaSinhVienModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa sinh viên</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>Bạn có chắc chắn muốn xóa sinh viên <b><span id="tenSinhVienMuonXoa-TrangQuanLySinhVienLop"></span></b>
+                    ra khỏi danh sách lớp? Mọi chức vụ của sinh viên này cũng sẽ bị xóa.</div> 
+            </div>                                  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-danger" id="XoaSinhVien">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{                   
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/SiteScript/services/LopService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/LopController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            var lopId = @Model.LopId;
+            var lopChuyenNganh = @Model.LopChuyenNganh.ToString().ToLower();
+            QuanLySinhVienLopController.initTrang(lopId,lopChuyenNganh);
+        })
+    </script>     
+}

@@ -1,0 +1,178 @@
+﻿@model NAPASTUDENT.Controllers.SearchViewModel
+
+@{
+    ViewBag.Title = "Tìm kiếm";
+}
+@Html.AntiForgeryToken()
+<div class="HeaderContainer">
+    <span class="Header" style="color: coral">Tìm kiếm</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText">Kết quả tìm kiếm cho: "@Model.SearchTerm" <span id="recordsNumber"></span></span>
+</div>
+<div class="body_80percent">
+    <section class="ketQuaTimKiem-section" id="HoatDong-section">
+        <h2 class="ketQuaTitle btn btn-primary" data-toggle="collapse" href="#HoatDong-collapse" role="button" aria-expanded="false" aria-controls="HoatDong-collapse">
+            <i class="fas fa-bullhorn"></i> Hoạt động:
+            <span id="HoatDongRecordNumber"></span>
+            kết quả
+        </h2>
+        <div class="collapse show" id="HoatDong-collapse">
+            <div id="ketQuaTimKiem-HoatDong" class="tinMoiWrapper"></div>
+            <ul id="HoatDongPagination" class="pagination-sm"></ul>
+        </div>
+    </section>
+    <section class="ketQuaTimKiem-section" id="BaiViet-section">
+        <h2 class="ketQuaTitle btn btn-success" data-toggle="collapse" href="#BaiViet-collapse" role="button" aria-expanded="false" aria-controls="BaiViet-collapse">
+            <i class="far fa-newspaper"></i> Bài viết:
+            <span id="BaiVietRecordNumber"></span>
+            kết quả
+        </h2>
+        <div class="collapse show" id="BaiViet-collapse">
+            <div id="ketQuaTimKiem-BaiViet" class="tinMoiWrapper"></div>
+            <ul id="BaiVietPagination" class="pagination-sm"></ul>
+        </div>
+    </section>
+    <section class="ketQuaTimKiem-section" id="SinhVien-section">
+        <h2 class="ketQuaTitle btn btn-primary" data-toggle="collapse" href="#SinhVien-collapse" role="button" aria-expanded="false" aria-controls="SinhVien-collapse">
+            <i class="fas fa-users"></i> Sinh viên:
+            <span id="SinhVienRecordNumber"></span>
+            kết quả
+        </h2>
+        <div class="collapse show" id="SinhVien-collapse">
+            <div id="ketQuaTimKiem-SinhVien" class="row"></div>
+            <ul id="SinhVienPagination" class="pagination-sm"></ul>
+        </div>
+    </section>
+    <section class="ketQuaTimKiem-section" id="Lop-section">
+        <h2 class="ketQuaTitle btn btn-primary" data-toggle="collapse" href="#Lop-collapse" role="button" aria-expanded="false" aria-controls="Lop-collapse">
+            <i class="fas fa-briefcase"></i> Lớp:
+            <span id="LopRecordNumber"></span>
+            kết quả
+        </h2>
+        <div class="collapse show" id="Lop-collapse">
+            <div id="ketQuaTimKiem-Lop" class="row"></div>
+            <ul id="LopPagination" class="pagination-sm"></ul>
+        </div>
+    </section>
+    <section class="ketQuaTimKiem-section" id="DonVi-section">
+        <h2 class="ketQuaTitle btn btn-success" data-toggle="collapse" href="#DonVi-collapse" role="button" aria-expanded="false" aria-controls="DonVi-collapse">
+            <i class="fas fa-theater-masks"></i> Đơn vị:
+            <span id="DonViRecordNumber"></span>
+            kết quả
+        </h2>
+        <div class="collapse show" id="DonVi-collapse">
+            <div id="ketQuaTimKiem-DonVi" class="row"></div>
+            <ul id="DonViPagination" class="pagination-sm"></ul>
+        </div>
+    </section>
+</div>
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/TimKiemController.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/twbsPagination/jquery.twbsPagination.min.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="cardDonVi_Template">
+        <div class="col-4 col-md-4 col-lg-4">
+            <div class="donViHolder">
+                <a href="/DonVi/ThongTin/<%= donVi.donViId %>" title="<%= donVi.tenDonVi %>">
+                    <img src="<%= donVi.anhBia %>" alt="<%= donVi.tenDonVi %>" class="anhBia-CardDonVi">
+                </a>
+                <a href="/DonVi/ThongTin/<%= donVi.donViId %>" title="<%= donVi.tenDonVi %>">
+                    <h4 class="tenDonVi-CardDonVi"><%= donVi.tenDonVi %></h4>
+                </a>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-template" id="cardLop_Template">
+        <div class="col-4 col-md-4 col-lg-4">
+            <div class="lopHolder">
+                <a href="/Lop/ChiTiet/<%= lop.lopId %>" title="<%= lop.tenLop %>">
+                    <img src="<%= lop.anhBia %>" alt="<%= lop.tenLop %>" class="anhBia-CardLop">
+                </a>
+                <a href="/Lop/ChiTiet/<%= lop.lopId %>" style="text-align: center" title="<%= lop.tenLop %>">
+                    <h4 class="tenLop-CardLop"><%= lop.tenLop %></h4>
+                    <h5><%= lop.tenKhoaHoc %></h5>
+                </a>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-template" id="baiVietMoi_Template">
+        <%
+        _.each(danhSachBaiViet, function(baiViet){  %>
+        <div class="tinMoi">
+            <div class="imgWrapper">
+                <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                    <img src="<%= baiViet.anhBia %>" alt="<%= baiViet.tenBaiViet %>">
+                </a>
+            </div>
+            <div class="tinWrapper">
+                <div class="title">
+                    <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                </div>
+                <p class="summary"><%= baiViet.soLuoc %></p>
+                <div>
+                    <span><i class="far fa-clock"></i> <%= moment(baiViet.ngayTao).format("HH:mm [ngày] DD/MM/YYYY") %></span>
+                    <span>&ensp;-&ensp;</span>
+                    <span><i class="far fa-eye"></i> <%= baiViet.soLuotXem %> lượt xem</span>
+                </div>
+            </div>
+        </div>
+        <%
+        })
+        %>
+    </script>
+    <script type="text/x-template" id="hoatDongMoi_Template">
+        <%
+        _.each(danhSachHoatDong, function(hoatDong){  %>
+        <div class="tinMoi">
+            <div class="imgWrapper">
+                <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>">
+                    <img src="<%= hoatDong.anhBia %>" alt="<%= hoatDong.tenHoatDong %>">
+                </a>
+            </div>
+            <div class="tinWrapper">
+                <div class="title">
+                    <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>">
+                        <%= hoatDong.tenHoatDong %>
+                    </a>
+                </div>
+                <p class="summary"><%= hoatDong.soLuoc %></p>
+                <div>
+                    <span>
+                        <i class="far fa-clock"></i>
+                        <%= moment(hoatDong.ngayBatDau).format("HH:mm [ngày] DD/MM/YYYY") %>
+                        &ensp;-&ensp;
+                        <%= moment(hoatDong.ngayKetThuc).format("HH:mm [ngày] DD/MM/YYYY") %>
+                    </span>
+                    <br />
+                    <span><i class="fas fa-school"></i> <%= hoatDong.diaDiem %></span>
+                    <span>&ensp;-&ensp;</span>
+                    <span><i class="fas fa-users"></i> <%= hoatDong.soLuotThamGia %> lượt tham gia</span>
+                </div>
+            </div>
+        </div>
+        <%
+        })
+        %>
+    </script>
+    <script type="text/x-template" id="cardSinhVien_Template">
+        <div class="col-4 col-md-4 col-lg-4 ">    
+            <div class="cardSinhVen">
+                <a href="/SinhVien/<%= sinhVien.id %>" title="<%= sinhVien.hoVaTenLot%> <%= sinhVien.ten%>">
+                    <img src="<%= sinhVien.anhDaiDien %>" alt="<%= sinhVien.hoVaTenLot%> <%= sinhVien.ten%>" class="cardSinhVien-AnhBia">
+                </a>
+                <a href="/SinhVien/<%= sinhVien.id %>" title="<%= sinhVien.hoVaTenLot%> <%= sinhVien.ten%>" class="cardSinhVien-Ten">
+                    <%= sinhVien.hoVaTenLot%> <%= sinhVien.ten%>
+                </a>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(document).ready(function () {
+            var searchTerm = "@Html.Raw(Ajax.JavaScriptStringEncode(Model.SearchTerm))";
+            var searchType = @( (int) Model.SearchType);
+            TimKiemController.intTrangTimKiem(searchTerm,searchType);
+        })
+    </script>
+}

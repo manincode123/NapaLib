@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Danh sách lớp của tôi";
+}
+@Html.AntiForgeryToken()
+
+<h1 style="text-align: center; font-weight: bold;color: blue">DANH SÁCH LỚP CỦA TÔI</h1>
+<div class="body_90percent">
+    <div class="row" id="danhSachLopCuaToi">
+    </div>
+</div>  
+@section scripts
+{          
+    <script src="@Url.Content("~/Scripts/SiteScript/services/SinhVienService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/SinhVienController.js")" type="text/javascript"></script>
+
+    <script type="text/x-template" id="cardLop_Template">  
+        <div class="col-4 col-md-4 col-lg-4">
+            <div class="lopHolder">
+                <a href="/Lop/ChiTiet/<%= lop.id %>" title="<%= lop.tenLop %>">
+                    <img src="<%= lop.anhBia %>" alt="<%= lop.tenLop %>" class="anhBia-CardLop">
+                </a>
+                <a href="/Lop/ChiTiet/<%= lop.id %>" style="text-align: center" title="<%= lop.tenLop %>">
+                    <h4 class="tenLop-CardLop"><%= lop.tenLop %></h4>
+                    <h5><%= lop.tenKhoaHoc %></h5>
+                </a>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(document).ready(function () {
+            showTabProfile("lopMenu", 0);
+            CacTrangCaNhanController.initTrangLopCuaToi();
+        });
+    </script>
+}

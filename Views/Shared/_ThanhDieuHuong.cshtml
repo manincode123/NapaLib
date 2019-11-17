@@ -1,0 +1,201 @@
+﻿<div class="sidebarWrapper">
+<!-- Sidebar  -->
+    <nav id="sidebar" class="active">
+    <div class="sidebar-header">
+        <h3>NAPA ADMIN</h3>
+        <strong>ND</strong>
+    </div>
+        <div class="tab-content" id="nav-tabContent">
+
+            <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="@Url.Action("Index","Home")" aria-expanded="false">
+                            <i class="fas fa-home"></i>
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#hoatDongMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-bullhorn"></i>
+                            Hoạt động
+                        </a>
+                        <ul class="collapse list-unstyled" id="hoatDongMenu">
+                            <li>
+                                <a href="@Url.Action("TrangHoatDong","HoatDong")">Trang chủ hoạt động</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("DanhSachHoatDongDonVi", "HoatDong")">Hoạt động theo đơn vị</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ThongKeChung","HoatDong")">Thống kê hoạt động</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="#lopMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-briefcase"></i>
+                            Lớp
+                        </a>
+                        <ul class="collapse list-unstyled" id="lopMenu">
+                            <li>
+                                <a href="@Url.Action("LopCuaToi","Lop")">Lớp của tôi</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("HoatDongLopCuaToi", "Lop")">Hoạt động lớp</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#donViMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-theater-masks"></i>
+                            Đơn vị
+                        </a>
+                        <ul class="collapse list-unstyled" id="donViMenu">
+                            <li>
+                                <a href="@Url.Action("DanhSachDonVi", "DonVi")">Danh sách đơn vị</a>
+                            </li>    
+                            <li>
+                                <a href="@Url.Action("DonViCuaToi","DonVi")">Đơn vị của tôi</a>
+                            </li> 
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#baiVietMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="far fa-newspaper"></i>
+                            Bài viết
+                        </a>
+                        <ul class="collapse list-unstyled" id="baiVietMenu">
+                            <li>
+                                <a href="@Url.Action("BaiVietCaNhan","BaiViet")">Bài viết cá nhân</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ThemBaiViet","BaiViet")">Thêm bài viết</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#caNhanMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-user"></i>
+                            Cá nhân
+                        </a>
+                        <ul class="collapse list-unstyled" id="caNhanMenu">
+                            <li>
+                                <a href="@Url.Action("TrangCaNhan","SinhVien")">Trang cá nhân</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("TrangHoatDongCaNhan","HoatDong")">Hoạt động cá nhân</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("TrangThongKeCaNhan","HoatDong")">Thống kê cá nhân</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="nav-quanLy" role="tabpanel" aria-labelledby="nav-home-tab">
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="#quanLySinhVienMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-users"></i>
+                            Sinh viên
+                        </a>
+                        <ul class="collapse list-unstyled" id="quanLySinhVienMenu">
+                            <li>
+                                <a href="@Url.Action("QuanLySinhVien","SinhVien")">Quản lý sinh viên Học viện</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ThemLoSinhVien","SinhVien")">Thêm lô sinh viên</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("QuanLyHoiVien", "SinhVien")">Quản lý Hội viên</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("QuanLyDoanVien", "SinhVien")">Quản lý Đoàn viên</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#quanLyLopMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            Lớp
+                        </a>
+                        <ul class="collapse list-unstyled" id="quanLyLopMenu">
+                            <li>
+                                <a href="@Url.Action("QuanLyKhoaHoc","Lop")">Quản lý Khóa học</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("QuanLyChungLop", "Lop")">Quản lý Lớp</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#quanLyHoatDongMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-bullhorn"></i>
+                            Hoạt động
+                        </a>
+                        <ul class="collapse list-unstyled" id="quanLyHoatDongMenu">
+                            <li>
+                                <a href="@Url.Action("QuanLyHoatDong","HoatDong")">Quản lý Hoạt động Học viện</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("PheDuyetHoatDong", "HoatDong")">Phê duyệt hoạt động</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("DieuHuongDiemDanh", "HoatDong")">Điểm danh hoạt động</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#quanLyDonViMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-theater-masks"></i>
+                            Đơn vị
+                        </a>
+                        <ul class="collapse list-unstyled" id="quanLyDonViMenu">
+                            <li>
+                                <a href="@Url.Action("QuanLyChungDonVi", "DonVi")">Quản lý chung</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#quanLyBaiVietMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="far fa-newspaper"></i>
+                            Bài viết
+                        </a>
+                        <ul class="collapse list-unstyled" id="quanLyBaiVietMenu">
+                            <li>
+                                <a href="@Url.Action("QuanLyBaiViet","BaiViet")">Quản lý bài viết Học viện</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("PheDuyetBaiViet","BaiViet")">Phê duyệt bài viết</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("QuanLyChuyenMuc","BaiViet")">Quản lý chuyên mục</a>
+                            </li>
+
+                        </ul>
+                    </li>                
+                    @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+                    {
+                        <li>
+                            <a href="@Url.Action("Index","Role")" aria-expanded="false">
+                                <i class="fas fa-id-card"></i>
+                                Quản lý chức vụ
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+
+            </div>
+        </div>  
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Cá nhân</a>
+                <a class="nav-item nav-link " id="nav-quanLy-tab" data-toggle="tab" href="#nav-quanLy" role="tab" aria-controls="nav-home" aria-selected="false">Quản lý</a>
+                </div>
+        </nav>
+    </nav>
+</div>

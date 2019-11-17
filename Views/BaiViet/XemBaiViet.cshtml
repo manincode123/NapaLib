@@ -1,0 +1,40 @@
+﻿@model int
+
+@Html.AntiForgeryToken()
+
+<div class="body_80percent">   
+    <a id="chuyenMucBaiViet"></a>
+    <h2 id="tenBaiViet-TrangBaiViet"></h2>
+    <small id="ngayTaoBaoViet"></small>
+    <div id="soLuoc-TrangBaiViet"></div>
+    <div id="noiDungBaiViet"></div>
+    <div>
+        <h2><strong>Hoạt động liên quan</strong></h2>
+        <div id="DanhSachHoatDong"></div>
+    </div>
+    <div id="DanhSachDonVi"></div>  
+</div>
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/SiteScript/services/BaiVietServices.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/BaiVietControllers.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="hoatDongTemplate">
+        <div class="hoatDongContainer-TrangThemBaiViet">
+            <img src="<%= anhBia %>" alt="" class="anhBiaHoatDong-TrangThemBaiViet" />
+            <div class="hoatDongWrapper-TrangThemBaiViet">
+                <div class="thongTinHoatDong-TrangThemBaiViet">
+                    <div><%= tenHoatDong %></div>
+                    <div><%= thoiGianBatDau %> -  <%= thoiGianKetThuc %></div>
+                    <div><%= diaDiem %></div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(document).ready(function() {
+            var baiVietId = @Model;
+            XemBaiVietController.initTrang(baiVietId);
+        })
+    </script>
+}

@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+}
+@Html.AntiForgeryToken()
+<div class="trangChuWrapper">
+    <div>
+        <div class="featured-wrap">
+            <div class="featured"></div>
+            <div class="sub-featured"></div>
+        </div>
+        <div class="chuyenMucWrap"></div>
+    </div>
+    <div class="banner-Wrapper">
+        <div class="banner-Link">
+            <a href="@Url.Action("TrangHoatDong","HoatDong")">
+                <img src="/Content/Banner/HOATDONG.png" alt="" class="banner" />
+            </a>
+        </div>
+        <div class="banner-Link">
+            <a href="@Url.Action("DanhSachDonVi","DonVi")">
+                <img src="/Content/Banner/DonVi.png" alt="" class="banner" />
+            </a>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/SiteScript/services/BaiVietServices.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/BaiVietControllers.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="FeaturedArticle_Template">
+        <% if(chuyenMuc.baiViet.length >= 1){%>
+        <div id="topArticle1">
+            <a href="/BaiViet/<%= chuyenMuc.baiViet[0].id %>">
+                <img src="<%= chuyenMuc.baiViet[0].anhBia %>" alt="<%= chuyenMuc.baiViet[0].tenBaiViet %>">
+            </a>
+            <div class="title">
+                <a href="/BaiViet/<%= chuyenMuc.baiViet[0].id %>">
+                    <%= chuyenMuc.baiViet[0].tenBaiViet %>
+                </a>
+            </div>
+            <p class="summary"><%= chuyenMuc.baiViet[0].soLuoc %></p>
+        </div>
+        <%}%>
+        <% if(chuyenMuc.baiViet.length >= 2) {%>
+        <div class="article" id="topArticle2">
+            <a href="/BaiViet/<%= chuyenMuc.baiViet[1].id %>">
+                <img class="img" src="<%= chuyenMuc.baiViet[1].anhBia %>" alt="<%= chuyenMuc.baiViet[1].tenBaiViet %>">
+            </a>
+            <div class="title">
+                <a href="/BaiViet/<%= chuyenMuc.baiViet[1].id %>">
+                    <%= chuyenMuc.baiViet[1].tenBaiViet %>
+                </a>
+            </div>
+        </div>
+        <%}%>
+        <% if(chuyenMuc.baiViet.length >= 3) {%>
+        <div class="article" id="topArticle3">
+            <a href="/BaiViet/<%= chuyenMuc.baiViet[2].id %>">
+                <img class="img" src="<%= chuyenMuc.baiViet[2].anhBia %>" alt="<%= chuyenMuc.baiViet[2].tenBaiViet %>">
+            </a>
+            <div class="title">
+                <a href="/BaiViet/<%= chuyenMuc.baiViet[2].id %>">
+                    <%= chuyenMuc.baiViet[2].tenBaiViet %>
+                </a>
+            </div>
+        </div>
+        <%}%>
+        <% if(chuyenMuc.baiViet.length >= 4) {%>
+        <div class="article" id="topArticle4">
+            <a href="/BaiViet/<%= chuyenMuc.baiViet[3].id %>">
+                <img class="img" src="<%= chuyenMuc.baiViet[3].anhBia %>" alt="<%= chuyenMuc.baiViet[3].tenBaiViet %>">
+            </a>
+            <div class="title">
+                <a href="/BaiViet/<%= chuyenMuc.baiViet[3].id %>">
+                    <%= chuyenMuc.baiViet[3].tenBaiViet %>
+                </a>
+            </div>
+        </div>
+        <%}%>
+    </script>
+    <script type="text/x-template" id="subFeaturedArticle_Template">
+        <% if(chuyenMuc.baiViet.length < 5) return;  %>
+        <div class="top-article" id="subFeatured-TopArticle">
+            <a href="/BaiViet/<%= chuyenMuc.baiViet[4].id %>">
+                <img src="<%= chuyenMuc.baiViet[4].anhBia %>" alt="<%= chuyenMuc.baiViet[4].tenBaiViet %>">
+            </a>
+            <div class="title">
+                <a href="/BaiViet/<%= chuyenMuc.baiViet[4].id %>"><%= chuyenMuc.baiViet[4].tenBaiViet %></a>
+            </div>
+        </div>
+        <% _.each(chuyenMuc.baiViet, function(baiViet,index){
+        if(index <= 4) return;
+        else {  %>
+        <div class="title">
+            <a href="/BaiViet/<%= baiViet.id %>"><%= baiViet.tenBaiViet %></a>
+        </div>
+        <%  }
+        }) %>
+    </script>
+    <script type="text/x-template" id="chuyenMucCon_Template">
+        <div>
+            <div>
+                <div class="chuyenMucHeader" id='nav<%= chuyenMuc.id %>'>
+                    <a class="chuyenMuc" href="/BaiViet/ChuyenMuc/<%= chuyenMuc.id %>" title="<%= chuyenMuc.tenChuyenMuc %>"><%= chuyenMuc.tenChuyenMuc %></a>
+                    <div class="chuyenMucCon">
+                        <% _.each(chuyenMuc.chuyenMucCon, function(CMCon){
+                        %>
+                        <a class="tenChuyenMucCon" href="/BaiViet/ChuyenMuc/<%= CMCon.id %>" title="<%= CMCon.tenChuyenMuc %>">
+                            <%= CMCon.tenChuyenMuc %>
+                        </a>
+                        <%
+                        })%>
+
+                        <a class="tenChuyenMucCon themButton" href="#chuyenMuc<%= chuyenMuc.id %>" data-toggle="collapse">
+                            Thêm
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        <ul id="chuyenMuc<%= chuyenMuc.id %>" class="collapse"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tinChuyenMucHolder">
+                <% if(chuyenMuc.baiViet.length >= 1) {%>
+                <div class="tinNoiBat">
+                    <a href="/BaiViet/<%= chuyenMuc.baiViet[0].id %>">
+                        <img src="<%= chuyenMuc.baiViet[0].anhBia %>" style="width: 330px; height: 248px;">
+                    </a>
+                    <a class="title" href="/BaiViet/<%= chuyenMuc.baiViet[0].id %>" title="<%= chuyenMuc.baiViet[0].tenBaiViet %>"><%= chuyenMuc.baiViet[0].tenBaiViet %></a>
+                    <div class="soLuoc"><%= chuyenMuc.baiViet[0].soLuoc %></div>
+                </div>
+                <div class="tinKhac">
+                    <%
+                    _.each(chuyenMuc.baiViet, function(baiViet,index){
+                    if(index ===0) {  return; }
+                    if (index ===1 ) {%>
+                    <a href="/BaiViet/<%= baiViet.id %>">
+                        <img class="img" src="<%= baiViet.anhBia %>">
+                    </a>
+                    <a class="titleTinNoiBat" href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                    <div class="soLuoc"> <%= baiViet.soLuoc %></div>
+                    <%}
+                    else {%>
+                    <a class="titleTinKhac" href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                    <%}
+                    })
+                    %>
+                </div>
+                <%} %>
+            </div>
+        </div>
+    </script>
+
+    <script>
+
+        $(document).ready(function() {
+            DanhSachBaiVietController.initPage_TrangChu();
+        });
+    </script>
+}
+

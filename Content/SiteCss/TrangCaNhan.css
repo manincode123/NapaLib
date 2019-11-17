@@ -1,0 +1,96 @@
+﻿.container-TrangCaNhan {
+
+}
+
+#anhTrangCaNhanSV {
+    width: 75%;
+    margin-left: 50px
+
+}
+
+
+.ttContainer-TrangCaNhan {
+    padding-bottom: 20px;
+    padding-right: 30px;
+}
+
+#ten-TrangCaNhan {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.thongTin-TrangCaNhan {
+    font-size: 1.5rem;
+}
+.thongTinCuThe-TrangCaNhan {
+    display: inline-block;
+    font-weight: bold;
+    color: darkorange !important;
+}
+.gioiThieuContainer-TrangCaNhan {
+    border: 5px gold dashed;
+    height: 100%;
+    border-radius: 30px;
+    padding: 25px;
+
+
+}
+.gioiThieuLabel-TrangCaNhan {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: solid;
+}
+.sdtDcContainer-TrangCaNhan {
+    margin-left: 50px;
+    margin-right: 20px;
+}
+.sdtDcLabel-TrangCaNhan {
+    border-bottom: 5px goldenrod solid;
+    padding-bottom: 10px;
+    font-size: 25px;
+}
+
+#sdt-TrangCaNhan {
+    width: 100% !important;
+}
+#diaChi-TrangCaNhan {
+    width: 100% !important;
+}
+.sdtRow {
+    font-size: 1.2rem;
+}
+.thamGiaInfo {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 30px;
+}
+.thamGiaContainer {
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    font-size: 70px;
+    color: white;
+}
+
+.thamGiaTrue {
+    background: green;
+}
+.thamGiaFalse {
+    background: red;
+}
+
+@media (max-width: 700px) {
+    .ttContainer-TrangCaNhan {
+        margin-left: 50px
+    }
+
+}

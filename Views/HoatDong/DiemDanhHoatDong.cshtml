@@ -1,0 +1,84 @@
+﻿@model int
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
+
+<a href='/HoatDong/ChiTiet/@Model' class="btn btn-primary" style="font-size: 25px">
+    <i class="fas fa-angle-left"></i>
+    Trở về trang hoạt động
+</a>                                                                
+<div>
+    <h1 id="tenHoatDong-TrangDiemDanh"></h1>  
+    <div style="font-size: 20px">Tình trạng: <span id="tinhTrang-TrangDiemDanh"></span> </div>          
+    <div style="font-size: 20px">Ngày diễn ra: <b id="ngayDienRa-TrangDiemDanh"></b> </div>          
+    <div style="font-size: 20px">Số lượt tham gia: <b id="soLuotThamGia-TrangDiemDanh"></b> </div>   
+</div>
+       
+
+<hr />
+<div>
+    <h2>DANH SÁCH SINH VIÊN ĐĂNG KÍ THAM GIA</h2>
+    <table class="table table-striped table-bordered" id="danhSachDangKi-TrangDiemDanh">
+        <thead>
+        <tr>
+            <th>Họ tên sinh viên</th>
+            <th>MSSV</th>
+            <th>Lớp</th>
+            <th>Phê duyệt</th>
+        </tr>
+        </thead>
+    </table>
+</div>         
+<hr />      
+<div class="form-group">
+    <input type="text" value="AS" class="form-control" id="input-TrangDiemDanh" />      
+    <small id="diemDanhHelpBlock" class="form-text text-muted">
+        Nhập Mã số sinh viên, họ tên, lớp để chọn và điểm danh sinh viên
+    </small>
+</div> 
+<div>
+    <h2>DANH SÁCH SINH VIÊN THAM GIA</h2>
+    <table class="table table-striped table-bordered" id="danhSachSvTg-TrangDiemDanh">
+        <thead>
+            <tr>
+                <th>Họ tên sinh viên</th>
+                <th>MSSV</th>
+                <th>Lớp</th>
+                <th>Điểm danh lúc</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+    </table>
+</div> 
+<div class="modal fade" id="XoaLuotThamGiaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Xóa lượt tham gia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>Bạn có chắc chắn muốn xóa lượt tham gia này?</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-danger" id="XoaLuotThamGia">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{    
+    @Scripts.Render("~/bundles/DataTable")
+    @Scripts.Render("~/bundles/DataTablePlugin")
+    <script src="@Url.Content("~/Scripts/SiteScript/services/HoatDongService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/HoatDongController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            var hoatDongId = @Model;
+            DiemDanhController.initTrangDiemDanh(hoatDongId);
+        });
+    </script>
+}

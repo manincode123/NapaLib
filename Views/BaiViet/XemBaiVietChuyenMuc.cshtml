@@ -1,0 +1,125 @@
+﻿@model int
+@Html.AntiForgeryToken()
+
+<h2 style="margin-bottom: 0">Chuyên mục: <span id="tenChuyenMuc"></span></h2>         
+<div style="margin-left: 30px; display: none">Thuộc chuyên mục: <a href="" id="chuyenMucCha"></a></div>  
+<div class="chuyenMucBody">    
+    <div class="tinMoiChuyenMucWrapper">
+        <div class="tinMoiWrapper"></div>   
+        <img src="/Content/Icons/Facebook-loader.svg" alt="" class="baiVietLoader"/>
+        <div class="khongConBaiViet">Đã tải toàn bộ bài viết của chuyên mục.</div>
+
+    </div>           
+    <div class="chuyenMucWrap">
+        <div class="chuyenMucWrapTitle">Chuyên mục con</div>
+    </div>
+</div> 
+
+
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/SiteScript/services/BaiVietServices.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/BaiVietControllers.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="chuyenMucCon_Template">
+        <div>
+            <div>
+                <div class="chuyenMucHeader" id='nav<%= chuyenMuc.id %>'>
+                    <a class="chuyenMuc" href="/BaiViet/ChuyenMuc/<%= chuyenMuc.id %>" title="<%= chuyenMuc.tenChuyenMuc %>"><%= chuyenMuc.tenChuyenMuc %></a>
+                    <div class="chuyenMucCon">
+                        <% _.each(chuyenMuc.chuyenMucCon, function(CMCon){
+                        %>
+                        <a class="tenChuyenMucCon" href="/BaiViet/ChuyenMuc/<%= CMCon.id %>" title="<%= CMCon.tenChuyenMuc %>">
+                            <%= CMCon.tenChuyenMuc %>
+                        </a>
+                        <%
+                        })%>
+                        <a class="tenChuyenMucCon themButton" href="#chuyenMuc<%= chuyenMuc.id %>" data-toggle="collapse">
+                            Thêm
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        <ul id="chuyenMuc<%= chuyenMuc.id %>" class="collapse"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tinChuyenMucHolder">
+                <% if(chuyenMuc.baiViet.length  ==0) { %>
+                <div>Chuyên mục chưa có bài viết</div>
+                <%}
+                else {
+                %>
+                <div class="tinNoiBat">
+                    <a href="/BaiViet/<%= chuyenMuc.baiViet[0].id %>">
+                        <img src="<%= chuyenMuc.baiViet[0].anhBia %>" style="width: 330px; height: 248px;">
+                    </a>
+                    <a class="title" href="/BaiViet/<%= chuyenMuc.baiViet[0].id %>" title="<%= chuyenMuc.baiViet[0].tenBaiViet %>"><%= chuyenMuc.baiViet[0].tenBaiViet %></a>
+                    <div class="soLuoc"><%= chuyenMuc.baiViet[0].soLuoc %></div>
+                </div>
+                <div class="tinKhac">
+                    <%
+                    _.each(chuyenMuc.baiViet, function(baiViet,index){
+                    if(index ===0) {  return; }
+                    if (index ===1 ) {%>
+                    <a href="/BaiViet/<%= baiViet.id %>">
+                        <img class="img" src="<%= baiViet.anhBia %>">
+                    </a>
+                    <a class="titleTinNoiBat" href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                    <div class="soLuocTinNoiBat"> <%= baiViet.soLuoc %></div>
+                    <%}
+                    else {%>
+                    <a class="titleTinKhac" href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                    <%}
+                    })
+                    %>
+                </div>
+                <%
+                }%>
+
+            </div>
+        </div>
+    </script>
+    <script type="text/x-template" id="baiVietMoi_Template">
+        <% if(danhSachBaiViet.length === 0) {%>
+        <div>Chuyên mục không có bài viết.</div>
+        <%
+        }
+        else {
+        _.each(danhSachBaiViet, function(baiViet){  %>
+        <div class="tinMoi">
+            <div class="imgWrapper">
+                <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                    <img src="<%= baiViet.anhBia %>" alt="<%= baiViet.tenBaiViet %>">
+                </a>
+            </div>
+            <div class="tinWrapper">
+                <div class="title">
+                    <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                </div>
+                <p class="summary"><%= baiViet.soLuoc %></p>  
+                <div>
+                    <span><i class="far fa-clock"></i> <%= moment(baiViet.ngayTao).format("HH:mm [ngày] DD/MM/YYYY") %></span>
+                    <span>&ensp;-&ensp;</span>
+                    <span><i class="far fa-eye"></i> <%= baiViet.soLuotXem %> lượt xem</span>
+                </div>
+            </div>
+        </div>
+        <%
+        })
+        } %>
+
+
+
+    </script>
+    <script>
+        $(document).ready(function() {
+            var chuyenMucId = @Model;
+            DanhSachBaiVietController.initPage_BaiVietChuyenMuc(chuyenMucId);
+        });
+    </script>
+}

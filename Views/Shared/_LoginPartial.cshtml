@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity
+@using NAPASTUDENT.Models
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Xin chào " + User.Identity.GetTenNguoiDung() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Quản lý" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        <li>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

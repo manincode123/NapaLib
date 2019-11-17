@@ -1,0 +1,190 @@
+﻿.twitter-typeahead {
+    width: 100%;
+}
+
+.typeahead {
+    background-color: #fff;
+}
+
+.typeahead:focus {
+    border: 2px solid #0097cf;
+}
+
+.tt-query {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+    color: #999;
+    top: 10px!important;
+    left: 50%!important;
+    -ms-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    max-width: 80%;
+    height: 4rem;
+    font-size: 30px;
+    padding: 30px;
+}
+
+.tt-menu {
+    left: 10%!important;
+    width: 80%;
+    margin: 12px 0;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.tt-suggestion:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #0097cf;
+}
+
+.tt-suggestion.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+.typeahead-input-QuanLyChucVuLop {
+    margin: 10px auto 0 auto;
+    padding: 30px;
+    font-size: 30px;
+    height: 3rem;
+    max-width: 80%;
+}
+.typeahead-hint-QuanLyChucVuLop {
+    color: #999;
+    top: 0px!important;
+    left: 50%!important;
+    -ms-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    max-width: 80%;
+    height: 4rem;
+    font-size: 30px;
+}
+
+.typeahead-suggestion-QuanLyChucVuLop {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.typeahead-suggestion-QuanLyChucVuLop:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #0097cf;
+}
+.typeahead-menu-QuanLyChucVuLop {
+    left: 10%!important;
+    width: 80%;
+    margin: 12px 0;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.typeahead-suggestion-QuanLyChucVuLop.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+
+}
+
+.typeahead-suggestion-QuanLyChucVuLop p {
+    margin: 0;
+}
+.typeahead-helpBlock-QuanLyChucVuLop {
+    margin: 5px auto 0 auto;
+    font-size: 17px;
+    max-width: 80%;
+}          
+
+.typeahead-input-BaiViet {
+    padding: 30px;
+    font-size: 30px;
+    height: 3rem;
+    max-width: 80%;
+}
+.typeahead-hint-BaiViet {
+    color: #999;
+    top: -1px!important;
+    left: 40%!important;
+    -ms-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    max-width: 80%;
+    height: 4rem;
+    font-size: 30px;
+}
+
+.typeahead-suggestion-BaiViet {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.typeahead-suggestion-BaiViet:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #0097cf;
+}
+.typeahead-menu-BaiViet {
+    left: 0%!important;
+    width: 80%;
+    margin: 12px 0;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.typeahead-suggestion-BaiViet.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+
+}
+
+.typeahead-suggestion-BaiViet p {
+    margin: 0;
+}
+.typeahead-helpBlock-BaiViet {
+    margin: 5px auto 0 auto;
+    font-size: 17px;
+    max-width: 80%;
+}          
+

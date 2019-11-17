@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Phê duyệt hoạt động";
+
+}   
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
+
+<a href="/HoatDong/QuanLyHoatDong" class="btn btn-primary" style="font-size: 25px">
+    <i class="fas fa-arrow-alt-circle-left"></i>
+    Về trang quản lý chung
+</a>
+
+<div class="body_80percent">
+    <h1 style="text-align: center">Phê duyệt hoạt động</h1>
+    <table class="table table-bordered table-striped" id="hdChoPheDuyetTable-TrangPheDuyet">
+        <thead>
+            <tr>
+                <th>Tên hoạt động</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Đơn vị tổ chức</th>
+                <th>Cấp hoạt động</th>
+                <th>Phê duyệt</th>
+                <th>Hủy</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div class="modal fade" id="thongBaoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="thongBaoModal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="pheDuyetHoatDong">Phê duyệt</button>
+                <button type="button" class="btn btn-danger" id="huyHoatDong">Hủy hoạt động</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{    
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/SiteScript/services/HoatDongService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/HoatDongController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            showTabQuanLy("quanLyHoatDongMenu", 1);
+            PheDuyetController.initTrangPheDuyet();
+        });
+    </script>
+}

@@ -1,0 +1,156 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Quản lý hội viên";
+}
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/TrangQuanLySinhVienLop.css" rel="stylesheet">    
+<section>
+    <div class="body_80percent">
+        <img src="/Content/Icons/IconHSV.png" title="Hội sinh viên" class="iconDoanHoi" style="float: left" alt="Icon Hội sinh viên"/>
+        <img src="/Content/Icons/IconHSV.png" title="Hội sinh viên" class="iconDoanHoi" style="float: right" alt="Icon Hội sinh viên"/>
+        <h1 style="text-align: center; color: coral;line-height: 60px">QUẢN LÝ HỘI VIÊN</h1>
+    </div>
+    <table class="table table-bordered table-striped" id="danhSachHoiVien" style="width: 100% !important">
+        <thead>
+        <tr>
+            <th>MSSV</th>
+            <th>Họ và tên lót</th>
+            <th>Tên</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+            <th>Lớp</th>
+            <th>Ngày vào hội</th>
+            <th>Quản lý</th>
+        </tr>
+        </thead>
+    </table>
+</section>
+
+<section>
+    <hr />
+    <h1 style="text-align: center;color: coral">ĐĂNG KÍ HỘI VIÊN</h1>
+    <div class="form-group" style="text-align: center">
+        <label style="font-size: 25px; font-weight: bold; margin-right: 20px">Ngày vào hội</label>
+        <input type="date" value="" class="form-control" id="ngayVaoHoi-input" style="display: inline-block;width: 180px" />
+    </div>
+    <div class="form-group">
+        <input type="text" value="AS" class="form-control" id="sinhVienVaoHoi-input" />
+        <small style="margin-left: 130px;" class="form-text text-muted">
+            Nhập Mã số sinh viên hoặc họ tên để chọn và đăng kí hội viên cho sinh viên
+        </small>
+    </div>
+</section>
+
+<section>
+    <hr />
+    <h1 style="text-align: center;color: coral">ĐĂNG KÍ HỘI VIÊN HÀNG LOẠT</h1>
+    <div style="display: inline-block; font-size: 30px; font-weight: bold;vertical-align: middle;">File đăng kí hội viên mẫu</div>
+    <span>
+        @Html.ActionLink("Download file mẫu", "DownLoadFileDangKiHoiVien", "SinhVien", null, new { @class = "btn btn-primary", @style = "margin-left: 15px;  font-size: 25px;" })
+    </span>
+    <div style="margin-bottom: 20px">
+        <strong style="font-size: 30px">Cách đăng kí hội viên hàng loạt</strong><br />
+        <strong>Bước 1:</strong> Tải file mẫu ở trên về máy tính. <br />
+        <strong>Bước 2:</strong> Điền MSSV muốn đăng kí hội viên, ngày vào hội (theo bảng bên dưới).  Lưu ý điền chính xác để tránh xảy ra lỗi<br />
+        <strong>Bước 3:</strong> Sau khi điền xong, nhấn nút "Chọn tệp" để tải file excel vừa mới điền lên. <br />
+        <strong>Bước 4:</strong> Nhấn nút "Đăng kí hội viên" để máy chủ thực hiện việc đăng kí hội viên cho sinh viên. <br />
+        <strong>Lưu ý: Chỉ điền MSSV của những sinh viên đã được tạo từ trước.</strong>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>MSSV</th>
+                <th>Ngày vào hội (Ngày/tháng/năm)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AS100001</td>
+                <td>15/10/2016</td>
+
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+        </tbody>
+    </table>         
+    <div>  
+        <hr />
+        <div class="row" style="margin: 30px 0 30px 0">
+            <div class="col-12 col-md-12 col-lg-6" style="text-align: center">     
+                <label class="btn btn-primary" style="width: 55%;font-size: 30px;">
+                    Chọn tệp <input type="file" id="uploadFile" style="display: none">
+                </label>  
+                <div class='label' id="upload-file-info" style="font-size: 25px;color:darkorange"></div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6" style="text-align: center">
+                <button class="btn btn-success" style="width: 55%;font-size: 30px;color: #fff;" id="dangKiHoiVien">
+                    Đăng kí hội viên
+                </button>    
+            
+            </div>
+        </div>   
+        <hr />
+    </div>
+    <div>
+        <label style="font-size: 30px;font-weight: bold">Danh sách sinh viên đã đăng kí</label>
+        <table class="table table-bordered table-striped" id="danhSachSinhVienDaDangKiTable" style="width: 100%!important">
+            <thead>
+                <tr>
+                    <th>MSSV</th>
+                    <th>Họ và tên</th>       
+                    <th>Ngày vào hội</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div>
+        <label style="font-size: 30px;font-weight: bold">Danh sách sinh viên không đăng kí được</label>
+        <table class="table table-bordered table-striped" id="danhSachLoiDangKiHoiVienTable" style="width: 100%!important">
+            <thead>
+                <tr>
+                    <th>MSSV</th>
+                    <th>Ngày vào hội</th>
+                    <th>Lỗi</th>
+                    <th>Vị trí trong file</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</section>
+ 
+<div class="modal fade" id="xoaDangKiHoiVienModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><strong>Xóa đăng kí hội viên</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>                      
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa đăng kí hội viên của <strong id="tenHoiVien"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" id="xoaDangKiHoiVien" class="btn btn-danger">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{        
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/SiteScript/services/SinhVienService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/SinhVienController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            showTabQuanLy("quanLySinhVienMenu", 2);
+            QuanLyHoiVienController.initTrang();
+        });
+    </script>
+}

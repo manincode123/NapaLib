@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "Thêm lô sinh viên";
+}
+
+<h1 style="text-align: center">Thêm lô sinh viên</h1>
+ @Html.AntiForgeryToken()
+<section>
+    <div style="display: inline-block; font-size: 30px; font-weight: bold;vertical-align: middle;">File sinh viên mẫu</div>
+    <span>
+        @Html.ActionLink("Download file mẫu", "DownLoadDanhSachSv", "SinhVien", null, new { @class = "btn btn-primary", @style = "margin-left: 15px;  font-size: 25px;" })
+    </span>
+</section>
+<hr />
+<div style="margin-bottom: 20px">
+    <strong style="font-size: 30px">Cách thêm lô sinh viên</strong><br />
+    <strong>Bước 1:</strong> Tải file sinh viên mẫu ở trên về máy tính. <br />
+    <strong>Bước 2:</strong> Điền thông tin sinh viên theo bảng bên dưới, những cột được mã hóa (giới tính, khóa học, dân tộc, tôn giáo) thì xem các bảng dưới để biết mã số từng loại. <br />
+    <strong>Bước 3:</strong> Sau khi điền xong, nhấn nút "Chọn tệp" để tải file excel vừa mới điền lên. <br />
+    <strong>Bước 4:</strong> Nhấn nút "Tạo" để máy chủ thực hiện việc tạo sinh viên. <br />
+    <strong>Lưu ý:</strong> Khi sinh viên được tạo sẽ được cung cấp một tài khoản mới với tên đăng nhập là "MSSV", mật khẩu là "MSSV + ngày tháng sinh". Sinh viên có thể thay đổi mật khẩu sau.<br />
+    <strong>Ví dụ:</strong> Sinh viên có MSSV là AS100001 và ngày sinh là 02/03/1997 thì có tên đăng nhập là "AS100001", mật khẩu là "AS1000010203" <br />
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Họ và tên lót</th>
+            <th>Tên</th>
+            <th>MSSV</th>
+            <th>Ngày sinh (Ngày/tháng/năm)</th>
+            <th>Giới tính (mã hóa)</th>
+            <th>Khóa học (mã hóa)</th>
+            <th>Dân tộc (mã hóa)</th>
+            <th>Tôn giáo (mã hóa)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nguyễn Văn</td>
+            <td>A</td>
+            <td>AS100001</td>
+            <td>02/03/1997</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+<div class="row">
+    <div class="col-6 col-lg-6 col-md-6">
+        <label style="font-size: 30px;font-weight: bold">Danh sách giới tính</label>
+        <table class="table table-bordered table-striped" id="danhSachGioiTinhTable" style="width: 100%!important">
+            <thead>
+                <tr>
+                    <th>Giới tính</th>
+                    <th>Mã số</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="col-6 col-lg-6 col-md-6">
+        <label style="font-size: 30px;font-weight: bold">Danh sách khóa học</label>
+        <table class="table table-bordered table-striped" id="danhSachKhoaTable" style="width: 100%!important">
+            <thead>
+                <tr>
+                    <th>Khóa học</th>
+                    <th>Mã số</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-6 col-lg-6 col-md-6">
+        <label style="font-size: 30px;font-weight: bold">Danh sách dân tộc</label>
+        <table class="table table-bordered table-striped" id="danhSachDanTocTable" style="width: 100%!important">
+            <thead>
+                <tr>
+                    <th>Dân tộc</th>
+                    <th>Mã số</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="col-6 col-lg-6 col-md-6">
+        <label style="font-size: 30px;font-weight: bold">Danh sách tôn giáo</label>
+        <table class="table table-bordered table-striped" id="danhSachTonGiaoTable" style="width: 100%!important">
+            <thead>
+                <tr>
+                    <th>Tôn giáo</th>
+                    <th>Mã số</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</div>
+<hr />
+<div class="row" style="margin: 30px 0 30px 0">
+    <div class="col-12 col-md-12 col-lg-6" style="text-align: center">     
+        <label class="btn btn-primary" style="width: 55%;font-size: 30px;">
+            Chọn tệp <input type="file" id="uploadFile" style="display: none">
+        </label>  
+        <div class="label" id="upload-file-info" style="font-size: 25px;color:darkorange"></div>
+    </div>
+    <div class="col-12 col-md-12 col-lg-6" style="text-align: center">
+        <button class="btn btn-success" style="width: 55%;font-size: 30px;color: #fff;" id="taoSinhVienBtn">
+            Tạo sinh viên
+        </button>    
+            
+    </div>
+</div>   
+<hr />
+<div>
+    <label style="font-size: 30px;font-weight: bold">Danh sách sinh viên đã tạo</label>
+    <table class="table table-bordered table-striped" id="danhSachSinhVienDaTaoTable" style="width: 100%!important">
+        <thead>
+            <tr>
+                <th>MSSV</th>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div>
+    <label style="font-size: 30px;font-weight: bold">Danh sách sinh viên không tạo được</label>
+    <table class="table table-bordered table-striped" id="danhSachSinhVienKhongTaoDuocTable" style="width: 100%!important">
+        <thead>
+            <tr>
+                <th>MSSV</th>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+                <th>Lỗi</th>
+                <th>Số dòng excel</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts
+{    
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/SiteScript/services/SinhVienService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/SinhVienController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            showTabQuanLy("quanLySinhVienMenu", 1);
+            ThemLoSinhVienController.initTrang();
+        });
+    </script>
+}

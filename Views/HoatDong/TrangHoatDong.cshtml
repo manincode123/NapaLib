@@ -1,0 +1,124 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Hoạt động Học viện";
+}
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
+
+<div class="HeaderContainer">
+    <span class="Header">Hoạt động</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Trang chủ</span>
+</div>
+<div class="danhSachHoatDong-body">
+    <div style="text-align: center;margin: 25px auto">
+        <img src="/Content/Icons/IconCapPhanVien.svg" title="Cấp Phân viện" class="iconCapHoatDong" style="float: left" />
+        <img src="/Content/Icons/IconCapPhanVien.svg" title="Cấp Phân viện" class="iconCapHoatDong" style="float: right" />
+        <h2>Cấp Phân viện</h2>
+    </div>
+    <div class="row" id="hoatDongCapPhanVien"></div>
+    <hr class="thanhNgangHoatDong" />
+    <div style="text-align: center;margin: 25px auto">
+        <img src="/Content/Icons/IconCapKhoa.svg" title="Cấp Khóa" class="iconCapHoatDong" style="float: left" />
+        <img src="/Content/Icons/IconCapKhoa.svg" title="Cấp Khóa" class="iconCapHoatDong" style="float: right" />
+        <h2>Cấp Khóa</h2>
+    </div>
+    <div class="row" id="hoatDongCapKhoa"></div>
+    <hr class="thanhNgangHoatDong" />
+    <div style="text-align: center;margin: 25px auto">
+        <img src="/Content/Icons/IconCapLienChiHoi.svg" title="Cấp Liên Chi hội" class="iconCapHoatDong" style="float: left" />
+        <img src="/Content/Icons/IconCapLienChiHoi.svg" title="Cấp Liên Chi hội" class="iconCapHoatDong" style="float: right" />
+        <h2>Cấp Liên Chi</h2>
+    </div>
+    <div class="row" id="hoatDongCapLienChiHoi"></div>
+    <hr class="thanhNgangHoatDong" />
+    <div style="text-align: center;margin: 25px auto">
+        <img src="/Content/Icons/IconCapChiHoi.svg" title="Cấp Chi hội" class="iconCapHoatDong" style="float: left" />
+        <img src="/Content/Icons/IconCapChiHoi.svg" title="Cấp Chi hội" class="iconCapHoatDong" style="float: right" />
+        <h2>Cấp Chi hội</h2>
+    </div>
+    <div class="row" id="hoatDongCapChiHoi"></div>
+</div>
+
+@section scripts
+{                 
+    <script src="@Url.Content("~/Scripts/SiteScript/services/HoatDongService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/HoatDongController.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="cardHoatDong_Template">
+        <div class="col-4 col-lg-4 col-md-4">
+            <div class="cardHoatDong">
+                <% if (hoatDong.coDangKi) { %>
+                <span class="ribbon daDangKi">Đã đăng kí</span>
+                <% } %>
+                <% if (hoatDong.coThamGia) { %>
+                <span class="ribbon daThamGia">Đang tham gia</span>
+                <% } %>
+                <% if (hoatDong.coTheoDoi) { %>
+                <span class="ribbon daTheoDoi">Đang theo dõi</span>
+                <% } %>
+                <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>">
+                    <img src="<%= hoatDong.anhBia %>" alt="<%= hoatDong.tenHoatDong %>" class="anhBiaCardHoatDong" />
+                </a>
+                <div class="noiDungCardHoatDong">
+                    <div class="donViToChuc-CardHoatDong" id="dvtc_<%= hoatDong.id %>">
+                        @* Tạo danh sách đơn vị tổ chức *@
+                        <% _.each(hoatDong.donViToChuc, function(donViToChuc){
+                        %>
+                        <a class="badge badge-pill badge-primary" href="/DonVi/HoatDong/<%= donViToChuc.donViId %>" title="<%= donViToChuc.tenDonVi %>">
+                            <%= donViToChuc.tenDonVi %>
+                        </a>
+                        <%
+                        })%>
+                        @* Tạo danh sách lớp tổ chức *@
+                        <% _.each(hoatDong.lopToChuc, function(lopToChuc){
+                        %>
+                        <a class="badge badge-pill badge-primary" href="/Lop/HoatDong/<%= lopToChuc.lopId %>" title="<%= lopToChuc.kyHieuTenLop %>">
+                            <%= lopToChuc.kyHieuTenLop %>
+                        </a>
+                        <%
+                        })%>
+                        <a class="badge badge-pill badge-primary themDonVi-CardHoatDong" data-toggle="popover">...</a>
+                    </div>
+                    <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>" class="thongTin-CardHoatDong">
+                        <h4 class="tenCardHoatDong"><%= hoatDong.tenHoatDong %></h4>
+                        <div>
+                            <span class="iconCardHoatDong">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                            <span><%= moment(hoatDong.ngayBatDau).format("HH[h]mm [ngày] DD [tháng] MM [năm] YYYY") %></span>
+                        </div>
+                        <div>
+                            <span class="iconCardHoatDong">
+                                <i class="fas fa-school"></i>
+                            </span>
+                            <span style="display: contents"><%= hoatDong.diaDiem %></span>
+                        </div>
+                        <div class="soLuocCardHoatDong"><%= hoatDong.soLuoc %></div>
+                    </a>
+                    <div class="thamGiaTheoDoiHolder-CardHd">
+                        <div class="luotThamGia-CardHoatDong">
+                            <span class="iconCardHoatDong thamGiaIcon">
+                                <i class="fas fa-users"></i>
+                            </span>
+                            <span><%= hoatDong.soLuotThamGia %> lượt tham gia</span>
+                        </div>
+                        <div class="luotThamGia-CardHoatDong">
+                            <span class="iconCardHoatDong heartIcon">
+                                <i class="fas fa-heart"></i>
+                            </span>
+                            <span><%= hoatDong.soLuotTheoDoi %> lượt theo dõi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            showTabProfile("hoatDongMenu", 0);
+            TrangChuHoatDongController.initTrangHoatDongChung();
+        })
+    </script>
+}

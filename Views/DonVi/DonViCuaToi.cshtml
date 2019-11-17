@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách đơn vị của tôi";
+}
+
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/DonViStyles.css" rel="stylesheet">
+<div class="HeaderContainer">
+    <span class="Header">Đơn vị</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Đơn vị của tôi</span>
+</div>
+<div class="body_90percent">
+    <div class="row" id="danhSachDonViCuaToi"></div>
+</div>
+@section scripts
+{      
+    <script src="@Url.Content("~/Scripts/SiteScript/services/SinhVienService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/SinhVienController.js")" type="text/javascript"></script>
+
+    <script type="text/x-template" id="cardDonVi_Template">
+        <div class="col-4 col-md-4 col-lg-4">
+            <div class="donViHolder">
+                @* Ribbon tham gia, đăng kí, theo dõi *@
+                <% if (!donVi.duocPheDuyet) {  %>
+                <span class="ribbon daDangKi">Đã đăng kí</span>
+                <% } %>
+                <% if (donVi.duocPheDuyet & !donVi.ngungThamGia) { %>
+                <span class="ribbon daThamGia">Đang tham gia</span>
+                <% } %>
+                <% if (donVi.duocPheDuyet & donVi.ngungThamGia) { %>
+                <span class="ribbon ngungThamGia">Đã ngừng tham gia</span>
+                <% } %>
+                <a href="/DonVi/ThongTin/<%= donVi.donViId %>" title="<%= donVi.tenDonVi %>">
+                    <img src="<%= donVi.anhBia %>" alt="<%= donVi.tenDonVi %>" class="anhBia-CardDonVi">
+                </a>
+                <a href="/DonVi/ThongTin/<%= donVi.donViId %>" style="text-align: center" title="<%= donVi.tenDonVi %>">
+                    <h4 class="tenDonVi-CardDonVi"><%= donVi.tenDonVi %></h4>
+                </a>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(document).ready(function () {
+            showTabProfile("donViMenu", 1);
+            CacTrangCaNhanController.initTrangDonViCuaToi();
+        });
+    </script>
+}

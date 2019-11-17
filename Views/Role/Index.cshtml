@@ -1,0 +1,255 @@
+﻿@model System.Collections.Generic.List<NAPASTUDENT.Controllers.SinhVienRole>
+
+@{
+    ViewBag.Title = "Quản lý chức vụ";
+}
+@Html.AntiForgeryToken()  
+<button class="btn btn-primary" id="addRoleBtn" style="top: 100px;position: absolute;right: 20px;font-size: 25px;">Thêm chức vụ</button>
+<div class="HeaderContainer">
+    <span class="Header">Quản lý</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Quản lý chức vụ</span>
+</div>                  
+<div class="body_90percent">
+    <h2>Thông tin về các loại chức vụ</h2>
+    <strong>Quản lý lớp: </strong><span>Chức vụ này có quyền quản lý TẤT CẢ LỚP phân viện (Thêm lớp, chỉnh sửa thông tin, quản lý thành viên, quản lý chức vụ lớp)</span> <br />
+    <strong>Quản lý đơn vị: </strong><span>Chức vụ này có quyền quản lý TẤT CẢ ĐƠN VỊ phân viện (Thêm đơn vị, chỉnh sửa thông tin, quản lý thành viên, quản lý chức vụ đơn vị)</span> <br />
+    <strong>Quản lý hoạt động: </strong><span>Chức vụ này có quyền quản lý TẤT CẢ HOẠT ĐỘNG phân viện (Thêm hoạt động, chỉnh sửa, phê duyệt, hủy, kết thúc, điểm danh tham gia hoạt động)</span> <br />
+    <strong>Điểm danh hoạt động: </strong><span>Chức vụ này có quyền điểm danh tham gia TẤT CẢ hoạt động phân viện</span> <br />
+    <strong>Quản lý bài viết: </strong><span>Chức vụ này có quyền quản lý TẤT CẢ bài viết phân viện(Phê duyệt, chỉnh sửa, xóa bài viết; Quản lý chuyên mục)</span> <br />
+    <strong>Quản lý sinh viên: </strong><span>Chức vụ này có quyền quản lý TẤT CẢ sinh viên phân viện(Thêm, chỉnh sửa thông tin sinh viên)</span> <br />
+    <strong>Quản lý Hội viên: </strong><span>Chức vụ này có quyền quản lý TẤT CẢ Hội viên phân viện(Thêm, chỉnh sửa thông tin Hội viên)</span> <br />
+    <strong>Quản lý Đoàn viên: </strong><span>Chức vụ này có quyền quản lý TẤT CẢ Đoàn viên phân viện(Thêm, chỉnh sửa thông tin Đoàn viên)</span> <br />
+    <strong>Admin: </strong><span>Chức vụ này có quyền quản lý TẤT CẢ các chức năng của web cũng như quản lý các chức vụ trên</span> <br />
+</div>      
+<hr />
+<div class="body_60percent" >
+    <table class="table table-bordered table-striped" style="text-align: center">
+        <thead>
+        <tr>
+            <th>Họ tên</th>
+            <th>MSSV</th>
+            <th>Chức vụ</th>
+            <th>Quản lý</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.SinhVienId">
+                <td>@item.HoVaTenLot @item.Ten</td>
+                <td>@item.MSSV</td>
+                <td>@item.RoleName</td>
+                <td><button class="btn btn-danger xoaChucVu-js">Xóa</button></td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="modal fade" id="addRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Thêm chức vụ</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">  
+                <div class="form-group">
+                    <input type="text" value="" class="form-control" id="addRoleInput" />
+                    <small class="form-text text-muted" id="addRoleInput-HelpBlock">
+                        Nhập Mã số sinh viên, họ tên để chọn thành viên thêm chức vụ
+                    </small>
+                </div>
+                <form id="userRoleForm">
+                    <div style="text-align: center">
+                        <div class="form-group">
+                            <input type="text" value="0" name="sinhVienId" id="sinhVienId" hidden />
+                        </div>
+                        <img src="/Content/AnhBia/AnhSV/avatar.png" alt="" id="anhSinhVien" style="width: 25%" />
+                        <h3 id="tenSinhVien"></h3>
+                        <h3 id="mssv"></h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleName" style="font-size: 30px">Loại chức vụ</label>
+                        <select name="roleName" id="roleName" class="form-control input-25px">
+                            <option value="Admin">Admin</option>
+                            <option value="QuanLyLop">Quản lý Lớp</option>
+                            <option value="QuanLySinhVien">Quản lý Sinh viên</option>
+                            <option value="QuanLyHoiVien">Quản lý Hội viên</option>
+                            <option value="QuanLyDoanVien">Quản lý Đoàn viên</option>
+                            <option value="QuanLyBaiViet">Quản lý Bài viết</option>
+                            <option value="QuanLyHoatDong">Quản lý Hoạt động</option>
+                            <option value="DiemDanhHoatDong">Điểm danh Hoạt động</option>
+                            <option value="QuanLyDonVi">Quản lý Đơn vị</option>
+                        </select>            
+                    </div> 
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >Đóng</button>
+                <button type="button" class="btn btn-success" id="addRole">Thêm</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="xoaRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Xóa chức vụ</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">  
+                <h4>Bạn có chắc muốn xóa chức vụ của sinh viên sau:</h4>
+                <h3><strong>Sinh viên: <span id="sinhVienNameXoa" style="color: coral"></span></strong></h3>
+                <h3><strong>Chức vụ: <span id="roleNameXoa" style="color: coral"></span></strong></h3>    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >Đóng</button>
+                <button type="button" class="btn btn-danger" id="xoaRoleBtn">Xóa</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $("document").ready(function () {
+            var sinhVienId, roleName;
+            //Xóa role
+            var hienThiModalXoaRole = function(e) {
+                var button = $(e.target);
+                sinhVienId = button.closest("tr").attr("id");
+                roleName = button.closest("tr").children().eq(2).html();
+                $("#sinhVienNameXoa").html(button.closest("tr").children().eq(0).html());
+                $("#roleNameXoa").html(roleName);
+                $("#xoaRoleModal").modal("show");
+            }
+            var xoaRole = function () {
+                $.ajax({
+                    url: "/Role/RemoveSinhVienFromRole",
+                    type: "DELETE",
+                    data: {
+                        sinhVienId: sinhVienId,
+                        roleName: roleName,
+                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val()
+                    },
+                    success: function (data) {
+                        alert(data);
+                        location.reload(true);
+                    },
+                    error: function () {
+                        alert("Đã có lỗi xảy ra");
+                    }
+
+                });
+            }
+            //Thêm role
+            var validateUserRoleForm = function () {
+                $("#userRoleForm").validate({
+                    ignore: [],
+                    rules: {
+                        sinhVienId: "required",
+                        roleName: "required"
+                    },
+                    messages: {
+                        sinhVienId: "Vui lòng chọn sinh viên giữ chức vụ",
+                        roleName: "Vui lòng chọn loại chức vụ"
+                    }
+                });
+
+            }
+            var resetInput = function() {
+                $("#tenSinhVien").html(null);
+                $("#addRoleInput").typeahead("val", "AS");
+                $("#sinhVienId").val(null);
+                $("#anhSinhVien").attr("src", "/Content/AnhBia/AnhSV/avatar.png");
+                $("#roleName").val(null);
+            }
+            var themSinhVienAddRole = function (e, sinhVien) {
+                sinhVienId = sinhVien.id;
+                $("#tenSinhVien").html(returnTenSinhVienWithLink(sinhVien));
+                $("#mssv").html(sinhVien.mssv);
+                $("#sinhVienId").val(sinhVien.id);
+                $("#anhSinhVien").attr("src", sinhVien.anhDaiDien);
+            }
+            var hienThiModalAddRole = function (e) {
+                resetInput();
+                $("#addRoleModal").modal("show");
+            }
+            var initTypeahead = function () {
+                var danhSachsinhVien = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace("hoVaTenLot", "ten", "mssv"),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: {
+                        url: "/api/SinhVien/TimKiem?searchTerm=%QUERY",
+                        wildcard: "%QUERY"
+                    }
+                });
+                $("#addRoleInput").typeahead(
+                        {
+                            highlight: true
+                        },
+                        {
+                            name: "sinhVien",
+                            display: function (data) {
+                                return data.hoVaTenLot + " " + data.ten;
+                            },
+                            source: danhSachsinhVien,
+                            templates: {
+                                suggestion: function (data) {
+                                    return '<p><img src="' + data.anhDaiDien + '" class="anhSvTypeahead"/><strong>'
+                                        + returnTenSinhVien(data) + "</strong> - "
+                                        + data.mssv + "</p>";
+                                }
+                            }
+
+                        })
+                    .on("typeahead:autocomplete", themSinhVienAddRole)
+                    .on("typeahead:select", themSinhVienAddRole)
+                    .on("typeahead:change",
+                        function () {
+                            //vm.tacGiaId = temp;
+                            //temp = 0;
+                        });
+                $("#addRoleInput").typeahead("val", "AS");
+            }
+            var addRole = function () {
+                if ($("#userRoleForm").valid()) {
+                    roleName = $("#roleName").val();
+                    $.ajax({
+                        url: "/Role/AddSinhVienToRole",
+                        type: "POST",
+                        data: {
+                            sinhVienId: sinhVienId,
+                            roleName: roleName,
+                            __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val()
+                        },
+                        success: function (data) {
+                            alert(data);
+                            location.reload(true);
+                        },
+                        error: function () {
+                            alert("Đã có lỗi xảy ra");
+                        }
+                    });
+                }
+            }
+            var initTrang = function() {
+                validateUserRoleForm();
+                initTypeahead();
+                $("body").on("click", ".xoaChucVu-js", hienThiModalXoaRole);
+                $("#xoaRoleBtn").on("click", xoaRole);
+                $("#addRoleBtn").on("click", hienThiModalAddRole);
+                $("#addRole").on("click", addRole);
+            }
+            initTrang();
+        })
+    </script>
+}

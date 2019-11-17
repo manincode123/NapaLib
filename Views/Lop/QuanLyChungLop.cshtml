@@ -1,0 +1,128 @@
+﻿
+
+@{
+    ViewBag.Title = "Quản lý chung lớp";
+}   
+@Html.AntiForgeryToken()     
+<link href="/Content/SiteCss/LopStyles.css" rel="stylesheet"> 
+<link href="/Content/croppie/croppie.css" rel="stylesheet">
+
+<h2 class="bold-center">QUẢN LÝ CHUNG LỚP, CHI HỘI</h2>
+<hr /> 
+<div class="bold-center">
+    <button class="btn btn-primary" id="saveLopBtn" style="font-size: 2rem">Thêm lớp mới</button>
+</div>
+<hr />
+<div>
+    <h3>Danh sách các lớp</h3>
+    <table class="table table-bordered table-striped" id="danhSachLop-TrangQuanLyChungLop" style="width: 100%">
+        <thead>
+        <tr>
+            <th>Tên lớp</th>
+            <th>Ký hiệu tên lớp</th>
+            <th>Khóa</th>
+            <th>Số sinh viên</th>
+            <th>Số hội viên</th>
+            <th>Số đoàn viên</th>
+            <th>Ghi chú</th>
+            <th>Quản lý</th>
+        </tr>
+        </thead>
+    </table>
+</div>                                    
+
+<div class="modal fade" id="SaveLopModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Quản lý thông tin lớp</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="SaveLopModal-body">
+                <form id="lopForm">
+                    <div hidden>
+                        <input type="text" value="0" id="lopId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="tenLop" style="font-size: 30px;">Tên lớp</label>
+                        <small>Ví dụ: KS16 Quản lí công 1</small>
+                        <input value="" name="tenLop" id="tenLop" type="text" class="form-control" maxlength="50"/>
+                        <small id="tenLopLimit"></small>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <label for="kyHieuTenLop" style="font-size: 30px;">Ký hiệu tên lớp</label>  
+                        <small>Ví dụ: KS16-QLC1</small>
+                        <input value="" name="kyHieuTenLop" id="kyHieuTenLop" type="text" class="form-control" maxlength="15"/>
+                        <small id="kyHieuTenLopLimit"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="khoaHocId" style="font-size: 30px;">Khóa học</label>
+                        <div>
+                            <select data-placeholder="Chọn khóa học" name="khoaHocId" id="khoaHocId" class="form-control" style="display: block"></select>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="material-switch">
+                        <input id="lopChuyenNganh-checkbox" name="lopChuyenNganh-checkbox" type="checkbox" />
+                        <label for="lopChuyenNganh-checkbox" class="badge-success"></label>
+                        <span style="margin-left: 20px; font-size: 25px">Lớp chuyên ngành</span>
+                        <small class="form-text text-muted">Chỉ chọn lựa chọn này nếu là lớp năm 3,4.</small>
+                    </div>     
+                    <hr />
+                    <div class="form-group">
+                        <label for="anhBiaLop_input" style="font-size: 30px; font-weight: bold">Ảnh bìa</label>
+                        <input id="anhBiaLop_input" type="file" style="display: none" />
+                        <small id="anhBiaLop-helpText">Chỉ có thể chỉnh sửa ảnh bìa sau khi tạo lớp.</small>
+                        <img id="anhBiaLop" src="/Content/HocVien.png" />
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cropImagePop" id="editAnhBiaBtn">
+                            Chỉnh sửa ảnh
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="saveLop">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="cropImagePop" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"><strong>Chỉnh sửa ảnh</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="anhBiaLop-Wrapper"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" id="cropImageBtn" class="btn btn-primary">Up ảnh bìa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{    
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/croppie/croppie.min.js")" type="text/javascript"></script>        
+    <script src="@Url.Content("~/Scripts/SiteScript/services/LopService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/LopController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            showTabQuanLy("quanLyLopMenu", 1);
+            QuanLyChungLopController.initTrangQuanLyChungLop();
+        });
+
+    </script>
+}

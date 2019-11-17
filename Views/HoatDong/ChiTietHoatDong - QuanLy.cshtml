@@ -1,0 +1,350 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "";
+}
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
+
+<div class="hoatDongBody">
+    <div>
+        <img src="/Content/anh-bia-facebook-10.jpg" alt="" id="anhBiaHoatDong" />
+    </div>
+    <div hidden>
+        <input type="text" value="0" id="hoatDongId" />
+    </div>
+    <div style="text-align: center;margin-bottom: 20px">
+        <h1 id="tenHoatDong-TrangChiTietHd"></h1>
+    </div>
+
+    <div class="row" id="thongTinCoBan-TrangChiTietHd">
+
+        <div class="col-12 col-md-6 col-lg-4 cardContainer">
+            <div class="card card-TrangChiTietHd">
+                <div class="iconDangDienRa-card">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="explain-card">ngày diễn ra</div>
+                <div class="number-card" id="ngayDienRa-TrangChiTietHd"></div>
+                <div class="cardText-TrangChiTietHd">Tháng <span id="thangDienRa-TrangChiTietHd"></span></div>
+                <div class="cardText-TrangChiTietHd">Năm <span id="namDienRa-TrangChiTietHd"></span></div>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 cardContainer">
+            <div class="card card-TrangChiTietHd">
+                <div class="iconDangDienRa-card">
+                    <i class="far fa-clock"></i>
+                </div>
+                <div class="explain-card">thời gian diễn ra</div>
+                <div class="number-card" id="gioDienRa-TrangChiTietHd"></div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 cardContainer">
+            <div class="card card-TrangChiTietHd">
+                <div class="iconDangDienRa-card">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="explain-card">lượt tham gia</div>
+                <div class="number-card" id="soLuotThamGia-TrangChiTietHd"></div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 cardContainer">
+            <div class="card card-TrangChiTietHd">
+                <div class="iconDangDienRa-card">
+                    <i class="fas fa-toggle-on"></i>
+                </div>
+                <div class="explain-card">tình trạng</div>
+                <div class="number-card" id="tinhTrang-TrangChiTietHd"></div>
+                <div class="cardText-TrangChiTietHd" id="tinhTrangKetThuc-TrangChiTietHd"></div>
+                <div class="cardText-TrangChiTietHd" id="tgKetThuc-TrangChiTietHd"></div>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 cardContainer">
+            <div class="card card-TrangChiTietHd">
+                <div class="iconDangDienRa-card">
+                    <i class="fas fa-school"></i>
+                </div>
+                <div class="explain-card">địa điểm diễn ra</div>
+                <div class="cardText-TrangChiTietHd" id="diaDiem-TrangChiTietHd"></div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 cardContainer">
+            <div class="card card-TrangChiTietHd">
+                <div class="iconDangDienRa-card">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="explain-card">Đơn vị tổ chức</div>
+                <div id="danhSachDonViToChuc-TrangChiTietHd"></div>
+            </div>
+        </div>
+
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4" style="text-align: center">
+            <button class="btn btn-primary quanLyHoatDongBtn" id="ChinhSuaHoatDongBtn">Chỉnh sửa hoạt động</button>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4" style="text-align: center">
+            <button class="btn btn-warning quanLyHoatDongBtn" id="KetThucHoatDongBtn">Kết thúc hoạt động</button>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4" style="text-align: center">
+            <button class="btn btn-danger quanLyHoatDongBtn" id="HuyHoatDongBtn">Hủy hoạt động</button>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <blockquote><i id="soLuocHoatDong"></i></blockquote>
+        <div id="noiDungHoatDong"></div>
+    </div>
+    <hr />
+    <div class="chuongTrinhHdWrapper">
+        <button type="button" class="btn btn-primary float-right" id="nutQlyChuongTrinhHoatDong" data-dismiss="modal">
+            Quản lý chương trình
+        </button>
+        <h2 style=" font-weight: bold; margin-bottom: 30px">CHƯƠNG TRÌNH HOẠT ĐỘNG</h2>
+        <div id="chuongTrinhHoatDong"></div>
+    </div>
+    <hr />
+    <div>
+        <a href='/HoatDong/DiemDanh/@Model' class="btn btn-success float-right">Điểm danh</a>    
+        <button type="button" class="btn btn-primary float-right" id="xemDanhSachTg" style="margin-right: 15px">
+            Xem danh sách
+        </button>
+        <h2>DANH SÁCH SINH VIÊN THAM GIA</h2>
+        <div id="danhSachSvTg-Wrapper" class="collapse">
+            <table class="table table-striped table-bordered" id="danhSachSvTg">
+                <thead>
+                <tr>
+                    <th>Họ tên sinh viên</th>
+                    <th>MSSV</th>
+                    <th>Số điện thoại</th>
+                    <th>Lớp</th>  
+                    <th>Điểm danh lúc</th> 
+                    <th>Tình trạng</th>     
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="QlChuongTrinhHd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Quản lý chương trình hoạt động</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="QlChuongTrinhHd-body">
+                <button type="button" class="btn btn-primary" id="nutThemChuongTrinhHoatDong" >
+                    Thêm chương trình
+                </button> 
+                <div>
+                    <table class="table table-striped table-bordered" id="chuongTrinhHoatDongTable">
+                        <thead>
+                        <tr>
+                            <th>Thời gian</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>Loại thời gian</th>
+                            <th>Chỉnh sửa,xóa</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="SaveChuongTrinhHoatDong" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SaveCtrModalTitle">Thêm chương trình</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="SaveChuongTrinhHoatDong-body">
+                <form class="form-horizontal" id="chuongTrinhHoatDongForm">
+                    <div hidden>
+                        <input type="text" value="0" id="idChuongTrinh" />
+                    </div>
+                    <div class="form-group">
+                        <label for="tieuDe">Tiêu đề</label>
+                        <input value="" name="tieuDe" id="tieuDe" type="text" class="form-control" maxlength="50" />
+                        <small id="tieuDeLimit"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="noiDung">Nội dung</label>
+                        <textarea value="" name="noiDungChuongTrinh" id="noiDungChuongTrinh" type="text" class="form-control" maxlength="400" rows="7"></textarea>
+                        <small id="noiDungChuongTrinhLimit"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="ngay">Ngày</label>
+                        <input type="date" name="ngayChuongTrinh" id="ngayChuongTrinh" class="form-control">
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="gio-checkbox">
+                        <label class="form-check-label" for="gio-checkbox">Hiển thị giờ</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="gio">Giờ</label>
+                        <input type="time" name="gioChuongTrinh" id="gioChuongTrinh" class="form-control" disabled="disabled">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="SaveChuongTrinhHoatDongBtn">Thêm chương trình</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="DeleteChuongTrinhHoatDong" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa chương trình</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>Bạn có chắc chắn muốn xóa chương trình này?</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-danger" id="DeleteChuongTrinhHoatDongBtn">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ChinhSuaHoatDongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Chỉnh sửa hoạt động</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="ChinhSuaHoatDongModal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="ChinhSuaHoatDong">Lưu sửa đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="KetThucHoatDongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kết thúc hoạt động</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>Bạn có chắc chắn muốn kết thúc hoạt động này?</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-warning" id="KetThucHoatDong">Kết thúc</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="HuyHoatDongModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hủy hoạt động</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    Nếu bạn hủy hoạt động, mọi lượt tham gia sẽ bị xóa.
+                    Bạn có chắc chắn muốn hủy hoạt động này?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-danger" id="HuyHoatDong">Hủy hoạt động</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="thongBaoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="thongBaoModal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="khoiPhucHoatDong">Khôi phục hoạt động</button>
+                <button type="button" class="btn btn-success" id="moLaiHoatDong">Mở lại hoạt động</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{    
+    @Scripts.Render("~/bundles/DataTable")
+    @Scripts.Render("~/bundles/DataTablePlugin")
+    <script src="@Url.Content("~/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/ckfinder/ckfinder.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/JTLine/jtline.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/services/HoatDongService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/HoatDongController.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="iconCapHoatDong_Template">
+        <% if (capHoatDong == 1) { %>
+        <img src="/Content/Icons/IconCapChiHoi.svg" title="Cấp Chi hội" class="iconCapHoatDong" style="float: left" />
+        <img src="/Content/Icons/IconCapChiHoi.svg" title="Cấp Chi hội" class="iconCapHoatDong" style="float: right" />
+        <% } %>
+        <% if (capHoatDong == 2) { %>
+        <img src="/Content/Icons/IconCapLienChiHoi.svg" title="Cấp Liên Chi hội" class="iconCapHoatDong" style="float: left" />
+        <img src="/Content/Icons/IconCapLienChiHoi.svg" title="Cấp Liên Chi hội" class="iconCapHoatDong" style="float: right" />
+        <% } %>
+        <% if (capHoatDong == 3) { %>
+        <img src="/Content/Icons/IconCapKhoa.svg" title="Cấp Khóa" class="iconCapHoatDong" style="float: left" />
+        <img src="/Content/Icons/IconCapKhoa.svg" title="Cấp Khóa" class="iconCapHoatDong" style="float: right" />
+        <% } %>
+        <% if (capHoatDong == 4) { %>
+        <img src="/Content/Icons/IconCapPhanVien.svg" title="Cấp Phân viện" class="iconCapHoatDong" style="float: left" />
+        <img src="/Content/Icons/IconCapPhanVien.svg" title="Cấp Phân viện" class="iconCapHoatDong" style="float: right" />
+        <% } %>
+    </script>
+    <script>
+        $(document).ready(function () {
+            var hoatDongId = @Model;
+            HoatDongController.initTrang_QuanLy(hoatDongId);
+        });
+    </script>
+}

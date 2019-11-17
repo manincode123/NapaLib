@@ -1,0 +1,126 @@
+﻿@model NAPASTUDENT.Models.DTOs.MonHocDtos.DiemLopHocKiDto
+
+@{
+    ViewBag.Title = "title";
+}
+<link href="@Url.Content("~/Content/SiteCss/MonHoc.css")" rel="stylesheet" type="text/css" />     
+<h2>Điểm lớp: <span id="tenLop"></span></h2> 
+<h3>Học kì: @((int)Model.HocKi) </h3>    
+
+<div style="overflow: scroll;overflow-y: hidden;">
+    <table class="table table-striped table-bordered bangDiem" id="bangDiem" style="width: 100%!important">
+        <thead>
+        <tr id="monHoc">
+            <th rowspan="3">MSSV</th>
+            <th rowspan="3">Họ</th>
+            <th rowspan="3">Tên</th>
+        </tr>        
+        <tr id="hocPhan">
+        </tr>     
+        <tr id="cotDiem">
+        
+        </tr>
+        </thead>
+    </table>         
+
+</div>
+  
+@section scripts
+{
+    @Scripts.Render("~/bundles/DataTable")
+    <script>
+        var bangDiemTable;
+        var columns=[
+            { data: 'mssv' },
+            { data: 'hoVaTenLot' },
+            { data: 'ten' }
+        ];
+        var dataObject = {}
+        var addColumnsToTable = function(monHoc) {
+            $("#monHoc").append('<th colspan="4">'+monHoc.kyHieuMonHoc+'</th>');
+            $("#hocPhan").append('<th colspan="4">'+monHoc.soHocPhan+'</th>');
+            $("#cotDiem").append('<th>CC</th><th>ĐK</th><th>Thi</th><th>TB</th>');
+            
+        }
+        var addColumnsData = function(index,monHoc) {    
+            columns.push({
+                data : 'diem',
+                render : function(data, type, row) {
+                    return data[index].diemChuyenCan;
+                }
+            });
+            columns.push({
+                data : 'diem',
+                render : function(data, type, row) {
+                    return data[index].diemDieuKien1;
+                }
+            });
+            columns.push({
+                data : 'diem',
+                render : function(data, type, row) {
+                    return data[index].diemThi;
+                }
+            });
+        }
+        var bindData = function(data) {
+            dataObject = data;
+        }
+        var initDataTable = function() {
+            var index = 0;
+            dataObject.lop.monHoc.forEach(function(monHoc) {
+                addColumnsToTable(monHoc);
+                addColumnsData(index, monHoc);
+                index++;
+            });
+            bangDiemTable = $("#bangDiem").DataTable({
+                data:dataObject.sinhVienVaDiem,
+                "order": [[0, 'asc']],
+                columns: columns,
+                rowId: "id",
+                columnDefs: [
+                    {
+                        targets: 0,
+                        width: 75
+                    },
+                    {
+                        targets: 1,
+                        width: 150
+                    },
+                    {
+                        targets: 2,
+                        width: 100
+                    }
+
+                    
+                ],
+                rowCallback: function (row, data) {
+
+                }
+            });
+        }
+        var updatePage = function(data) {
+            bindData(data);
+            initDataTable();
+        }
+        var getData = function(dataSent,updatePage) {
+            $.ajax({
+                url: "/api/MonHoc/LayDiemHocKiLop",
+                type: "POST",
+                data:  dataSent,
+                async: false,
+                success: function(data) {
+                    updatePage(data);
+                }
+            });
+        }
+
+        var initTrang = function(diemLopHocKi) {
+
+        }
+        $(document).ready(function() {
+
+            var diemLopHocKi = {lopId : @Model.LopId, hocKi: @((int)Model.HocKi)}
+            getData(diemLopHocKi, updatePage);
+        });
+    </script>
+}

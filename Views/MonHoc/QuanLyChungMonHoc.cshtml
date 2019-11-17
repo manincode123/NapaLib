@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Quản lý chung môn học";
+}
+<link href="@Url.Content("~/Content/SiteCss/MonHoc.css")" rel="stylesheet" type="text/css" /> 
+<input value="" id="monHocId" type="text" hidden="true" />
+<button type="button" class="btn btn-success" id="themMonHoc">Thêm môn học</button>
+<h2 style="margin-bottom: 50px">Quản lý chung môn học</h2>   
+ 
+<table id="danhSachMonHoc" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Tên Môn học</th>
+            <th>Ký hiệu</th>
+            <th>Số tiết</th>
+            <th>Số học phần</th>
+            <th>Loại môn</th>
+            <th>Quản lý</th>
+        </tr>
+    </thead>
+</table>   
+<div>
+    <hr />
+    <h2 style="font-weight: bold">Danh sách sinh viên phải thi lại</h2>
+    <table class="table table-striped table-bordered" id="danhSachSvPhaiThiLai">
+        <thead>
+        <tr>
+            <th>MSSV</th>
+            <th>Họ tên</th>
+            <th>Lớp</th>
+            <th>Môn học</th>
+            <th>Điểm Trung bình</th>
+            <th>Quản lý</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<div>
+    <hr />
+    <h2 style="font-weight: bold">Danh sách lịch thi lại</h2>
+    <table class="table table-striped table-bordered" id="danhSachLichThiLai">
+        <thead>
+        <tr>
+            <th>Thời gian</th>
+            <th>Địa điểm thi</th> 
+            <th>Môn học</th>
+            <th>Tình trạng</th>
+            <th>Quản lý</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div class="modal fade" id="xoaMonHocModal" tabindex="-1" role="dialog" aria-labelledby="xoaMonHocModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa môn học</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa môn học? Tất cả điểm sinh viên môn học này cũng bị xóa theo.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger" id="xoaMonHoc">Xóa</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="saveMonHocModal" tabindex="-1" role="dialog" aria-labelledby="saveMonHocModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"></h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="tenMonHoc-input" style="font-size: 30px;">Tên môn học</label>
+                    <input value="" id="tenMonHoc-input" type="text" class="form-control" style="max-width: 80%;" maxlength="30" />
+                    <small id="tenMonHocLimit"></small>
+                </div>
+                <div class="form-group">
+                    <label for="kyHieuMonHoc-input" style="font-size: 30px;">Ký hiệu môn học</label>
+                    <input value="" id="kyHieuMonHoc-input" type="text" class="form-control" style="max-width: 80%;" maxlength="50" />
+                    <small id="kyHieuMonHocLimit"></small>
+                </div>
+                <div class="form-group">
+                    <label for="soTiet-input" style="font-size: 30px;">Số tiết</label>
+                    <input value="" id="soTiet-input" type="number" class="form-control" style="max-width: 80%;" />
+                </div>
+                <div class="form-group">
+                    <label for="soHocPhan-input" style="font-size: 30px;">Số học phần</label>
+                    <input value="" id="soHocPhan-input" type="number" class="form-control" style="max-width: 80%;" />
+                </div>
+                <div class="form-group" style="display: flex;align-items: center;">
+                    <input id="haiDiemDk-input" name="haiDiemDk-input" type="checkbox" />
+                    <span style="margin-left: 10px; font-size: 25px">Có 2 cột điểm điều kiện</span>
+                </div>
+                <div class="form-group">
+                    <label for="loaiMon-input" style="font-size: 30px;">Loại môn</label>
+                    <select class="form-control" id="loaiMon-input" style="max-width: 80%;">
+                        <option value="1">Môn thường</option>
+                        <option value="2">Môn Tiếng anh</option>
+                        <option value="3">Môn CPĐT-TTTQLNN</option>
+                    </select>
+                    <small>
+                        Môn thường có 1 (hoặc 2) cột điều kiện, 1 cột điểm thi.<br>
+                        Loại môn Tiếng Anh có 2 cột điều kiện, 3 cột điểm thi (Nghe, Nói, Viết).<br>
+                        Loại môn CPĐT-TTQLNN có 2 cột điều kiện, 2 cột điểm thi (Lý thuyết, thực hành).
+                    </small>
+                </div> 
+                <strong style="font-size: 15px;">
+                    Lưu ý: Không thể chỉnh sửa loại môn và số cột điểm điều kiện sau khi đã tạo. 
+                </strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 20px">Đóng</button>
+                <button type="button" class="btn btn-primary" id="saveMonHoc" style="font-size: 20px">Chỉnh sửa</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+ {
+    @Scripts.Render("~/bundles/DataTable")
+    <script>
+       
+        $(document).ready(function () {
+            QuanLyChungMonHocController.initTrang();
+        });
+    </script>
+}

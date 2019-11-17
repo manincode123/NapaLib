@@ -1,0 +1,129 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "Quản lý kì thi lại";
+}
+<link href="@Url.Content("~/Content/SiteCss/MonHoc.css")" rel="stylesheet" type="text/css" />
+<a href='' class="btn btn-success" style="font-size: 25px" id="linkQuanLyThiLaiMonHoc">
+    <i class="fas fa-angle-left"></i>
+    Quản lý thi lại môn học
+</a>
+<button class="btn btn-primary" id="chinhSuaNgayThi">Chỉnh sửa thông tin</button>
+<h2 style="text-align: center; font-weight: bold">Quản lý kì thi lại</h2>
+<div id="thongTinThiLai">
+    <div class="row">
+        <h3 class="col-lg-6 col-md-6 col-6">Môn học: <span id="tenMonHoc"></span></h3>
+        <h3 class="col-lg-6 col-md-6 col-6">Loại môn: <span id="loaiMon"></span></h3>
+    </div>
+    <hr />
+    <div class="row">
+        <h3 class="col-lg-6 col-md-6 col-6">Ngày thi: <span id="ngayThi"></span></h3>
+        <h3 class="col-lg-6 col-md-6 col-6">Địa điểm thi: <span id="diaDiemThi"></span></h3>
+    </div>
+    <hr />
+    <div class="row">
+        <h3 class="col-lg-6 col-md-6 col-6" style="display: flex; align-items: center; margin: 0;">
+            Tình trạng:&nbsp;<span id="tinhTrangThiLai"></span>
+        </h3>
+        <div class="col-lg-6 col-md-6 col-6 ">
+            <button class="btn btn-warning" id="ketThucThiLaiBtn">Kết thúc thi lại</button>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <hr />
+    <h2 style="font-weight: bold">Điểm thi</h2>
+    <table class="table table-striped table-bordered" id="bangDiem" style="width: 100% !important">
+        <thead>
+            <tr id="cotDiem">
+                <th>MSSV</th>
+                <th>Họ</th>
+                <th>Tên</th>
+                <th>Lớp học</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div id="danhSachSvPhaiThiLaiHolder" style="display: none">
+    <hr />
+    <h2 style="font-weight: bold">Danh sách sinh viên phải thi lại</h2>
+    <small>Nhấn thêm vào để đăng kí lịch thi lại</small>
+    <table class="table table-striped table-bordered" id="danhSachSvPhaiThiLai" style="width: 100% !important">
+        <thead>
+            <tr>
+                <th>MSSV</th>
+                <th>Họ tên</th>
+                <th>Lớp</th>
+                <th>Điểm Trung bình</th>
+                <th>Quản lý</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+<div class="modal fade" id="saveLichThiLaiModal" tabindex="-1" role="dialog" aria-labelledby="saveLichThiLaiModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Thay đổi kỳ thi lại</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="ngay" style="font-size: 30px;">Ngày thi</label>
+                <div class="form-group">
+                    <label for="ngay">Ngày</label>
+                    <input type="date" id="ngay" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="gio">Giờ</label>
+                    <input type="time" id="gio" class="form-control">
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="diaDiemThi-input" style="font-size: 30px;">Địa điểm thi</label>
+                    <input value="" id="diaDiemThi-input" type="text" class="form-control" style="max-width: 100%;" maxlength="30" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 20px">Đóng</button>
+                <button type="button" class="btn btn-primary" id="saveLichThiLai" style="font-size: 20px">Thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ketThucThiLaiModal" tabindex="-1" role="dialog" aria-labelledby="ketThucThiLaiModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Kết thúc kỳ thi lại</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn kết thúc kì thi lại này? Bạn sẽ không thể thêm sinh viên vào kì thi lại này nữa.
+                <br /> (Bạn vẫn có thể cập nhật điểm thi sau khi kết thúc).
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 20px">Đóng</button>
+                <button type="button" class="btn btn-danger" id="ketThucThiLai" style="font-size: 20px">Kết thúc</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/DataTable")
+    <script>
+        $(document).ready(function() {
+            var idLichThiLai = @Model;
+            QuanLyThiLaiController.initTrang(idLichThiLai);
+        });
+    </script>
+}

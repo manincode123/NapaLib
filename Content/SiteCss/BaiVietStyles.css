@@ -1,0 +1,497 @@
+﻿/*Class chung*/
+.baiVietLoader {
+    width: 90px;
+    margin: auto;
+    display: none;
+}
+.khongConBaiViet {
+    text-align: center;
+    display: none;
+    font-size: 25px;
+    margin-top: 20px;
+}
+.anhBiaContainer-DanhSachBaiViet {
+    position: relative;
+    display: block;
+}
+.anhBia-DanhSachBaiViet {
+    width: 100%;
+    height: 42vh;
+    object-fit: cover;
+    object-position: center;
+    margin: auto;
+    display: block;
+
+}
+.anhBiaTextBox-DanhSachBaiViet {
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right: 50%;
+    transform: translate(50%);
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+/*Trang chủ*/
+.featured-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 725px;
+    width: 725px;
+}
+.featured-wrap .featured {
+    margin-left: 0;
+    width: 472px;
+    margin: 10px 0;
+    border-bottom: 0;
+    border-right: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+.width .featured .cover {
+    width: 470px;
+    height: 260px;
+    float: none;
+    margin-bottom: 4px;
+}
+ .featured img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+.featured .title {
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    height: auto;
+    margin-bottom: 4px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+.featured .summary {
+     font-size: 16px;
+     overflow: hidden;
+    text-overflow: ellipsis;
+}
+.featured .article {
+    width: 32%;
+    margin-right: 2%;
+    display: inline-block;
+    float: left
+           
+}
+.featured .article:last-child {
+    width: 32%;
+    margin-right: 0;
+    display: inline-block;
+           
+}
+.article .title {
+    font-size: 15px;
+    margin-bottom: 4px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+.article .img {
+    width: 100%
+}
+.featured-wrap .sub-featured {
+    padding: 10px 0 0 10px;
+    margin: 10px 0 0;
+    border-top: 1px solid lightgrey;
+    width: 250px;
+    overflow: scroll;
+    height: 100%;
+
+}
+.featured-wrap .sub-featured::-webkit-scrollbar { width: 5px !important }
+.featured-wrap .sub-featured::-webkit-scrollbar-track {   /* Track */
+    background: none; 
+}
+.featured-wrap .sub-featured:hover::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+.featured-wrap .sub-featured::-webkit-scrollbar-thumb {  /* Handle */
+    background: none; 
+}
+.featured-wrap .sub-featured::-webkit-scrollbar-thumb:hover { /* Handle on hover */
+    background: #555; 
+}
+
+.sub-featured .top-article {
+    border-bottom: 1px solid lightgrey;
+}
+.sub-featured .top-article img {
+    width: 100%;
+}
+.sub-featured .title {
+    font-size: 16px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.chuyenMucWrap {
+    margin-top: 30px;
+    width: 725px;
+}
+.chuyenMucHeader {
+    width: 100%;
+    background: gainsboro;
+    border-top: 2px blue solid; 
+    padding: 4px 0 4px 0;
+    position: relative;
+
+}
+.chuyenMucHeader .chuyenMuc {
+    font-size: 20px;
+         font-weight: bold;
+         color: #115caa;
+         text-transform: uppercase;
+    margin: 18px;
+    
+}
+.chuyenMucHeader .chuyenMucCon {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+}
+.chuyenMucHeader .chuyenMucCon .tenChuyenMucCon {
+    vertical-align: middle;
+    border-left: 1px black solid;
+    padding-left: 5px;
+}
+.chuyenMucHeader .chuyenMucCon .tenChuyenMucCon:first-child {
+    border: none;
+}
+.chuyenMucHeader ul {
+    position: absolute;
+    top: 100%;
+    padding: 0 10px 10px;
+    right: 0;
+    background: gainsboro;
+    border-top: 1px gray solid;
+    /*display: none;*/
+}
+.chuyenMucHeader ul li {
+    border-bottom:  1px gray solid;
+    border-bottom: 1px gray solid;
+    padding: 5px 0 5px 0;
+    
+}
+.chuyenMucHeader ul li:last-child {
+    border-bottom: none;
+    padding: 5px 0 0 0;
+}
+.chuyenMucHeader ul li.active>a, a[aria-expanded="true"] {
+    color: #fff;
+    background: lightslategrey;
+}
+.tinChuyenMucHolder {
+    display: flex;
+    margin: 15px 0 15px 0;
+    width: 100%;
+    max-height: 425px;
+}
+.tinNoiBat {
+    width: 330px;
+    display: inline-block;
+    margin-right: 20px;
+}
+.tinNoiBat .title {
+    margin: 5px 0 5px 0;
+    font-size: 17px;
+    font-weight: bold;
+    display: block;
+}
+.tinKhac {
+    display: inline-block;
+    width: 370px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.tinKhac .img {
+    width: 120px;
+    float: left;
+    margin-right: 15px;
+}
+.tinKhac .titleTinNoiBat {
+    font-weight: bold;
+}
+.tinKhac .titleTinKhac {
+    display: block;
+    margin: 10px 0 10px 0;
+    padding: 0 0 10px 15px;
+    border-bottom: 1px dashed;
+    background: url(http://hoisinhvien.com.vn/cms/display/New/SubControls/NewCateHome/bgtile.png) no-repeat left top 8px;
+    font-weight: bold;
+}
+.tinKhac .titleTinKhac:last-child {
+    border-bottom: none;
+}
+.tinChuyenMucHolder .soLuoc {
+    font-size: 15px;
+}
+    /*.tinKhac Wrapper scrollbar*/
+.tinKhac::-webkit-scrollbar {
+    width: 5px;
+}
+.tinKhac::-webkit-scrollbar-track {   /* Track */
+    background: none; 
+}
+.tinKhac:hover::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+.tinKhac::-webkit-scrollbar-thumb {  /* Handle */
+    background: none; 
+}
+.tinKhac::-webkit-scrollbar-thumb:hover { /* Handle on hover */
+    background: #555; 
+}
+/*Class tin mới cho trang bài viết lớp, bài viết đơn vị, bài viết sinh viên hoặc cho hoạt động*/
+.tinMoiWrapper {
+    width: 100%;
+}
+.tinMoiWrapper .tinMoi {
+    display: flex;
+    padding: 20px 0 20px;
+    border-bottom: 1px darkgrey solid;
+}
+.tinMoi:hover {
+    box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 10px 10px;
+}
+.tinMoi .imgWrapper {
+    width: 220px;
+    display: flex;
+    align-items: center;
+}
+.tinMoi .imgWrapper img {
+    width: 100%;
+}
+.tinMoi .tinWrapper {
+    margin: 0 0 0 20px;
+    width: calc(100% - 250px);
+}
+.tinMoi .tinWrapper .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.tinMoi .tinWrapper .title:hover {
+    cursor: pointer;
+    color: blue;
+}
+.tinMoi .tinWrapper .summary {
+    font-size: 15px;
+}
+#chuyenMucCha {
+     color: #115caa;
+ }
+#chuyenMucCha:hover {
+    text-decoration: underline;
+}
+/*Trang bài viết chuyên mục*/
+.chuyenMucBody {
+    display: flex;
+    position: relative;
+    margin: 0 0 0 20px;
+}
+.chuyenMucBody .chuyenMucWrap {
+    width: 600px;
+    margin: 10px 0 0 60px;
+}
+.chuyenMucWrap .chuyenMucWrapTitle {
+    font-size: 25px;
+    font-weight: bold;
+    color: darkorange;
+    margin-bottom: 15px;
+}
+.chuyenMucBody .tinKhac {
+    display: inline-block;
+    width: 370px;
+}
+.chuyenMucBody .tinKhac .img {
+    width: 120px;
+    float: left;
+    margin-right: 15px;
+}
+.chuyenMucBody .tinKhac .titleTinNoiBat {
+    font-size: 15px;
+}
+.chuyenMucBody .tinKhac .soLuocTinNoiBat {
+    font-size: 13.5px;
+    border-bottom: 1px dashed;
+    padding-bottom: 5px;
+}
+.chuyenMucBody .tinKhac .titleTinKhac {
+    margin: 15px 0 15px 0;
+    padding: 0 0 10px 15px;
+    font-size: 15px;
+}
+.chuyenMucBody .tinMoiWrapper {
+    width: 600px;
+}
+.chuyenMucBody .tinMoiWrapper .tinMoi {
+    display: flex;
+    padding: 20px 0 10px;
+    border-bottom: 1px darkgrey solid;
+}
+.chuyenMucBody .tinMoi .imgWrapper {
+    width: 220px;
+}
+.chuyenMucBody .tinMoi .imgWrapper img {
+    width: 100%;
+}
+.chuyenMucBody .tinMoi .tinWrapper {
+    margin: 0 0 0 20px;
+    width: calc(100% - 250px);
+}
+.chuyenMucBody .tinMoi .tinWrapper .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.chuyenMucBody .tinMoi .tinWrapper .summary {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+/**/
+#DanhSachHoatDong {
+    margin: 20px 0 20px 0;
+}
+.hoatDongContainer-TrangThemBaiViet {
+    width: 80%;
+    border-bottom: 2px solid #e7e7e7;
+    padding: 20px 0 20px 0;
+}
+.hoatDongContainer-TrangThemBaiViet:first-child {
+    border-top: 2px solid #e7e7e7;
+}
+.anhBiaHoatDong-TrangThemBaiViet {
+    width: 180px;
+    margin-right: 30px;
+    vertical-align: middle;
+}
+.hoatDongWrapper-TrangThemBaiViet {
+    display: inline-flex;
+    vertical-align: middle;
+    width: calc(100% - 215px);
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.thongTinHoatDong-TrangThemBaiViet {
+    width: calc(100% - 20px);
+    font-size: 25px;
+}
+.buttonHolder-TrangThemBaiViet {
+    font-size: 30px;
+    color: red;
+}
+.buttonHolder-TrangThemBaiViet:hover {
+    cursor: pointer;
+}
+#chuyenMucSelectContainer .select2-selection__rendered {
+    line-height: 40px !important;
+}
+#chuyenMucSelectContainer .select2-container .select2-selection--single {
+    height: 40px !important;
+}
+#chuyenMucSelectContainer .select2-selection__arrow {
+    height: 40px !important;
+}
+/*Trang chi tiết bài viết*/
+#chuyenMucBaiViet {
+    color: lightgrey;
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#chuyenMucBaiViet:hover {
+    color: orange;
+}
+#tenBaiViet-TrangBaiViet {
+    font-weight: bold;
+}
+#soLuoc-TrangBaiViet {
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-size: 20px
+}
+.donViTag {
+    background: bisque;
+    padding: 5px;
+    margin: 0 5px 0 5px;
+}
+.donViTag:hover {
+    color: blue;
+    text-decoration: underline;
+}
+/*Trang phê duyệt bài viết*/
+#baiVietPheDuyet .xemBaiViet-js {
+    margin-bottom: 5px
+}
+#baiVietPheDuyet .pheDuyet-js {
+    margin-bottom: 5px
+}
+#quanLyBaiViet .xemBaiViet-js {
+    margin-bottom: 5px
+}
+#quanLyBaiViet .chinhSuaBaiViet-js {
+    margin-bottom: 5px
+}
+/*Trang quản lý chuyên mục*/
+#quanLyChuyenMuc .chinhSuaChuyenMuc-js,#quanLyChuyenMuc .xoaChuyenMuc-js {
+    margin: 5px 5px
+}
+#themChuyenMuc {
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+    font-size: 25px;
+}
+/*Trang bài viết sinh viên*/
+.danhSachBaiVietHeaderContainer {
+    border-bottom: 5px solid lightgray;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+.danhSachBaiVietHeader {
+    font-size: 45px;
+    font-weight: bold;
+    color: cadetblue;
+
+}
+.danhSachBaiVietHeaderText {
+    margin-left: 5px;
+    font-weight: bold; 
+    font-size: 25px
+}
+.thongTinTacGiaContainer_BaiVietSv {
+    display: block;
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid;
+    background: white;
+}
+#anhBiaTacGia_BaiVietSv {
+    height: 175px;
+    margin-right: 20px;
+}
+.thongTinTacGia_BaiVietSv {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    text-align: justify;
+    width: calc(100% - 175px);
+}
+/**/

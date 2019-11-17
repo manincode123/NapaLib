@@ -1,0 +1,343 @@
+﻿#tenLop-TrangChiTietLop {
+    text-align: center;
+    font-size: 45px;
+    margin-top: 50px;
+    font-weight: bold;
+}
+
+.ttLabel-TrangChiTietLop {
+    text-align: center;
+    font-size: 30px;
+}
+
+ /*Trang chi tiet lop*/
+#anhBia-ChiTietLop {
+    object-fit: cover;
+    object-position: center;
+}
+.siSoContainer-ChiTietLop {
+    margin-top: 50px;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    background: azure;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.siSoInfo {
+    font-size: 30px;
+    text-align: center;
+    color: darkorange;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+}
+.soNamInfo {
+    font-size: 30px;
+    text-align: center;
+    color: blue;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.soNuInfo {
+    font-size: 30px;
+    text-align: center;
+    color: deeppink;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.gtKhacInfo {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.gtKhacLabel {
+    background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+    background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+    color:transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: bold;
+
+}
+.svg-inline--fa {                                           
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+}
+    /*Css cho chức vụ lớp*/
+.chucVuAnh-TrangChiTietLop {
+    max-width: 150px;
+    margin-top: 15px;
+}
+.anhSvGiuCvContainer {
+    display: inline-block;
+}
+.anhSvGiuCvContainer:hover + .tenSvGiuCv {
+    color: #2222ff;
+}
+.tenSvGiuCv {
+    font-size: 25px;
+    margin-top: 25px;
+    display: block;
+    color: #22ff22;
+}
+.tenSvGiuCv:hover {
+    color: #2222ff;
+    
+}
+.chucVuWrapper-TrangChiTietLop {
+    padding-top: 30px;
+    background: white;
+    border: 1px solid;
+}
+.chucVuContainer-TrangChiTietLop {
+    border: 2px solid;
+    background: rgba(255, 212, 0, 0.25);
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+.chucVuContainerLabel-TrangChiTietLop {
+    text-align: center;
+    color: white;
+    border-bottom: 3px solid black;
+    background: #007bff;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 5px;
+}
+.collapsible {
+    background-color: #357ebd;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+    font-size: 150%;
+
+}
+.linkHoatDong-TrangChiTietLop:hover {
+    color: blue;
+    font-weight: bold;
+}
+/*Hoạt động lớp*/
+.thongTinHd-TrangChiTietLop {
+    width: 25%;
+    margin: auto
+}
+#thongKeHd-TrangChiTietLop {
+    margin-bottom: 40px;
+}
+.bieuDoContainer-TrangChiTietLop {
+    width: 80%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+#bieuDoContent .nav,#thamGiaContent .nav {
+    width: fit-content;
+    margin: 10px auto;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+#bieuDoContent .namHoc-link:hover {
+    background: wheat;
+}
+#hdLopToChuc-TrangChiTietLop {
+    width: 100% !important;
+    max-height: 500px;
+    overflow: auto;
+}
+#hdVaSoLuotTg-TrangChiTietLop {
+    width: 100% !important;
+   
+}
+.label-TrangChiTietLop {
+    border: 5px goldenrod solid;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 20px;
+    text-align: center; 
+    cursor: pointer
+}
+.label-TrangChiTietLop:hover {
+    background: antiquewhite;
+}
+.hdLopToChucContainer-TrangChiTietLop {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border: 1px solid;
+}
+.hdVaSoLuotTgContainer-TrangChiTietLop {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-bottom: 5px goldenrod solid;
+    padding-bottom: 40px;
+}
+/*Trang quản lý sinh viên lớp*/
+#danhSachSv-TrangChiTietLop {
+    width: 100% !important;
+}
+.anhSvDanhSach {
+    width: 120px;
+}
+.tenSvDs-TrangChiTietLop:hover {
+    color: blue;
+    font-weight: bold;
+}
+.gioiThieuContainer-TrangChiTietLop {
+    border: 5px gold dashed;
+    height: 400px;
+    border-radius: 30px;
+    padding: 25px;
+    margin: 30px 30px 0 30px;
+    background: white;
+}
+.gioiThieuLabel-TrangChiTietLop {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: solid;
+}
+ /*Trang quản lý chung lớp*/
+.suaLop-js,.quanLySinhVienLop {
+    margin-bottom: 5px;
+}
+#selectLopTruong {
+    font-size: 30px;
+    height: 100%;
+}
+#selectBiThu {
+    font-size: 30px;
+    height: 100%;
+
+}
+#selectChiHoiTruong {
+    font-size: 30px;
+    height: 100%;
+}
+.Typeahead-hint-QuanLyChungLop {
+    color: #999;
+    top: -3px!important;
+    left: 40%!important;
+    -ms-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    max-width: 80%;
+    height: 4rem;
+    font-size: 30px;
+}
+.Typeahead-suggestion-QuanLyChungLop {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+.Typeahead-suggestion-QuanLyChungLop:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #0097cf;
+}
+.Typeahead-menu-QuanLyChungLop {
+    left: 0!important;
+    width: 100%;
+    margin: 12px 0;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+.Typeahead-suggestion-QuanLyChungLop.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+
+}
+.Typeahead-suggestion-QuanLyChungLop p {
+    margin: 0;
+}
+#anhBiaLop {
+    height: 300px;
+    width: 900px;
+    margin: auto;
+    display: block;
+}
+#anhBiaLop-Wrapper {
+    height: 400px;
+    width: 1200px;
+    margin: 0 auto 20px;
+}
+#anhBiaLop_input {
+    margin-left: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 44px;
+    max-width: 300px;
+}
+#editAnhBiaBtn {
+    margin: 10px auto;
+    display: none; 
+}
+
+/*Trang quản lý khóa học*/
+.suaKhoaHoc-js, .xemDsLopKhoa-js {
+    margin-right: 10px;
+}
+/*Trang quản lý lớp*/
+.quanLyLopLink {
+    font-size: 30px;
+    color: white;
+    width: 60%;
+    margin-bottom: 20px;
+}
+#anhBiaLop-input {
+    width: 100%; height: 300px; object-fit: cover;object-position: center
+}
+/*Trang quản lý sinh viên lớp*/
+#input-TrangQuanLySinhVienLop {
+    margin: 10px auto 0 auto;
+    padding: 30px;
+    font-size: 30px;
+    height: 3rem;
+    max-width: 80%;
+}
+/*.tenSvGiuCv {
+    font-size: 25px;
+    margin-top: 25px;
+    display: block;
+    color: black;
+    font-weight: bold;
+}
+.tenSvGiuCv:hover {
+    color: #2222ff;
+    
+}*/
+#tenLop-TrangQuanLyChucVuLop {
+    color: darkorange;
+    font-weight: bold;
+}
+#tenLop-TrangQuanLySinhVienLop {
+    color: darkorange;
+    font-weight: bold;
+}
+#tenChucVu-ModalXoaChucVu {
+    color: darkorange;
+}

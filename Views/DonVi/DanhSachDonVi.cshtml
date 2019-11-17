@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Danh sách đơn vị";
+}
+
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/DonViStyles.css" rel="stylesheet">
+
+<div class="HeaderContainer">
+    <span class="Header">Đơn vị</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Danh sách đơn vị</span>
+</div>
+<div class="body_90percent">
+    <h4 style="text-align: center">Hãy tham gia một đơn vị ngay nào.</h4>
+    <img src="/Content/Icons/IconHSV.png" title="Hội sinh viên" class="iconDoanHoi" style="float: left" alt="Icon Hội sinh viên"/>
+    <img src="/Content/Icons/IconHSV.png" title="Hội sinh viên" class="iconDoanHoi" style="float: right" alt="Icon Hội sinh viên"/>
+    <h3 style="text-align: center; line-height: 60px;"><strong>Đơn vị thuộc Hội sinh viên</strong> </h3>
+    <div class="row" id="danhSachDonViHoi"></div>
+    <hr/>
+    <img src="/Content/Icons/IconDoan.png" title="Đoàn Thanh niên" class="iconDoanHoi" style="float: left" alt="Icon Đoàn Thanh niên"/>
+    <img src="/Content/Icons/IconDoan.png" title="Đoàn Thanh niên" class="iconDoanHoi" style="float: right" alt="Icon Đoàn Thanh niên"/>
+    <h3 style="text-align: center; line-height: 60px;"><strong>Đơn vị thuộc Đoàn Thanh niên</strong> </h3>
+    <div class="row" id="danhSachDonViDoan"></div>
+</div>
+       
+@section scripts
+{   
+    <script src="@Url.Content("~/Scripts/SiteScript/services/DonViService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/DonViController.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="cardDonVi_Template">
+        <div class="col-4 col-md-4 col-lg-4" >
+            <div class="donViHolder">
+                <a href="/DonVi/ThongTin/<%= donVi.donViId %>" title="<%= donVi.tenDonVi %>">
+                    <img src="<%= donVi.anhBia %>" alt="<%= donVi.tenDonVi %>" class="anhBia-CardDonVi">
+                </a>
+                <a href="/DonVi/ThongTin/<%= donVi.donViId %>" title="<%= donVi.tenDonVi %>">
+                    <h4 class="tenDonVi-CardDonVi"><%= donVi.tenDonVi %></h4>
+                </a>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(document).ready(function () {
+            showTabProfile("donViMenu", 0);
+            QuanLyChungDonViController.initTrangDanhSachDonVi();
+        });
+    </script>
+
+}

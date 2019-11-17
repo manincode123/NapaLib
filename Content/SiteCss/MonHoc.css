@@ -1,0 +1,115 @@
+﻿.bangDiem {
+  width: 100%
+}
+.bangDiem th,.bangDiem td {
+    text-align: center;
+    vertical-align: middle;
+}
+.quanLyMon-js {
+    margin-right: 10px;
+}
+.chinhSuaMon-js {
+    margin-right: 10px;
+}
+#haiDiemDk-input {
+    width: 30px;
+    height: 30px;
+}
+#themMonHoc {
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+    font-size: 25px;
+}
+#chinhSuaMonHoc {
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+    font-size: 25px;
+}
+#thongTinMonHoc span{
+    color: darkorange;
+    font-weight: bold;
+}
+#themLopMonHoc {
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+    font-size: 25px;
+}
+#danhSachLopMonHoc .quanLyLopMonHoc-js{
+    margin-right: 10px;
+}
+#themLichHoc {
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+    font-size: 25px;
+}
+.suaLichHoc-js {
+    margin-right: 10px;
+}
+#chinhSuaLopMonHoc {
+    margin-right: 20px;
+    float: right;
+    font-size: 25px;
+}
+#thongTinLopMonHoc span{
+    color: darkorange;
+    font-weight: bold;
+}
+
+.bangDiem_XemDiemSV th,.bangDiem_XemDiemSV td{
+    border: 2px solid grey !important;
+}
+#bangDiem .editable-clear-x {
+    right: 10px !important;
+}
+
+#bangDiem .has-error {
+    display: block!important;
+}
+#bangDiem .has-error .form-control {
+    border-color: #b94a48;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+ 
+#bangDiem .has-error .form-control:focus {
+    border-color: #953b39;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+
+}
+
+#bangDiem .has-error .editable-error-block {
+    color: red;
+}
+
+#chinhSuaNgayThi {
+    margin-right: 20px;
+    float: right;
+    font-size: 25px;
+}
+
+#thongTinThiLai span {
+    color: darkorange;
+    font-weight: bold;
+}
+#ketThucThiLaiBtn {
+    font-size: 25px;
+}
+
+#QuanLyThiLaiMonHoc {
+    margin-right: 20px;
+    float: right;
+    font-size: 25px;
+}
+
+#thongTinDiemHocKi {
+    margin: 0 0 30px 30px;
+}
+#thongTinDiemHocKi span {
+    color: darkorange;
+    font-weight: bold;
+}

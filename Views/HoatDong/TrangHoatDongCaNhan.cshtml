@@ -1,0 +1,295 @@
+﻿@{
+    ViewBag.Title = "Trang hoạt động cá nhân";
+}      
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
+<div class="HeaderContainer">
+    <span class="Header">Hoạt động</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Hoạt động cá nhân</span>
+</div>
+<div class="danhSachHoatDong-body">
+
+    <h2 style="margin-bottom: 20px" class="btn btn-primary danhSachHoatDongToggle" id="thongBaoToggle">
+        <i class="fas fa-bullhorn" style="color: white"></i>
+        Thông báo
+        <i class="fas fa-bullhorn" style="color: white"></i>
+        <span class="badge badge-danger" id="thongBaoCount"></span>
+    </h2>
+    <div id="danhSachThongBao" class="collapse">
+        <ul class="danhSachThongBaoHoatDong">
+            <li class="thongBaoHoatDong tieuDe" id="thongBaoChuaDoc"><strong>Thông báo chưa đọc</strong></li>
+            <li class="thongBaoHoatDong tieuDe" id="thongBaoTruocDo"><strong>Thông báo trước đó</strong></li>
+            <li><img src="/Content/Icons/Facebook-loader.svg" alt="" class="baiVietLoader" style="width:50px" /></li>
+        </ul>
+    </div>
+    <hr class="thanhNgangHoatDong" />
+    <div class="btn btn-primary danhSachHoatDongToggle" data-toggle="collapse" data-target="#hoatDongThamGia">
+        Hoạt động đang tham gia
+        <span class="badge badge-danger" id="thamGiaCount"></span>
+    </div>
+    <div class="row" id="hoatDongThamGia"></div>
+    <hr class="thanhNgangHoatDong" />
+    <div class="btn btn-primary danhSachHoatDongToggle" data-toggle="collapse" data-target="#hoatDongDangKi">
+        <span>Hoạt động đã đăng kí</span>
+        <span class="badge badge-danger" id="dangKiCount"></span>
+    </div>
+    <div class="row" id="hoatDongDangKi"></div>
+    <hr class="thanhNgangHoatDong" />
+    <div class="btn btn-primary danhSachHoatDongToggle" data-toggle="collapse" data-target="#hoatDongTheoDoi">
+        Hoạt động đang theo dõi
+        <span class="badge badge-danger" id="theoDoiCount"></span>
+    </div>
+    <div class="row" id="hoatDongTheoDoi"></div>
+    <hr class="thanhNgangHoatDong" />
+    <div class="btn btn-primary danhSachHoatDongToggle" data-toggle="collapse" data-target="#hoatDongToChuc">
+        Hoạt động sinh viên tổ chức
+        <span class="badge badge-danger" id="toChucCount"></span>
+    </div>
+    <div class="row" id="hoatDongToChuc"></div>
+</div>
+@section scripts
+{      
+    <script src="@Url.Content("~/Scripts/SiteScript/services/HoatDongService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/HoatDongController.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="cardHoatDong_Template">
+        <div class="col-4 col-lg-4 col-md-4">
+            <div class="cardHoatDong">
+                @* Ribbon tham gia, đăng kí, theo dõi *@
+                <% if (hoatDong.coDangKi) {  %>
+                <span class="ribbon daDangKi">Đã đăng kí</span>
+                <% } %>
+                <% if (hoatDong.coThamGia) { %>
+                <span class="ribbon daThamGia">Đang tham gia</span>
+                <% } %>
+                <% if (hoatDong.coTheoDoi) { %>
+                <span class="ribbon daTheoDoi">Đang theo dõi</span>
+                <% } %>
+                @* Badge Cấp hoạt động *@
+                <% if (hoatDong.capHoatDong == 4) { %>
+                <img src="/Content/Icons/IconCapPhanVien.svg" title="Cấp Phân viện" class="iconCapHoatDong badgeCapHoatDong" />
+                <% } %>
+                <% if (hoatDong.capHoatDong == 3) { %>
+                <img src="/Content/Icons/IconCapKhoa.svg" title="Cấp Khóa" class="iconCapHoatDong badgeCapHoatDong" />
+                <% } %>
+                <% if (hoatDong.capHoatDong == 2) { %>
+                <img src="/Content/Icons/IconCapLienChiHoi.svg" title="Cấp Liên Chi hội" class="iconCapHoatDong badgeCapHoatDong" />
+                <% } %>
+                <% if (hoatDong.capHoatDong == 1) { %>
+                <img src="/Content/Icons/IconCapChiHoi.svg" title="Cấp Chi hội" class="iconCapHoatDong badgeCapHoatDong" />
+                <% } %>
+                @* Ảnh hoạt động *@
+                <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>">
+                    <img src="<%= hoatDong.anhBia %>" alt="<%= hoatDong.tenHoatDong %>" class="anhBiaCardHoatDong" />
+                </a>
+                <div class="noiDungCardHoatDong">
+                    <div class="donViToChuc-CardHoatDong" id="dvtc_<%= hoatDong.id %>">
+                        @* Tạo danh sách đơn vị tổ chức *@
+                        <% _.each(hoatDong.donViToChuc, function(donViToChuc){
+                        %>
+                        <a class="badge badge-pill badge-primary" href="/DonVi/HoatDong/<%= donViToChuc.donViId %>" title="<%= donViToChuc.tenDonVi %>">
+                            <%= donViToChuc.tenDonVi %>
+                        </a>
+                        <%
+                        })%>
+                        @* Tạo danh sách lớp tổ chức *@
+                        <% _.each(hoatDong.lopToChuc, function(lopToChuc){
+                        %>
+                        <a class="badge badge-pill badge-primary" href="/Lop/HoatDong/<%= lopToChuc.lopId %>" title="<%= lopToChuc.kyHieuTenLop %>">
+                            <%= lopToChuc.kyHieuTenLop %>
+                        </a>
+                        <%
+                        })%>
+                        <a class="badge badge-pill badge-primary themDonVi-CardHoatDong" data-toggle="popover">...</a>
+                    </div>
+                    <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>" class="thongTin-CardHoatDong">
+                        <h4 class="tenCardHoatDong"><%= hoatDong.tenHoatDong %></h4>
+                        <div>
+                            <span class="iconCardHoatDong">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                            <span><%= moment(hoatDong.ngayBatDau).format("HH[h]mm [ngày] DD [tháng] MM [năm] YYYY") %></span>
+                        </div>
+                        <div>
+                            <span class="iconCardHoatDong">
+                                <i class="fas fa-school"></i>
+                            </span>
+                            <span style="display: contents"><%= hoatDong.diaDiem %></span>
+                        </div>
+                        <div class="soLuocCardHoatDong"><%= hoatDong.soLuoc %></div>
+                    </a>
+                    <div class="thamGiaTheoDoiHolder-CardHd">
+                        <div class="luotThamGia-CardHoatDong">
+                            <span class="iconCardHoatDong thamGiaIcon">
+                                <i class="fas fa-users"></i>
+                            </span>
+                            <span><%= hoatDong.soLuotThamGia %> lượt tham gia</span>
+                        </div>
+                        <div class="luotThamGia-CardHoatDong">
+                            <span class="iconCardHoatDong heartIcon">
+                                <i class="fas fa-heart"></i>
+                            </span>
+                            <span><%= hoatDong.soLuotTheoDoi %> lượt theo dõi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-template" id="cardHoatDongSinhVienTao_Template">
+        <div class="col-4 col-lg-4 col-md-4">
+            <div class="cardHoatDong">
+                @* Ribbon tham gia, đăng kí, theo dõi *@
+                <% if (!hoatDong.duocPheDuyet) %>
+                <span class="ribbon choPheDuyet">Đang chờ phê duyệt</span>
+                <% if (hoatDong.duocPheDuyet) {
+                if (hoatDong.biHuy) %>
+                <span class="ribbon biHuy">Bị hủy</span>
+                <% else {
+                if (new Date(hoatDong.ngayBatDau) > new Date()) %>
+                <span class="ribbon sapDienRa">Sắp diễn ra</span>
+                <% else %>
+                <span class="ribbon daThamGia">Đang diễn ra</span>
+                <%}
+                }%>
+                @* Badge Cấp hoạt động *@
+                <% if (hoatDong.capHoatDong == 4) { %>
+                <img src="/Content/Icons/IconCapPhanVien.svg" title="Cấp Phân viện" class="iconCapHoatDong badgeCapHoatDong" />
+                <% } %>
+                <% if (hoatDong.capHoatDong == 3) { %>
+                <img src="/Content/Icons/IconCapKhoa.svg" title="Cấp Khóa" class="iconCapHoatDong badgeCapHoatDong" />
+                <% } %>
+                <% if (hoatDong.capHoatDong == 2) { %>
+                <img src="/Content/Icons/IconCapLienChiHoi.svg" title="Cấp Liên Chi hội" class="iconCapHoatDong badgeCapHoatDong" />
+                <% } %>
+                <% if (hoatDong.capHoatDong == 1) { %>
+                <img src="/Content/Icons/IconCapChiHoi.svg" title="Cấp Chi hội" class="iconCapHoatDong badgeCapHoatDong" />
+                <% } %>
+                @* Ảnh hoạt động *@
+                <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>">
+                    <img src="<%= hoatDong.anhBia %>" alt="<%= hoatDong.tenHoatDong %>" class="anhBiaCardHoatDong" />
+                </a>
+                <div class="noiDungCardHoatDong">
+                    <div class="donViToChuc-CardHoatDong" id="dvtcSVtao_<%= hoatDong.id %>">
+                        @* Tạo danh sách đơn vị tổ chức *@
+                        <% _.each(hoatDong.donViToChuc, function(donViToChuc){
+                        %>
+                        <a class="badge badge-pill badge-primary" href="" title="<%= donViToChuc.tenDonVi %>">
+                            <%= donViToChuc.tenDonVi %>
+                        </a>
+                        <%
+                        })%>
+                        @* Tạo danh sách lớp tổ chức *@
+                        <% _.each(hoatDong.lopToChuc, function(lopToChuc){
+                        %>
+                        <a class="badge badge-pill badge-primary" href="" title="<%= lopToChuc.kyHieuTenLop %>">
+                            <%= lopToChuc.kyHieuTenLop %>
+                        </a>
+                        <%
+                        })%>
+                        <a class="badge badge-pill badge-primary themDonVi-CardHoatDong" data-toggle="popover">...</a>
+                    </div>
+                    <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>" class="thongTin-CardHoatDong">
+                        <h4 class="tenCardHoatDong"><%= hoatDong.tenHoatDong %></h4>
+                        <div>
+                            <span class="iconCardHoatDong">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                            <span><%= moment(hoatDong.ngayBatDau).format("HH[h]mm [ngày] DD [tháng] MM [năm] YYYY") %></span>
+                        </div>
+                        <div>
+                            <span class="iconCardHoatDong">
+                                <i class="fas fa-school"></i>
+                            </span>
+                            <span style="display: contents"><%= hoatDong.diaDiem %></span>
+                        </div>
+                        <div class="soLuocCardHoatDong"><%= hoatDong.soLuoc %></div>
+                    </a>
+                    <div class="thamGiaTheoDoiHolder-CardHd">
+                        <div class="luotThamGia-CardHoatDong">
+                            <span class="iconCardHoatDong thamGiaIcon">
+                                <i class="fas fa-users"></i>
+                            </span>
+                            <span><%= hoatDong.soLuotThamGia %> lượt tham gia</span>
+                        </div>
+                        <div class="luotThamGia-CardHoatDong">
+                            <span class="iconCardHoatDong heartIcon">
+                                <i class="fas fa-heart"></i>
+                            </span>
+                            <span><%= hoatDong.soLuotTheoDoi %> lượt theo dõi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-template" id="danhSachThongBao_Template">
+        <%_.each(danhSachThongBao, function(thongBao){ %>
+        <li class="thongBaoHoatDong">
+            <a href="/HoatDong/ChiTiet/<%= thongBao.hoatDongId %>">
+                <img src="<%= thongBao.anhBia %>" class="anhBia" />
+                <% if(thongBao.loaiThongBaoHoatDong == 1){
+                var thayDoi=[], thongTinGoc=[], thongTinThayDoi=[];
+                if (thongBao.ngayBatDauGoc != null || thongBao.ngayKetThucGoc !=null){
+                thayDoi.push("Thời gian diễn ra");
+                thongTinGoc.push(moment(thongBao.ngayBatDauGoc).format("HH:mm [ngày] DD/MM/YYYY")+" - "+moment(thongBao.ngayKetThucGoc).format("HH:mm [ngày] DD/MM/YYYY"));
+                thongTinThayDoi.push(moment(thongBao.ngayBatDau).format("HH:mm [ngày] DD/MM/YYYY")+" - "+moment(thongBao.ngayKetThuc).format("HH:mm [ngày] DD/MM/YYYY"));
+                }
+                if (thongBao.diaDiemGoc != null){
+                thayDoi.push("Địa điểm diễn ra");
+                thongTinGoc.push(thongBao.diaDiemGoc);
+                thongTinThayDoi.push(thongBao.diaDiem);
+                }
+                if (thayDoi.length > 0){ %>
+                <span>Hoạt động <strong><%= thongBao.tenHoatDong %></strong> đã thay đổi <strong><%= thayDoi.join(' và ') %></strong> từ <strong><%= thongTinGoc.join(' tại ') %></strong> thành <strong><%= thongTinThayDoi.join(' tại ') %></strong>.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}
+                else{%>
+                <span>Hoạt động <strong><%= thongBao.tenHoatDong %></strong> đã được chỉnh sửa thông tin. Hãy xem thông tin mới của hoạt động ngay.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}
+                }%>
+                <%if (thongBao.loaiThongBaoHoatDong == 2) { %>
+                <span>Hoạt động <strong><%= thongBao.tenHoatDong %></strong> đã kết thúc.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}%>
+                <%if (thongBao.loaiThongBaoHoatDong == 3) { %>
+                <span>Hoạt động <strong><%= thongBao.tenHoatDong %></strong> đã được phê duyệt.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}%>
+                <%if (thongBao.loaiThongBaoHoatDong == 4) { %>
+                <span>Hoạt động <strong><%= thongBao.tenHoatDong %></strong> đã bị hủy.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}%>
+                <%if (thongBao.loaiThongBaoHoatDong == 5) { %>
+                <span>Bạn đã được điểm danh tham gia hoạt động <strong><%= thongBao.tenHoatDong %></strong>.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}%>
+                <%if (thongBao.loaiThongBaoHoatDong == 6) { %>
+                <span>Lượt tham gia hoạt động <strong><%= thongBao.tenHoatDong %></strong> của bạn đã bị xóa. Hãy liên lạc BTC hoạt động để biết thêm chi tiết.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}%>
+                <%if (thongBao.loaiThongBaoHoatDong == 7) { %>
+                <span>Đăng kí tham gia hoạt động <strong><%= thongBao.tenHoatDong %></strong> của bạn đã được phê duyệt. Hãy xem thông tin hoạt động ngay.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}%>
+                <%if (thongBao.loaiThongBaoHoatDong == 8) { %>
+                <span>Đăng kí tham gia hoạt động <strong><%= thongBao.tenHoatDong %></strong> của bạn đã không được phê duyệt. Hãy liên lạc BTC hoạt động để biết thêm chi tiết.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}%>
+                <%if (thongBao.loaiThongBaoHoatDong == 9) { %>
+                <span>Hoạt động <strong><%= thongBao.tenHoatDong %></strong> đã được thêm chương trình mới.  Hãy xem chi tiết ngay.</span>
+                <span> - <%= moment(thongBao.ngayTaoThongBao).format("DD/MM/YYYY HH:mm") %></span>
+                <%}%>
+            </a>
+        </li>
+        <%})%>
+    </script>
+    <script>
+        $(document).ready(function () {
+            showTabProfile("caNhanMenu", 1);
+            TrangChuHoatDongController.initTrangCaNhan();
+        });
+    </script>
+}
+

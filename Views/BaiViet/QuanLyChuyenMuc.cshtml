@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Quản lý chuyên mục";
+}       
+@Html.AntiForgeryToken()        
+<div class="HeaderContainer">
+    <span class="Header">Bài viết</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Quản lý chuyên mục</span>
+</div>
+<input value="" id="chuyenMucId" type="text" hidden="true" />
+<button type="button" class="btn btn-success" id="themChuyenMuc" >Thêm chuyên mục</button>
+<h2 style="margin-bottom: 50px">Quản lý chuyên mục</h2>   
+<table class="table table-striped table-bordered" id="quanLyChuyenMuc">
+    <thead>
+        <tr>
+            <th>Ảnh bìa</th>
+            <th>Tên chuyên mục</th>
+            <th>Mô tả</th>
+            <th>Chuyên mục cha</th>
+            <th>Số bài viết</th>
+            <th>Quản lý</th>
+        </tr>
+    </thead>
+</table> 
+<div class="modal fade" id="xoaChuyenMucModal" tabindex="-1" role="dialog" aria-labelledby="xoaChuyenMucModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa chuyên mục</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                 Bạn có chắc muốn xóa? Tất cả bài viết và chuyên mục con cũng sẽ bị xóa theo.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger" id="xoaChuyenMuc">Xóa</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="quanLyChuyenMucModal" tabindex="-1" role="dialog" aria-labelledby="quanLyChuyenMucModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="chuyenMucForm">
+                    <div class="form-group">
+                        <label for="tenChuyenMuc" style="font-size: 30px;">Tên chuyên mục</label>    
+                        <div class="col-sm-10">
+                            <input value="" name="tenChuyenMuc" id="tenChuyenMuc" type="text" class="form-control"  maxlength="50"/>
+                            <small id="tenChuyenMucLimit"></small>
+                        </div>    
+                    </div>
+                    <div class="form-group">
+                        <label for="moTa" style="font-size: 30px;">Mô tả</label>
+                        <div class="col-sm-10">
+                            <input value="" name="moTa" id="moTa" type="text" class="form-control" maxlength="70"/>
+                            <small id="moTaLimit"></small>
+                        </div>    
+                    </div>
+                    <div class="form-group">
+                        <label for="selectAnhBiaButton" style="font-size: 30px;">Ảnh bìa</label>
+                        <button id="selectAnhBiaButton" class="btn btn-primary" style="margin-bottom: 0.5rem; margin-left: 0.5rem">Chọn ảnh</button>
+                        <img src="/Content/HocVien.png" alt="" style="width: 300px; height: 200px; display: block" id="anhBia"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="chuyenMucCha" style="font-size: 30px; display: block">Chuyên mục cha</label>
+                        <select id="chuyenMucCha" style="width: 80%;" class="form-control input-25px"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 20px">Đóng</button>
+                <button type="button" class="btn btn-primary" id="chinhSuaChuyenMuc" style="font-size: 20px">Chỉnh sửa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{                 
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/SiteScript/services/BaiVietServices.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/BaiVietControllers.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="~/ckfinder/ckfinder.js"></script>
+    <script>
+        $(document).ready(function () {
+            showTabQuanLy("quanLyBaiVietMenu", 2);
+            QuanLyChuyenMucController.initPage();
+        });
+    </script>
+}

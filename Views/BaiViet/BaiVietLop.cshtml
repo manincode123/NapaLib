@@ -1,0 +1,68 @@
+﻿@model NAPASTUDENT.Models.ViewModels.LopViewModel
+
+@{
+    ViewBag.Title = "Bài viết lớp " + Model.TenLop;
+}
+@Html.AntiForgeryToken()
+<div class="danhSachBaiVietHeaderContainer">
+    <span class="danhSachBaiVietHeader">Bài viết</span>
+    <span class="danhSachBaiVietHeaderText" style="color: lightgrey">|</span>
+    <span class="danhSachBaiVietHeaderText">Lớp</span>
+</div>
+<div class="body_80percent">
+    <a href="@Url.Action("ChiTietLop","Lop",Model.LopId)" class="anhBiaContainer-DanhSachBaiViet">
+        <img src="@Model.AnhBia" alt="Ảnh bìa lớp" class="anhBia-DanhSachBaiViet">
+        <div class="anhBiaTextBox-DanhSachBaiViet">
+            <div style="font-size: 3vw;font-weight: bold">@Model.TenLop</div>
+            <div style="font-size: 2.5vw;font-weight: bold">Khóa: @Model.KhoaHoc.TenKhoa</div>
+        </div>
+    </a>   
+</div>     
+<div class="body_75percent">
+    <div class="tinMoiWrapper"></div>  
+    <img src="/Content/Icons/Facebook-loader.svg" alt="" class="baiVietLoader" />        
+    <div class="khongConBaiViet">Đã tải toàn bộ bài viết của lớp.</div>
+
+</div>
+@section scripts
+{   
+    <script src="@Url.Content("~/Scripts/SiteScript/services/BaiVietServices.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/BaiVietControllers.js")" type="text/javascript"></script>
+
+    <script type="text/x-template" id="baiVietMoi_Template">
+        <% 
+        _.each(danhSachBaiViet, function(baiViet){  %>
+        <div class="tinMoi">
+            <div class="imgWrapper">
+                <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                    <img src="<%= baiViet.anhBia %>" alt="<%= baiViet.tenBaiViet %>">
+                </a>
+            </div>
+            <div class="tinWrapper">
+                <div class="title">
+                    <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                </div>
+                <p class="summary"><%= baiViet.soLuoc %></p> 
+                <div>
+                    <span><i class="far fa-clock"></i> <%= moment(baiViet.ngayTao).format("HH:mm [ngày] DD/MM/YYYY") %></span>
+                    <span>&ensp;-&ensp;</span>
+                    <span><i class="far fa-eye"></i> <%= baiViet.soLuotXem %> lượt xem</span>
+                </div>
+            </div>
+        </div>
+        <%
+        })
+         %>
+    </script>
+    <script src="@Url.Content("~/Scripts/SiteScript/services/BaiVietServices.js")" type="text/javascript"></script>        
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/BaiVietControllers.js")" type="text/javascript"></script>        
+    <script>
+        $(document).ready(function () {
+            var idLop = @Model.LopId;
+            DanhSachBaiVietController.initPage_BaiVietLop(idLop);
+        })
+    </script>
+}
+

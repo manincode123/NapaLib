@@ -1,0 +1,300 @@
+﻿@model NAPASTUDENT.Controllers.QuanLyChucVuLopViewModel
+
+@{
+    ViewBag.Title = "Quản lý chức vụ lớp";
+}
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/LopStyles.css" rel="stylesheet">
+<div class="HeaderContainer">
+    <span class="Header">Lớp</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Quản lý chức vụ</span>
+</div>
+<div class="body_80percent">
+    <div class="anhBiaContainer">
+        <img src="@Model.AnhBia" alt="Ảnh bìa lớp" class="anhBia anhBia-DanhSachBaiViet">
+        <div class="anhBiaTextBox">
+            <div style="font-size: 3vw;font-weight: bold">@Model.TenLop</div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row" style="margin-bottom: 20px">
+    <div class="col-6 col-md-6 col-lg-6 align-vertically">
+        <a href="/Lop/ChiTiet/@Model.LopId" class="btn btn-success" style="font-size: 30px">
+            <i class="fas fa-edit"></i>
+            Quản lý lớp
+        </a>
+    </div>
+    @if (Model.SuaBanCanSu)  //Chỉ có lớp trưởng hoặc admin mới thấy nút này
+    {
+        <div class="col-6 col-md-6 col-lg-6 align-vertically">
+            <a href="/Lop/QuanLySinhVienLop/@Model.LopId" class="btn btn-primary" style="font-size: 30px; color: white">
+                <i class="fas fa-address-book"></i>
+                Quản lý sinh viên lớp
+            </a>
+        </div>
+    }
+</div>
+<div class="chucVuWrapper-TrangChiTietLop">
+
+    <div class="row chucVuContainer-TrangChiTietLop">
+        <div class="col-12 col-md-12 col-lg-12 chucVuContainerLabel-TrangChiTietLop">Ban cán sự lớp</div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Lớp trưởng</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="LopTruongAnh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenLopTruong-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaBanCanSu)  //Chỉ có lớp trưởng hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="1">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="1">Xóa</button>
+
+            }
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Lớp phó</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="LopPhoAnh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenLopPho-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaBanCanSu)  //Chỉ có lớp trưởng hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="2">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="2">Xóa</button>
+            }
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Thủ quỹ</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="ThuQuyAnh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenThuQuy-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaBanCanSu)  //Chỉ có lớp trưởng hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="3">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="3">Xóa</button>
+            }
+        </div>
+    </div>
+
+    <div class="row chucVuContainer-TrangChiTietLop">
+        <div class="col-12 col-md-12 col-lg-12 chucVuContainerLabel-TrangChiTietLop">Ban chấp hành Chi Đoàn</div>
+        <div class="col-12 col-md-6 col-lg-6 siSoInfo">
+            <div>Bí Thư</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="BiThuAnh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenBiThu-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaDoan)  //Chỉ có Bí thư hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="4">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="4">Xóa</button>
+            }
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 siSoInfo">
+            <div>Phó Bí Thư</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="PhoBiThuAnh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenPhoBiThu-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaDoan)  //Chỉ có Bí thư hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="5">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="5">Xóa</button>
+            }
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Ủy viên BCH Chi Đoàn</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienDoan1Anh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenUyVienDoan1-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaDoan)  //Chỉ có Bí thư hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="6">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="6">Xóa</button>
+
+            }
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Ủy viên BCH Chi Đoàn</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienDoan2Anh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenUyVienDoan2-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaDoan)  //Chỉ có Bí thư hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="6">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="6">Xóa</button>
+
+            }
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Ủy viên BCH Chi Đoàn</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienDoan3Anh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenUyVienDoan3-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaDoan)  //Chỉ có Bí thư hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="6">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="6">Xóa</button>
+
+            }
+        </div>
+    </div>
+
+    <div class="row chucVuContainer-TrangChiTietLop">
+        <div class="col-12 col-md-12 col-lg-12 chucVuContainerLabel-TrangChiTietLop">Ban chấp hành Chi Hội</div>
+        <div class="col-12 col-md-6 col-lg-6 siSoInfo">
+            <div>Chi Hội trưởng</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="ChiHoiTruongAnh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenChiHoiTruong-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaHoi)  //Chỉ có Chi hội trưởng hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="7">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="7">Xóa</button>
+            }
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 siSoInfo">
+            <div>Chi Hội Phó</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="ChiHoiPhoAnh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenChiHoiPho-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaHoi)  //Chỉ có Chi hội trưởng hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="8">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="8">Xóa</button>
+
+            }
+
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Ủy viên BCH Chi Hội</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienHoi1Anh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenUyVienHoi1-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaHoi)  //Chỉ có Chi hội trưởng hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="9">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="9">Xóa</button>
+
+            }
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Ủy viên BCH Chi Hội</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienHoi2Anh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenUyVienHoi2-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaHoi)  //Chỉ có Chi hội trưởng hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="9">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="9">Xóa</button>
+
+            }
+        </div>
+        <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+            <div>Ủy viên BCH Chi Hội</div>
+            <a href="" class="anhSvGiuCvContainer">
+                <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienHoi3Anh-TrangChiTietLop" />
+            </a>
+            <a href="" id="tenUyVienHoi3-TrangChiTietLop" class="tenSvGiuCv"></a>
+            @if (Model.SuaHoi)  //Chỉ có Chi hội trưởng hoặc admin mới thấy nút này
+            {
+                <button class="btn btn-primary ThayDoiChucVuButton" sinhvienid="0" chucvu="9">Thay đổi</button>
+                <button class="btn btn-danger xoaChucVuButton" chucvu="9">Xóa</button>
+
+            }
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="ThayDoiChucVuModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thay đổi chức vụ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" value="" class="form-control typeahead-input-QuanLyChucVuLop" id="input-TrangQuanLyChucVuLop" />
+                    <small class="form-text text-muted typeahead-helpBlock-QuanLyChucVuLop">
+                        Nhập Mã số sinh viên, họ tên để thay đổi
+                    </small>
+                </div>
+                <h2 style="margin: 10px auto 10px auto; width: 80%">Chức vụ: <span id="tenChucVu-Modal"></span></h2>
+                <div class="row">
+                    <div class="col-5 col-md-5 col-lg-5" style="text-align: center">
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="anhSinhVienGiuChucVuCu" />
+                        </a>
+                        <a href="" id="tenSinhVienGiuChucVuCu" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-2 col-md-2 col-lg-2 align-vertically">
+                        <div style=" font-size: 80px; color: #22ff22 ">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                    <div class="col-5 col-md-5 col-lg-5" style="text-align: center">
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="anhSinhVienGiuChucVuMoi" />
+                        </a>
+                        <a href="" id="tenSinhVienGiuChucVuMoi" class="tenSvGiuCv"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-success" id="ThayDoiChucVuLop">Thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="XoaChucVuModal" tabindex="-1" role="dialog" aria-labelledby="XoaChucVuModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Xoá chức vụ</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 style="margin: 10px auto 10px auto; width: 80%">Bạn có chắc chắc muốn xóa chức vụ của người này</h3>
+                <h2 style="margin: 10px auto 10px auto; width: 80%">Chức vụ: <span id="tenChucVu-ModalXoaChucVu"></span></h2>
+                <div style="text-align: center">
+                    <a href="" class="anhSvGiuCvContainer">
+                        <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="anhSinhVienGiuChucVuCu-ModalXoaChucVu" />
+                    </a>
+                    <a href="" id="tenSinhVienGiuChucVuCu-ModalXoaChucVu" class="tenSvGiuCv"></a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="XoaChucVuLop">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{    
+    <script src="@Url.Content("~/Scripts/SiteScript/services/LopService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/LopController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            var lopId = @Model.LopId;
+            QuanLyChucVuLopController.initTrang(lopId);
+        });
+
+    </script>
+}

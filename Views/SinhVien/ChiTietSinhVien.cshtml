@@ -1,0 +1,163 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "Thông tin sinh viên";
+}
+<link href="/Content/SiteCss/TrangQuanLySinhVienLop.css" rel="stylesheet">
+
+<div class="HeaderContainer">
+    <span class="Header">Sinh viên</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Thông tin</span>
+</div> 
+@Html.AntiForgeryToken()
+<div style="margin-top: 80px" class="row">
+    <div class="col-12 col-md-6 col-lg-4">
+        <img src="/Content/AnhBia/AnhSV/avatar.png" alt="Ảnh bìa sinh viên" id="anhTrangCaNhanSV" class="img-fluid" />
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="ttContainer-TrangCaNhan ">
+            <div id="ten-TrangCaNhan"></div>
+            <div class="thongTin-TrangCaNhan">
+                MSSV:
+                <div id="MSSV-TrangCaNhan" class="thongTinCuThe-TrangCaNhan"></div>
+            </div>
+            <div class="thongTin-TrangCaNhan">
+                Lớp:
+                <a id="lop-TrangCaNhan" class="thongTinCuThe-TrangCaNhan"></a>
+            </div>
+            <div class="thongTin-TrangCaNhan">
+                Giới tính:
+                <div id="gioiTinh-TrangCaNhan" class="thongTinCuThe-TrangCaNhan"></div>
+            </div>
+
+            <div class="thongTin-TrangCaNhan">
+                Ngày sinh:
+                <div id="ngaySinh-TrangCaNhan" class="thongTinCuThe-TrangCaNhan"></div>
+            </div>
+            <div class="thongTin-TrangCaNhan">
+                Dân tộc:
+                <div id="danToc-TrangCaNhan" class="thongTinCuThe-TrangCaNhan"></div>
+            </div>
+            <div class="thongTin-TrangCaNhan">
+                Tôn giáo:
+                <div id="tonGiao-TrangCaNhan" class="thongTinCuThe-TrangCaNhan"></div>
+            </div>
+            <div class="thongTin-TrangCaNhan">
+                Khóa:
+                <div id="khoa-TrangCaNhan" class="thongTinCuThe-TrangCaNhan"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="gioiThieuContainer-TrangCaNhan">
+            <div class="gioiThieuLabel-TrangCaNhan">Giới thiệu</div>
+            <div id="gioiThieu-TrangCaNhan"></div>
+        </div>
+    </div>
+</div>    
+<div style="margin-top: 50px" class="row">
+    <div class="col-12 col-md-4 col-lg-4 thamGiaInfo">
+        <div>Là Hội viên</div>
+        <div class="thamGiaContainer" id="hoiVienStatus"></div>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 thamGiaInfo">
+        <div>Là Đoàn viên</div>
+        <div class="thamGiaContainer" id="doanVienStatus"></div>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 thamGiaInfo">
+        <div>Là Đảng viên</div>
+        <div class="thamGiaContainer" id="dangVienStatus"></div>
+    </div>
+</div>    
+<div class="body_90percent">
+    <nav style="margin-top: 25px">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">                                                                                 
+            <a class="nav-item nav-link active" id="nav-hoatDongSv-tab" data-toggle="tab" href="#nav-hoatDongSv" role="tab" aria-controls="nav-danhSachSv" aria-selected="false">Hoạt động tham gia</a>
+            <a class="nav-item nav-link" id="nav-baiVietSv-tab" data-toggle="tab" href="#nav-baiVietSv" role="tab" aria-controls="nav-baiVietDonVi" aria-selected="false">Bài viết sinh viên</a>
+            <a class="nav-item nav-link" id="nav-donViSv-tab" data-toggle="tab" href="#nav-donViSv" role="tab" aria-controls="nav-chucVuDonVi" aria-selected="false">Đơn vị tham gia</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade active show" id="nav-hoatDongSv" role="tabpanel" aria-labelledby="nav-hoatDongSv">
+            <div class="tabcontent">
+                <div class="tinMoiWrapper"></div>
+                <div style="text-align: center; margin-top: 10px">
+                    <a href="@Url.Action("TrangThongKeSinhVien", "HoatDong", Model)" class="btn btn-success" style="font-size: 200%">
+                        Xem thống kê hoạt động sinh viên
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-baiVietSv" role="tabpanel" aria-labelledby="nav-baiVietSv">
+            <div class="tabcontent">
+                <div class="tinMoiWrapper"></div>
+                <div style="text-align: center; margin-top: 10px">
+                    <a href="@Url.Action("BaiVietSinhVien", "BaiViet", Model)" class="btn btn-success" style="font-size: 200%">
+                        Xem tất cả bài viết
+                    </a>
+                </div>
+            </div>
+        </div>         
+        <div class="tab-pane fade" id="nav-donViSv" role="tabpanel" aria-labelledby="nav-donViSv">
+            <div class="tabcontent align-vertically">
+                <div class="row" id="danhSachDonViSinhVien"></div>
+            </div>
+        </div>
+    </div>
+</div>  
+@section scripts
+{   
+    <script src="@Url.Content("~/Scripts/SiteScript/services/SinhVienService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/SinhVienController.js")" type="text/javascript"></script>
+
+    <script type="text/x-template" id="baiVietMoi_Template">
+        <%
+        _.each(danhSachBaiViet, function(baiViet){  %>
+        <div class="tinMoi">
+            <div class="imgWrapper">
+                <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                    <img src="<%= baiViet.anhBia %>" alt="<%= baiViet.tenBaiViet %>">
+                </a>
+            </div>
+            <div class="tinWrapper">
+                <div class="title">
+                    <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                </div>
+                <p class="summary"><%= baiViet.soLuoc %></p>
+                <div>
+                    <span><i class="far fa-clock"></i> <%= moment(baiViet.ngayTao).format("HH:mm [ngày] DD/MM/YYYY") %></span>
+                    <span>&ensp;-&ensp;</span>
+                    <span><i class="far fa-eye"></i> <%= baiViet.soLuotXem %> lượt xem</span>
+                </div>
+            </div>
+        </div>
+        <%
+        })
+        %>
+    </script>
+    <script type="text/x-template" id="cardDonVi_Template">
+        <div class="col-4 col-md-4 col-lg-4">
+            <div class="donViHolder">
+                <a href="/DonVi/ThongTin/<%= donVi.donViId %>" title="<%= donVi.tenDonVi %>">
+                    <img src="<%= donVi.anhBia %>" alt="<%= donVi.tenDonVi %>" class="anhBia-CardDonVi">
+                </a>
+                <a href="/DonVi/ThongTin/<%= donVi.donViId %>" style="text-align: center" title="<%= donVi.tenDonVi %>">
+                    <h4 class="tenDonVi-CardDonVi"><%= donVi.tenDonVi %></h4>
+                </a>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(document).ready(function () {
+            var idSinhVien = @Model;
+            QuanLyTrangCaNhanController.initTrangChiTietSinhVien(idSinhVien);
+        });
+
+    </script>
+}
+
+

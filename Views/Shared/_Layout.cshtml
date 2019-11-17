@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - NAPASTUDENT</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/x-template" id="tenHoatDongTemplate">    
+        <a href='/HoatDong/ChiTiet/<%= hoatDongId %>' class='linkHoatDong-TrangChiTietLop'><%= tenHoatDong %></a>
+</script>
+</head>
+<body>
+    @Html.Partial("_ThanhDieuHuong");
+    <div class="navbar navbar-inverse active">
+        <div id="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="input-group searchBar">
+ 
+            @* Ô input *@
+            <input type="text" class="form-control" value="" id="searchTermValue" placeholder="Tìm kiếm hoạt động, bài viết, sinh viên, đơn vị mong muốn...">
+    
+            @* Nút tìm kiếm *@     
+            <select class="custom-select" id="searchType">
+                <option value="1">Hoạt động</option>
+                <option value="2">Bài viết</option>
+                <option value="3">Sinh viên</option>
+                <option value="4">Lớp</option>
+                <option value="5">Đơn vị</option>
+            </select>
+            <div class="input-group-btn">
+                <button class="btn btn-primary" id="searchBtn">Tìm kiếm</button>
+            </div>
+        </div>
+
+        @Html.Partial("_LoginPartial")
+
+    </div>
+    <div class="pageBody active">
+
+        <div class="body-content">
+            @RenderBody()
+            @* Loader *@
+            <div class="loader" style="display: none">
+                <img src="/Content/Icons/Spinner.svg" alt="spinner" style="width: 100px" />
+                Đang tải
+            </div>
+        </div>
+        <hr />
+        <footer class="body-content">
+            <p>&copy; @DateTime.Now.Year - Được thiết kế bởi Hứa Thanh Phong.</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/lib")
+    @Scripts.Render("~/bundles/app")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

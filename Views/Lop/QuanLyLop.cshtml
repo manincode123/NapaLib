@@ -1,0 +1,405 @@
+﻿@model NAPASTUDENT.Models.ViewModels.QuanLyLopViewModel
+
+@{
+    ViewBag.Title = "Thông tin lớp";
+}
+<link href="/Content/SiteCss/LopStyles.css" rel="stylesheet">
+<link href="/Content/croppie/croppie.css" rel="stylesheet">
+
+@Html.AntiForgeryToken()
+<div class="HeaderContainer">
+    <span class="Header">Lớp</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Quản lý</span>
+</div>
+<div class="body_90percent">
+    @*Ảnh bìa tên lớp*@
+    <div class="anhBiaContainer">
+        <img src="@Model.AnhBia" id="anhBia-ChiTietLop" alt="Ảnh bìa lớp" class="anhBia">
+        <div class="anhBiaTextBox">
+            <div style="font-size: 3vw;font-weight: bold">@Model.TenLop</div>
+            <div style="font-size: 2.5vw;font-weight: bold">Khóa: @Model.KhoaHoc.TenKhoa</div>
+        </div>
+    </div>
+    @*Sĩ số lớp*@
+    <div style="margin-bottom: 30px">
+        <div class="row siSoContainer-ChiTietLop">
+            <div class="col-12 col-md-6 col-lg-3 siSoInfo">
+                <div>Sĩ số <i class="fas fa-users"></i></div>
+                <div id="siSo-TrangChiTietLop"></div>
+
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 soNuInfo">
+                <div>Nữ <i class="fas fa-venus"></i></div>
+                <div id="soNu-TrangChiTietLop">
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 soNamInfo">
+                <div>Nam <i class="fas fa-mars"></i></div>
+                <div id="soNam-TrangChiTietLop">
+
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 gtKhacInfo">
+                <div>
+                    <span class="gtKhacLabel">GT khác</span>
+                    <svg aria-hidden="true" data-prefix="fas" data-icon="transgender-alt" class="svg-inline--fa fa-transgender-alt fa-w-15" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512">
+                        <linearGradient id="rainbow" x1="0" x2="0" y1="0" y2="100%" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF5B99" offset="0%" />
+                            <stop stop-color="#FF5447" offset="20%" />
+                            <stop stop-color="#FF7B21" offset="40%" />
+                            <stop stop-color="#EAFC37" offset="60%" />
+                            <stop stop-color="#4FCB6B" offset="80%" />
+                            <stop stop-color="#51F7FE" offset="100%" />
+                        </linearGradient>
+                        <path fill="url(#rainbow)" d="M468 0h-79c-10.7 0-16 12.9-8.5 20.5l16.9 16.9-80.7 80.7C294.5 104.1 268.2 96 240 96c-28.2 0-54.5 8.1-76.7 22.1l-16.5-16.5 19.8-19.8c4.7-4.7 4.7-12.3 0-17l-28.3-28.3c-4.7-4.7-12.3-4.7-17 0l-19.8 19.8-19-19 16.9-16.9C107.1 12.9 101.7 0 91 0H12C5.4 0 0 5.4 0 12v79c0 10.7 12.9 16 20.5 8.5l16.9-16.9 19 19-19.8 19.8c-4.7 4.7-4.7 12.3 0 17l28.3 28.3c4.7 4.7 12.3 4.7 17 0l19.8-19.8 16.5 16.5C104.1 185.5 96 211.8 96 240c0 68.5 47.9 125.9 112 140.4V408h-36c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h36v28c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-28h36c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-36v-27.6c64.1-14.6 112-71.9 112-140.4 0-28.2-8.1-54.5-22.1-76.7l80.7-80.7 16.9 16.9c7.6 7.6 20.5 2.2 20.5-8.5V12c0-6.6-5.4-12-12-12zM240 320c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z">
+                        </path>
+                    </svg>
+
+                </div>
+                <div id="khac-TrangChiTietLop" class="gtKhacLabel">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*Nút quản lý lớp*@
+    <hr />
+    <div class="row" style="margin-bottom: 20px">
+        @if (Model.ChucVu == 1)
+        {
+            <div class="col-6 col-md-6 col-lg-6 align-vertically">
+                <div class="btn btn-success quanLyLopLink" id="suaThongTinLopBtn">
+                    <i class="fas fa-edit"></i>
+                    Thay đổi thông tin lớp
+                </div>
+            </div>
+            <div class="col-6 col-md-6 col-lg-6 align-vertically">
+                <a href="/Lop/QuanLySinhVienLop/@Model.LopId" class="btn btn-primary quanLyLopLink">
+                    <i class="fas fa-address-book"></i>
+                    Quản lý sinh viên lớp
+                </a>
+            </div>
+        }
+        <div class="col-6 col-md-6 col-lg-6 align-vertically">
+            <a href="/Lop/HoatDong/@Model.LopId" class="btn btn-primary quanLyLopLink">
+                <i class="fas fa-bullhorn"></i>
+                Quản lý hoạt động lớp
+            </a>
+        </div>
+        <div class="col-6 col-md-6 col-lg-6 align-vertically">
+            <a href="/Lop/QuanLyChucVuLop/@Model.LopId" class="btn btn-success quanLyLopLink">
+                <i class="fas fa-sitemap"></i>
+                Quản lý chức vụ lớp
+            </a>
+        </div>
+
+    </div>
+    @*Tab content*@
+    <hr />
+    <nav style="margin-top: 25px">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-danhSachSv-tab" data-toggle="tab" href="#nav-danhSachSv" role="tab" aria-controls="nav-danhSachSv" aria-selected="false">Danh sách sinh viên</a>
+            <a class="nav-item nav-link" id="nav-banCanSu-tab" data-toggle="tab" href="#nav-banCanSu" role="tab" aria-controls="nav-banCanSu" aria-selected="false">Cơ cấu nhân sự</a>
+            <a class="nav-item nav-link" id="nav-hoatDongLop-tab" data-toggle="tab" href="#nav-hoatDongLop" role="tab" aria-controls="nav-hoatDong" aria-selected="false">Hoạt động lớp</a>
+            <a class="nav-item nav-link" id="nav-baiVietLop-tab" data-toggle="tab" href="#nav-baiVietLop" role="tab" aria-controls="nav-hoatDong" aria-selected="false">Bài viết lớp</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade active show" id="nav-danhSachSv" role="tabpanel" aria-labelledby="nav-danhSachSv-tab">
+            <div class="tabcontent">
+                <table class="table table-striped table-bordered" id="danhSachSv-TrangChiTietLop">
+                    <thead>
+                        <tr>
+                            <th>Ảnh bìa</th>
+                            <th>Tên sinh viên</th>
+                            <th>MSSV</th>
+                            <th>Giới tính</th>
+                            <th>Ngày sinh</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-banCanSu" role="tabpanel" aria-labelledby="nav-banCanSu-tab">
+            <div class="chucVuWrapper-TrangChiTietLop">
+                <div class="row chucVuContainer-TrangChiTietLop">
+                    <div class="col-12 col-md-12 col-lg-12 chucVuContainerLabel-TrangChiTietLop">Ban cán sự lớp</div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Lớp trưởng</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="LopTruongAnh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenLopTruong-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Lớp phó</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="LopPhoAnh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenLopPho-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Thủ quỹ</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="ThuQuyAnh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenThuQuy-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                </div>
+                <div class="row chucVuContainer-TrangChiTietLop">
+                    <div class="col-12 col-md-12 col-lg-12 chucVuContainerLabel-TrangChiTietLop">Ban chấp hành Chi Đoàn</div>
+                    <div class="col-12 col-md-6 col-lg-6 siSoInfo">
+                        <div>Bí Thư</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="BiThuAnh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenBiThu-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6 siSoInfo">
+                        <div>Phó Bí Thư</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="PhoBiThuAnh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenPhoBiThu-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Ủy viên BCH Chi Đoàn</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienDoan1Anh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenUyVienDoan1-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Ủy viên BCH Chi Đoàn</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienDoan2Anh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenUyVienDoan2-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Ủy viên BCH Chi Đoàn</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienDoan3Anh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenUyVienDoan3-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                </div>
+                <div class="row chucVuContainer-TrangChiTietLop">
+                    <div class="col-12 col-md-12 col-lg-12 chucVuContainerLabel-TrangChiTietLop">Ban chấp hành Chi Hội</div>
+                    <div class="col-12 col-md-6 col-lg-6 siSoInfo">
+                        <div>Chi Hội trưởng</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="ChiHoiTruongAnh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenChiHoiTruong-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6 siSoInfo">
+                        <div>Chi Hội Phó</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="ChiHoiPhoAnh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenChiHoiPho-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Ủy viên BCH Chi Hội</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienHoi1Anh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenUyVienHoi1-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Ủy viên BCH Chi Hội</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienHoi2Anh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenUyVienHoi2-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4 siSoInfo">
+                        <div>Ủy viên BCH Chi Hội</div>
+                        <a href="" class="anhSvGiuCvContainer">
+                            <img src="/Content/AnhBia/AnhSV/default-avatar.png" class="img-fluid chucVuAnh-TrangChiTietLop" id="UyVienHoi3Anh-TrangChiTietLop" />
+                        </a>
+                        <a href="" id="tenUyVienHoi3-TrangChiTietLop" class="tenSvGiuCv"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-hoatDongLop" role="tabpanel" aria-labelledby="nav-hoatDongLop">
+            <div class="tabcontent">
+                <div class="tinMoiWrapper"></div>
+                <div style="text-align: center; margin-top: 10px">
+                    <a href="@Url.Action("HoatDong","Lop",Model)" class="btn btn-success" style="font-size: 200%">
+                        Xem tất cả hoạt động lớp
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-baiVietLop" role="tabpanel" aria-labelledby="nav-baiVietLop">
+            <div class="tabcontent">
+                <div class="tinMoiWrapper"></div>
+                <div style="text-align: center; margin-top: 10px">
+                    <a href="@Url.Action("BaiVietLop", "BaiViet", Model)" class="btn btn-success" style="font-size: 200%">
+                        Xem tất cả bài viết lớp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="SaveLopModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thay đổi thông tin lớp</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="SaveLopModal-body">
+                <form id="lopForm">
+                    <div hidden>
+                        <input type="text" value="0" id="lopId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="tenLop" style="font-size: 30px;">Tên lớp</label>
+                        <small>Ví dụ: KS16 Quản lí công 1</small>
+                        <input value="" name="tenLop" id="tenLop" type="text" class="form-control" maxlength="50"/>
+                        <small id="tenLopLimit"></small>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <label for="kyHieuTenLop" style="font-size: 30px;">Ký hiệu tên lớp</label>  
+                        <small>Ví dụ: KS16-QLC1</small>
+                        <input value="" name="kyHieuTenLop" id="kyHieuTenLop" type="text" class="form-control" maxlength="15"/>
+                        <small id="kyHieuTenLopLimit"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="khoaHocId" style="font-size: 30px;">Khóa học</label>
+                        <div>
+                            <select data-placeholder="Chọn khóa học" name="khoaHocId" id="khoaHocId" class="form-control" style="display: block"></select>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="material-switch">
+                        <input id="lopChuyenNganh-checkbox" name="lopChuyenNganh-checkbox" type="checkbox" />
+                        <label for="lopChuyenNganh-checkbox" class="badge-success"></label>
+                        <span style="margin-left: 20px; font-size: 25px">Lớp chuyên ngành</span>
+                        <small class="form-text text-muted">Chỉ chọn lựa chọn này nếu là lớp năm 3,4.</small>
+                    </div> 
+                    <hr />
+                    <div class="form-group">
+                        <label for="" style="font-size: 30px;">Ảnh bìa</label>
+                        <span id="selectAnhBiaButton" class="btn btn-primary" style="margin-bottom: 0.5rem; margin-left: 0.5rem">Chọn ảnh</span>
+                        <small style="display: block">Nên sử dụng ảnh ngang để làm ảnh bìa.</small>
+                        <img id="anhBiaLop-input" src="/Content/HocVien.png"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="saveLop">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="cropImagePop" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"><strong>Chỉnh sửa ảnh</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="anhBiaLop-Wrapper"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" id="cropImageBtn" class="btn btn-primary">Up ảnh bìa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{          
+    @Scripts.Render("~/bundles/DataTable")
+    <script src="@Url.Content("~/Scripts/croppie/croppie.min.js")" type="text/javascript"></script>        
+    <script src="@Url.Content("~/Scripts/SiteScript/services/LopService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/LopController.js")" type="text/javascript"></script>
+    <script type="text/x-template" id="baiVietMoi_Template">
+        <%
+        _.each(danhSachBaiViet, function(baiViet){  %>
+        <div class="tinMoi">
+            <div class="imgWrapper">
+                <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                    <img src="<%= baiViet.anhBia %>" alt="<%= baiViet.tenBaiViet %>">
+                </a>
+            </div>
+            <div class="tinWrapper">
+                <div class="title">
+                    <a href="/BaiViet/<%= baiViet.id %>" title="<%= baiViet.tenBaiViet %>">
+                        <%= baiViet.tenBaiViet %>
+                    </a>
+                </div>
+                <p class="summary"><%= baiViet.soLuoc %></p>
+                <div>
+                    <span><i class="far fa-clock"></i> <%= moment(baiViet.ngayTao).format("HH:mm [ngày] DD/MM/YYYY") %></span>
+                    <span>&ensp;-&ensp;</span>
+                    <span><i class="far fa-eye"></i> <%= baiViet.soLuotXem %> lượt xem</span>
+                </div>
+            </div>
+        </div>
+        <%
+        })
+        %>
+    </script>
+    <script type="text/x-template" id="hoatDongMoi_Template">
+        <%
+        _.each(danhSachHoatDong, function(hoatDong){  %>
+        <div class="tinMoi">
+            <div class="imgWrapper">
+                <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>">
+                    <img src="<%= hoatDong.anhBia %>" alt="<%= hoatDong.tenHoatDong %>">
+                </a>
+            </div>
+            <div class="tinWrapper">
+                <div class="title">
+                    <a href="/HoatDong/ChiTiet/<%= hoatDong.id %>" title="<%= hoatDong.tenHoatDong %>">
+                        <%= hoatDong.tenHoatDong %>
+                    </a>
+                </div>
+                <p class="summary"><%= hoatDong.soLuoc %></p>
+                <div>
+                    <span>
+                        <i class="far fa-clock"></i>
+                        <%= moment(hoatDong.ngayBatDau).format("HH:mm [ngày] DD/MM/YYYY") %>
+                        &ensp;-&ensp;
+                        <%= moment(hoatDong.ngayKetThuc).format("HH:mm [ngày] DD/MM/YYYY") %>
+                    </span>
+                    <br />
+                    <span><i class="fas fa-school"></i> <%= hoatDong.diaDiem %></span>
+                    <span>&ensp;-&ensp;</span>
+                    <span><i class="fas fa-users"></i> <%= hoatDong.soLuotThamGia %> lượt tham gia</span>
+                </div>
+            </div>
+        </div>
+        <%
+        })
+        %>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var lopId = @Model.LopId;
+            QuanLyChungLopController.initTrangQuanLyLop(lopId);
+        });
+    </script>
+}

@@ -1,0 +1,36 @@
+﻿@model int
+@{
+    ViewBag.Title = "title";
+}
+<link href="@Url.Content("~/Content/SiteCss/MonHoc.css")" rel="stylesheet" type="text/css" />   
+<div id="thongTinDiemHocKi">
+    <h1 style="margin-left: 10em">Điểm học tập sinh viên</h1>             
+    <h2>Học kỳ: <span id="hocKi"></span></h2> 
+    <h2>Sinh viên: <span id="tenSinhVien"></span></h2>
+    <h2>MSSV: <span id="mssv"></span></h2>
+</div> 
+<div style="overflow: scroll;overflow-y: hidden;">
+    <table class="table table-striped table-bordered bangDiem bangDiem_XemDiemSV" id="bangDiem" style="width: 100%!important">
+        <thead>
+            <tr id="monHoc"></tr>
+            <tr id="hocPhan"></tr>
+            <tr id="cotDiem"></tr>
+        </thead>
+        <tbody>
+            <tr id="diem"></tr>
+        </tbody>
+    </table>
+
+</div>
+
+@section scripts
+{                  
+    @Scripts.Render("~/bundles/DataTable")
+    <script>
+        $(document).ready(function() {
+            var hocKi =@Model;
+            XemDiemHocKiSinhVienController.initTrang(hocKi);
+        });
+    </script>
+      
+}

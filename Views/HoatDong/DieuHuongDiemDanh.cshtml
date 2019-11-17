@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "ĐIỂM DANH HOẠT ĐỘNG";
+
+}
+@Html.AntiForgeryToken()
+<link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
+
+<h2>ĐIỂM DANH HOẠT ĐỘNG</h2>
+<div class="form-group">
+    <input type="text" value="" class="form-control" id="input-TrangDiemDanh" />
+    <small id="diemDanhHelpBlock" class="form-text text-muted">
+        Nhập Tên hoạt động để chuyển tới trang điểm danh hoạt động đó.
+    </small>
+</div>         
+@section scripts
+{  
+    <script src="@Url.Content("~/Scripts/SiteScript/services/HoatDongService.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/HoatDongController.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            showTabQuanLy("quanLyHoatDongMenu", 2);
+            DiemDanhController.initTrangDieuHuongDiemDanh();
+        });
+    </script>     
+}

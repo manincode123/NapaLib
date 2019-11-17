@@ -1,0 +1,103 @@
+﻿<form id="hoatDongForm">
+    <div hidden>
+        <input type="text" value="0" id="hoatDongId" />
+    </div>
+    <div hidden>
+        <input type="checkbox" value="0" id="duocPheDuyet" />
+    </div>
+    <div class="form-group">
+        <label for="tenHoatDong" style="font-size: 30px;">Tên hoạt động</label>   
+        <div class="col-sm-10">
+            <input value="" name="tenHoatDong" id="tenHoatDong" type="text" class="form-control" maxlength="100"/>
+            <small id="tenHoatDongLimit"></small>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label for="soLuoc" style="font-size: 30px;">Sơ lược</label>   
+        <div class="col-sm-10">
+            <textarea value="" name="soLuoc" id="soLuoc" type="text" class="form-control" rows="5" maxlength="300"></textarea>
+            <small id="soLuocLimit"></small>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label for="noiDung" style="font-size: 30px;">Nội dung</label>
+        <textarea value="" name="noiDung" id="noiDung" type="text" class="form-control"></textarea>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label for="diaDiem" style="font-size: 30px;">Địa điểm</label> 
+        <div class="col-sm-10">
+            <input value="" name="diaDiem" id="diaDiem" type="text" class="form-control" maxlength="100"/>
+            <small id="diaDiemLimit"></small>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-6">
+            <h4>Thời gian bắt đầu</h4>
+            <div class="form-group">
+                <label for="ngayBatDau">Ngày</label>
+                <input type="date" name="ngayBatDau" id="ngayBatDau" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="gioBatDau">Giờ</label>
+                <input type="time" name="gioBatDau" id="gioBatDau" class="form-control">
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">
+            <h4>Thời gian kết thúc</h4>
+            <div class="form-group">
+                <label for="ngayKetThuc">Ngày</label>
+                <input type="date" name="ngayKetThuc" id="ngayKetThuc" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="gioKetThuc">Giờ</label>
+                <input type="time" name="gioKetThuc" id="gioKetThuc" class="form-control">
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="form-group col-12 col-md-6 col-lg-6">
+            <label for="selectLopToChuc" style="font-size: 25px">Lớp tổ chức</label>
+            <div>
+                <select name="selectLopToChuc" id="selectLopToChuc" multiple="multiple" style="width:80%;" class="form-control donViToChuc-group"></select>
+            </div>
+        </div>
+        <div class="form-group col-12 col-md-6 col-lg-6">
+            <label for="selectDonViToChuc" style="font-size: 25px">Đơn vị tổ chức</label>
+            <div>
+                <select name="selectDonViToChuc" id="selectDonViToChuc" multiple="multiple" style="width:80%;" class="form-control donViToChuc-group"></select>
+            </div>
+        </div>
+    </div>
+    <hr />       
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-6 form-group">
+                <label for="capHoatDong-input" style="font-size: 25px">Cấp hoạt động</label>
+                <select id="capHoatDong-input" class="form-control">
+                    <option value="1">Cấp chi hội</option>
+                    <option value="2">Cấp liên chi hội</option>
+                    <option value="3">Cấp khóa</option>
+                    <option value="4">Cấp phân viện</option>
+                </select>
+        </div>
+        <div class="material-switch hdNgoaiHocVien-Holder col-12 col-md-6 col-lg-6">
+            <input id="hdNgoaiHocVien-checkbox" name="hdNgoaiHocVien-checkbox" type="checkbox" />
+            <label for="hdNgoaiHocVien-checkbox" class="badge-primary"></label>
+            <span style="margin-left: 20px; font-size: 25px">Hoạt động ngoài học viện</span>
+            <small class="form-text text-muted">Chỉ chọn nếu hoạt động này không do chính Học viện tổ chức</small>
+        </div>
+    </div>
+    <hr />   
+    <div class="row">
+        <div class="form-group col-6 col-md-6 col-lg-6">
+            <label for="" style="font-size: 30px;">Ảnh bìa</label>  
+            <span id="selectAnhBiaButton" class="btn btn-primary" style="margin-bottom: 0.5rem; margin-left: 0.5rem">Chọn ảnh</span>       
+            <small style="display: block">Nên sử dụng ảnh ngang để làm ảnh bìa.</small>
+            <img id="anhBiaHoatDong-input" src="/Content/HocVien.png" />
+        </div>
+    </div>
+</form>

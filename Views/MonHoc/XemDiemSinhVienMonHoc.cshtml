@@ -1,0 +1,73 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "";
+}
+<link href="@Url.Content("~/Content/SiteCss/MonHoc.css")" rel="stylesheet" type="text/css" />
+<div id="thongTinLopMonHoc">
+    <h2>Sinh viên: <span id="tenSinhVien"></span></h2>
+    <hr />
+    <div class="row">
+        <h3 class="col-lg-6 col-md-6 col-6">Lớp: <span id="tenLop"></span></h3>
+        <h3 class="col-lg-6 col-md-6 col-6">Môn học: <span id="tenMonHoc"></span></h3>
+        <h3 class="col-lg-6 col-md-6 col-6">Số tiết: <span id="soTiet"></span></h3>
+        <h3 class="col-lg-6 col-md-6 col-6">Số học phần: <span id="soHocPhan"></span></h3>
+        <h3 class="col-lg-6 col-md-6 col-6">Số cột điều kiện: <span id="haiDiemDk"></span></h3>
+        <h3 class="col-lg-6 col-md-6 col-6">Loại môn: <span id="loaiMon"></span></h3>
+        <h3 class="col-lg-12 col-md-12 col-12">Học kì học: <span id="hocKi"></span></h3>
+    </div>
+    <hr /> 
+    <h2 style="font-weight: bold">Lịch thi</h2>
+    <div class="row">             
+        <h3 class="col-lg-6 col-md-6 col-6">Ngày thi: <span id="ngayThi"></span></h3>
+        <h3 class="col-lg-6 col-md-6 col-6">Địa điểm thi: <span id="diaDiemThi"></span></h3>
+    </div> 
+    <div id="thongTinThiLai" style="display: none">
+        <hr /> 
+        <h2 style="font-weight: bold;">Lịch thi lại</h2>
+        <div class="row">   
+            <h3 class="col-lg-6 col-md-6 col-6">Ngày thi: <span id="ngayThiLai"></span></h3>
+            <h3 class="col-lg-6 col-md-6 col-6">Địa điểm thi: <span id="diaDiemThiLai"></span></h3>
+        </div>
+    </div>
+    
+</div>
+<hr />
+<div>
+    <h2 style="font-weight: bold">Lịch học</h2>
+    <table class="table table-striped table-bordered" id="lichHoc">
+        <thead>
+            <tr>
+                <th>Thời gian học</th>
+                <th>Ngày học</th>
+                <th>Buổi học</th>
+                <th>Tiết học</th>
+                <th>Giáo viên dạy</th>
+                <th>Phòng học</th>
+            </tr>
+        </thead>
+
+    </table>
+</div>
+<hr />
+<div>
+    <h2 style="font-weight: bold">Điểm thi</h2>
+    <table class="table table-striped table-bordered bangDiem_XemDiemSV bangDiem" id="bangDiem" style="width: 100% !important">
+        <thead>
+            <tr id="cotDiem"></tr>
+        </thead>
+        <tbody>
+            <tr id="duLieu"></tr>
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/DataTable")
+    <script>
+        $(document).ready(function() {
+            var monHocId = @Model;
+            XemDiemMonHocSinhVienController.initTrang(monHocId);
+        });
+    </script>
+} 

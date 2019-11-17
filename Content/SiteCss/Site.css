@@ -1,0 +1,817 @@
+﻿
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+.pageBody {
+    position: absolute;
+    top: 0;
+    right: 0;
+    -webkit-transition: width 0.3s linear;
+    transition: width 0.3s linear;
+    width: calc(100% - 210px);
+    background-color: #F4F7FA;
+    min-height: 100vh;
+    padding-bottom: 50px;
+    padding-top: 90px;
+}
+.pageBody.active {
+    width: calc(100% - 80px)!important;
+}
+@media (max-width: 1199px) {
+    .pageBody {
+         width: calc(100% - 80px);
+    }
+    .page.active {
+        width: calc(100% - 80px);
+    }
+}
+@media (max-width: 700px) {
+    .pageBody {
+        width: 100%;
+    }
+}
+/*Modal scrollbar overload*/
+.modal {
+    overflow-y: auto !important; 
+}
+.modal-md {
+    max-width: 50%;
+}
+.modal-lg {
+    max-width: 80%;
+}
+@media (min-width: 992px) {
+    .modal-lg {
+        max-width: 80%;
+    }
+}
+/*Card Container*/
+.cardContainer {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.card {
+    background: white;
+    border: 1px solid;
+    text-align: center;
+    padding: 20px;
+}
+.card-small {
+    background: white;
+    border: 1px solid;
+    text-align: center;
+    padding: 20px;
+    width: 70%;
+    margin: 0 auto 0 auto;
+}
+.number-card {
+    font-size: 2.5em;
+}
+.explain-card {
+    font-size: 1.5em;
+    color: #2b90d9 !important;
+}
+.iconDangDienRa-card {
+    color: #22ff22;
+    font-size: 2.5em;
+}
+.selection {
+    width: 100%
+}
+/*Search bar*/
+.searchBar {
+    width: 50%;
+    left: 50px;
+    position: absolute;
+}
+.searchBar #searchTermValue {
+    width: 59%;
+}
+.searchBar #searchBtn {
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0.25rem;
+}
+.searchBar .twitter-typeahead {
+    width: 70%;
+}
+.twitter-typeahead #searchTermValue {
+    width: 100%;
+}
+.searchBar .tt-hint {
+    color: #999;
+    max-width: 100%;
+    font-size: 16px;
+    top: 0!important;
+    left: 0!important;
+    height: calc(2.25rem + 3px);
+    padding: 0.375rem 0.75rem;
+    -ms-transform: none;
+    -webkit-transform: none;
+    transform: none;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0.25rem;
+}
+.searchBar .tt-input {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0.25rem;
+}
+.searchBar .tt-menu {
+    left: 0!important;
+    width: 100%;
+    margin: 0 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.searchBar .tt-suggestion {
+    color: black;
+}
+.ketQuaTitle {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    outline: none;
+    margin-bottom: 10px;
+    font-size: 2rem !important;
+}
+.ketQuaTimKiem-section {
+    display: none;
+}
+/*Pagination*/
+.pagination-sm{
+    display: table;
+    margin-bottom: 1.75em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    width: fit-content;
+}
+.pagination-sm > li {
+    display: inline-block;
+}
+.pagination-sm > li > a, .pagination-sm > li > span {
+    padding: 5px 10px!important;
+    font-size: 20px!important;
+}
+/*Card Sinh viên*/
+.cardSinhVen {
+    text-align: center;
+    font-weight: bold;
+    display: table;
+    margin: auto;
+}
+.cardSinhVen:hover {
+    box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 10px 10px;
+}
+.cardSinhVen:hover .cardSinhVien-Ten{
+    color: #22ff22;
+}
+.cardSinhVien-AnhBia {
+    max-width: 150px;
+    margin-top: 15px;
+}         
+.cardSinhVien-Ten {
+    margin: 25px 15px 0;
+    display: block;
+    font-size: 25px;
+}
+.cardSinhVien-Ten:hover {
+    color: #22ff22;
+}
+/*Bootstrap Form Overload*/
+.form-group .col-sm-10 {
+    padding: 0;
+}
+.form-control-feedback {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    pointer-events: none;
+}
+.has-error label{
+    color: #a94442
+}
+.has-error .form-control-feedback {
+    color: #a94442;
+}
+.has-error .select2-selection {
+    border: 1px solid #dc3545 !important;
+}
+.select2-container--open.has-error  .select2-selection--multiple {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+.has-success .select2-selection--multiple {
+    border: 1px solid #28a745 !important;
+}
+.select2-container--open.has-success  .select2-selection--multiple {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+/*Input style*/
+.input-30px {
+    font-size: 30px;
+    height: 60px;
+}
+.input-25px {
+    font-size: 25px;
+    height: 50px;
+}
+.input-80width {
+    max-width: 80%;
+}
+#addRoleInput {
+    margin: 10px auto 0 auto;
+    padding: 30px;
+    font-size: 30px;
+    height: 3rem;
+    max-width: 80%;
+}
+#addRoleInput-HelpBlock {
+    margin: 10px auto 0 auto;
+    width: 80%;
+}
+/*Checkbox but it's android switch :3 */
+.material-switch > input[type="checkbox"] {
+    display: none;   
+}
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative; 
+    width: 50px;  
+}
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 19px;
+    content: '';
+    height: 25px;
+    margin-top: -8px;
+    position: absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 50px;
+    top: -2px;
+}
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 30px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 30px;
+}
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 25px;
+}
+.select2-selection__rendered {
+    font-size: 20px;
+
+}
+.anhBiaHoatDongTypeAhead {
+    width: 120px;
+    margin-right: 30px;
+    vertical-align: top;
+}
+.tableHeaderCenter {
+    text-align: center;
+    vertical-align: middle;
+}
+/*Class that use alot*/
+.body_60percent {
+    width: 60%;
+    margin: auto;
+}
+.body_65percent {
+    width: 65%;
+    margin: auto;
+}
+.body_70percent {
+    width: 70%;
+    margin: auto;
+}
+.body_75percent {
+    width: 75%;
+    margin: auto;
+}
+.body_80percent {
+    width: 80%;
+    margin: auto;
+}
+.body_85percent {
+    width: 85%;
+    margin: auto;
+}
+.body_90percent {
+    width: 90%;
+    margin: auto;
+}
+.bold-center {
+    font-weight: bold;
+    text-align: center;
+}
+.link:hover {
+    font-weight: bold;
+    color: blue;
+}
+.anhSvTypeahead {
+    width: 120px;
+    margin-right: 30px;
+}
+.align-vertically {
+    display: flex;
+    align-items: center; /* align vertical */
+    justify-content: center; /* align horizontal */
+
+}
+.tenSvDs:hover {
+    color: blue;
+    font-weight: bold;
+}
+/*Input save hoạt động modal*/
+.hdNgoaiHocVien-Holder {
+    height: fit-content;
+    margin: auto
+}
+#capHoatDong-input {
+    max-width: 80%;
+    padding: 0.4rem 0.75rem;
+    height: unset;
+    font-size: 1.5rem;
+}
+#anhBiaHoatDong-input {
+    width: 100%;
+    height: 165px;
+    object-fit: cover;
+    object-position: center;
+}
+/*Sidebar*/
+#sidebar .nav {
+    text-align: center
+}
+#sidebar .nav-item {
+    width: 100%
+}
+/*Loader*/
+.loader{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    text-align: center;
+    border-radius: 25px;
+    z-index: 10000;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    background: wheat;
+    font-size: 2rem;
+
+}
+.lopHolder,.donViHolder {
+    margin: 15px 10px;
+    border-radius: 10px 10px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2), 
+                0 1px 1px 0 rgba(0,0,0,0.14), 
+                0 2px 1px -1px rgba(0,0,0,0.12)
+}   
+.pageBody.active .lopHolder,.pageBody.active .donViHolder {
+    margin: 15px 25px;
+}
+.donViHolder:hover,.lopHolder:hover {
+          box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
+          border-radius: 10px 10px;
+}
+.anhBia-CardLop,.anhBia-CardDonVi {
+    width: 100%;
+    height: 175px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    object-position: center;
+}
+.tenLop-CardLop,.tenDonVi-CardDonVi {
+    font-weight: bold;
+    padding: 10px 10px 5px 10px;
+    margin-bottom: 0;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+.tenDonVi-CardDonVi {
+    padding-bottom: 10px;
+    white-space: unset; 
+    display: -webkit-box;
+    line-height: 24px;
+    max-height: 68px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+ /*Header*/
+.HeaderContainer {
+    border-bottom: 5px solid lightgray;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+.Header {
+    font-size: 45px;
+    font-weight: bold;
+    color: cadetblue;
+
+}
+.Header:hover {
+    color: cadetblue;
+}
+.HeaderText {
+    margin-left: 5px;
+    font-weight: bold; 
+    font-size: 25px
+}
+ /*Ảnh bìa lớp, đơn vị*/
+.anhBiaContainer {
+    position: relative;
+    display: block;
+}
+.anhBia {
+    width: 100%;
+    height: 42vh;
+    object-position: center;
+    margin: auto;
+    display: block;
+
+}
+.anhBiaTextBox {
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right: 50%;
+    transform: translate(50%);
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+/*Textbox giới thiệu*/
+.gioiThieu {
+    margin-top: 30px;
+    text-align: justify;
+    max-height: 120px;
+    position: relative;
+    overflow: hidden;
+    transition: max-height 1s ease;
+    -moz-transition: max-height 1s ease; /* Firefox 4 */
+    -webkit-transition: max-height 1s ease; /* Safari and Chrome */
+    -o-transition: max-height 1s ease; /* Opera */
+    -ms-transition: max-height 1s ease; /* Explorer 10 */
+}
+.gioiThieu.-daMoRong {
+    max-height: 5000px;
+}
+.gioiThieu:not(.-daMoRong)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(rgba(244, 247, 250, 0),rgba(244, 247, 250, 1));
+}
+.nut-xemThem {
+    cursor: pointer;
+    display: block;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    font-size: 1.2rem;
+    width: fit-content;
+    width: -moz-fit-content;
+    text-align: center;
+    transition: all 1s ease;
+}
+/*Ribbon*/
+.ribbon{
+    position: absolute;
+    color:#fff;
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    clear: both;
+    padding: 4px;
+    text-shadow:1px 1px 2px #111;
+    left: 2px;
+    top: 5px;
+    white-space: nowrap;
+    display: inline-block;
+    -webkit-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.75);
+}
+.ribbon:after{
+    content:"";
+    float: right;
+    position:absolute;
+    top:0;
+    right: -12px;
+    width:0;
+    height:0;
+    border-color:transparent transparent transparent #A21D0A;
+    border-style:solid;
+    border-width: 11px 0 12px 12px;		
+}  
+.ribbon.daDangKi {
+    left: 25px;
+    top: 30px;
+    background: #0062cc;
+}
+.ribbon.daDangKi:after {
+    border-color: transparent transparent transparent #0062cc;
+    border-width: 14px 0 15px 12px;
+}
+.ribbon.daThamGia {
+    left: 25px;
+    top: 30px;
+    background: #28a745;
+}
+.ribbon.daThamGia:after {
+    border-color: transparent transparent transparent #28a745;
+    border-width: 14px 0 15px 12px;
+}
+.ribbon.daTheoDoi {
+    left: 25px;
+    top: 65px;
+    background: #ffc107;
+}
+.ribbon.daTheoDoi:after {
+    border-color: transparent transparent transparent #ffc107;
+    border-width: 14px 0 15px 12px;
+}
+.ribbon.biHuy {
+    left: 25px;
+    top: 65px;
+    background: red;
+}
+.ribbon.biHuy:after {
+    border-color: transparent transparent transparent red;
+    border-width: 14px 0 15px 12px;
+}
+.ribbon.choPheDuyet {
+    left: 25px;
+    top: 65px;
+    background: purple;
+    color: white;
+}
+.ribbon.choPheDuyet:after {
+    border-color: transparent transparent transparent purple;
+    border-width: 14px 0 15px 12px;
+}
+.ribbon.sapDienRa {
+    left: 25px;
+    top: 65px;
+    background: blue;
+    color: white;
+}
+.ribbon.sapDienRa:after {
+    border-color: transparent transparent transparent blue;
+    border-width: 14px 0 15px 12px;
+}
+.ribbon.ngungThamGia {     
+    /*Ribbon này cho người ngừng tham gia đơn vị*/
+    left: 25px;
+    top: 65px;
+    background: #ffc107;
+    color: white;
+}
+.ribbon.ngungThamGia:after {
+    border-color: transparent transparent transparent #ffc107;
+    border-width: 14px 0 15px 12px;
+}
+.ribbon:first-child {
+    top: 30px;
+}   
+/*Icon doan hoi*/
+.iconDoanHoi {
+    width: 60px;
+}
+/*Card Hoạt động*/
+.cardHoatDong {
+    height: 530px;
+    margin: 15px 0;
+    border-radius: 10px 10px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2), 
+                0 1px 1px 0 rgba(0,0,0,0.14), 
+                0 2px 1px -1px rgba(0,0,0,0.12)
+}                           
+.pageBody.active .cardHoatDong {
+    margin: 15px 10px;
+}
+.cardHoatDong:hover {
+    box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 10px 10px;
+}
+.anhBiaCardHoatDong {
+    width: 100%;
+    height: 175px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    object-position: center; 
+}   
+.noiDungCardHoatDong {
+    height: 300px;
+    border-radius:0 0 10px 10px ;
+    width: 90%;
+    margin: 10px auto;
+}
+.thongTin-CardHoatDong {
+    height: 255px;
+    display: block;
+}
+.tenCardHoatDong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 33px;       /* fallback */
+    max-height: 66px;        /* fallback */
+    -webkit-line-clamp: 2;    /* number of lines to show */
+    -webkit-box-orient: vertical;
+
+}
+.iconCardHoatDong {
+    color: #22ff22;
+    font-size: 1em;
+    width: 25px;
+    text-align: center;
+    margin-right: 10px;
+}
+.heartIcon {
+    color: red;
+}
+.thamGiaIcon {
+    color: blue
+}
+.soLuocCardHoatDong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 24px;       /* fallback */
+    max-height: 120px;        /* fallback */
+    -webkit-line-clamp: 5;    /* number of lines to show */
+    -webkit-box-orient: vertical;
+    text-align: justify;
+    margin-top: 15px;
+}
+.thamGiaTheoDoiHolder-CardHd {
+    margin: 15px 0;
+    text-align: center;
+}
+.luotThamGia-CardHoatDong {
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 5px 7px;
+    background: #E0E0E0;
+    width: 170px;
+    text-align: center;
+    transition:all 0.5s ease;
+    display: inline-block;
+}
+.luotThamGia-CardHoatDong .iconCardHoatDong {
+    margin-right: 0;
+}
+.daDangKy-CardHoatDong:hover {
+    background: #22ff22;
+}
+.daDangKy-CardHoatDong:hover span{
+    display: none;
+}
+.daDangKy-CardHoatDong:hover:before {
+    content: "Đăng kí";
+    color: white;
+    font-weight: bold;
+}
+.chuaDangKy-CardHoatDong:hover {
+    background: wheat;
+}
+.chuaDangKy-CardHoatDong:hover span{
+    display: none;
+}
+.chuaDangKy-CardHoatDong:hover:before {
+    content: "Đã đăng kí";
+    color: #00ff00;
+    font-weight: bold;
+}
+.themDonVi-CardHoatDong {
+    color: #fff!important;
+    cursor: pointer;
+}
+ .themDonVi-CardHoatDong:hover, .themDonVi-CardHoatDong:focus {
+        color: #fff!important;
+        text-decoration: none;
+        background-color: #0062cc;
+    }
+.popover-body .donViBoSung {
+    margin: 5px 5px 0 0;
+    font-size: 12px;
+}
+.thanhNgangHoatDong {
+    width: 50%; 
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+.iconCapHoatDong {
+    width: 60px;
+}
+.badgeCapHoatDong {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+}
+/*Thống kê hoạt động*/
+#namHocPicker {
+    display: inline-block;
+    width: auto;
+    font-size: 1.8rem;
+    height: auto;
+}
+/*Tab*/
+.tab {
+    overflow: hidden;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #f1f1f1;
+}
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: 1px solid;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+.tabcontent {
+
+    background: white;
+    padding: 30px;
+    border: 1px solid;
+
+}
+/*Trang chủ*/
+.trangChuWrapper {
+    display: flex;
+    margin: auto;
+    width: 100%;
+}
+.pageBody.active .trangChuWrapper{
+    width: 90%;
+}
+
+.banner-Wrapper {
+    width: 500px;
+    margin-left: 45px;
+}
+.banner-Link {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    display: block;
+    border-bottom: 1px gray solid;
+}
+.banner {
+    width: 500px;
+    height: 175px;
+}

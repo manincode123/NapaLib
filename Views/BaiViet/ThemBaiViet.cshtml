@@ -1,0 +1,115 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Thêm bài viết";
+}
+@Html.AntiForgeryToken()
+
+<h1 style="text-align: center">Thêm bài viết</h1>       
+<div style="margin-left: 20px">   
+    <form id="baiVietForm">     
+        <input type="text" value="0" id="baiVietId" hidden/>
+        <div class="form-group">
+            <label for="tenBaiViet" style="font-size: 30px;">Tên bài viết</label>   
+            <div class="col-sm-10">
+                <input name="tenBaiViet" value="" id="tenBaiViet" type="text" class="form-control" maxlength="100" />
+                <small id="tenBaiVietLimit"></small>
+            </div>    
+        </div>
+        <div class="form-group">
+            <label for="soLuoc" style="font-size: 30px;">Sơ lược</label> 
+            <div class="col-sm-10">
+                <textarea name="soLuoc" id="soLuoc" cols="" rows="" class="form-control" maxlength="150"></textarea>
+                <small id="soLuocLimit"></small>
+            </div>    
+        </div>
+        <div class="form-group">
+            <label for="selectAnhBiaButton" style="font-size: 30px;">Ảnh bìa</label>
+            <button id="selectAnhBiaButton" class="btn btn-primary" style="margin-bottom: 0.5rem; margin-left: 0.5rem">Chọn ảnh</button>
+            <small style="display: block">Nên sử dụng ảnh ngang để làm ảnh bìa. Có thể chọn ảnh trong bài viết.</small>
+            <img src="/Content/HocVien.png" alt="" style="width: 300px; height: 200px; display: block" id="anhBia" />
+        </div>
+        <div class="form-group">
+            <label for="NoiDung" style="font-size: 30px;">Nội dung</label>
+            <textarea name="NoiDung" id="NoiDung" cols="" rows=""></textarea>
+        </div>
+        <div class="form-group">
+            <label for="tagLop" style="font-size: 30px">Gắn thẻ lớp</label>
+            <div>
+                <select id="tagLop" multiple="multiple" style="width:80%;" class="form-control"></select>
+            </div>
+            <small>Bài viết sẽ xuất hiện trong bảng tin của lớp được gắn thẻ.</small>
+        </div>
+        <div class="form-group">
+            <label for="tagDonVi" style="font-size: 30px">Gắn thẻ đơn vị</label>
+            <div>
+                <select id="tagDonVi" multiple="multiple" style="width:80%;" class="form-control"></select>
+            </div>
+            <small>Bài viết sẽ xuất hiện trong bảng tin của đơn vị được gắn thẻ.</small>
+        </div>
+        <div class="form-group">
+            <label for="tagHoatDong" style="font-size: 30px">Gắn thẻ hoạt động</label>
+            <small>Nhập tên hoạt động và đợi xíu để trang tìm.</small>
+            <input type="text" value="" class="form-control typeahead-input-BaiViet" id="tagHoatDong" />
+            <small>Bài viết sẽ xuất hiện trong bảng tin của hoạt động được gắn thẻ.</small>
+            <div id="DanhSachHoatDong"></div>
+        </div>
+        <div class="form-group">
+            <label for="chuyenMuc" style="font-size: 30px">Đăng vào chuyên mục</label>
+            <div id="chuyenMucSelectContainer">
+                <select id="chuyenMuc" style="width:80%;" class="form-control"></select>
+            </div>
+            <small>Bài viết sẽ xuất hiện trong chuyên mục đã chọn.</small>
+        </div>
+    </form>
+    <div class="modal fade" id="xemTruocBaiVietModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="xemTruocBaiVietModal-title"></h2>
+                </div>
+                <div class="modal-body" id="xemTruocBaiVietModal-body">
+                    <div id="xemTruocBaiVietModal-soLuoc" style="font-weight: bold;margin-bottom: 20px"></div>
+                    <div id="xemTruocBaiVietModal-noiDung"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 25px">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="xemTruocBaiVietButton" style="font-size: 30px" class="btn btn-primary">Xem trước bài viết</button>
+    <button id="luuBaiVietButton" style="font-size: 30px" class="btn btn-success">Lưu bài viết</button>
+
+</div>
+<script type="text/x-template" id="hoatDongTemplate">
+    <div class="hoatDongContainer-TrangThemBaiViet">
+        <img src="<%= anhBia %>" alt="" class="anhBiaHoatDong-TrangThemBaiViet" />
+        <div class="hoatDongWrapper-TrangThemBaiViet">
+            <div class="thongTinHoatDong-TrangThemBaiViet">
+                <div><%= tenHoatDong %></div>
+                <div><%= thoiGianBatDau %> -  <%= thoiGianKetThuc %></div>
+                <div><%= diaDiem %></div>
+            </div>
+            <span id="<%= idHoatDong %>" class="buttonHolder-TrangThemBaiViet">
+                <i class="far fa-times-circle"></i>
+            </span>
+        </div>
+    </div>
+</script>
+
+@section scripts
+{    
+    <script src="@Url.Content("~/Scripts/SiteScript/services/BaiVietServices.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SiteScript/controllers/BaiVietControllers.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/ckfinder/ckfinder.js")" type="text/javascript"></script>
+    <script>
+        showTabProfile("baiVietMenu", 1);
+        $(document).ready(function () {
+            SaveBaiVietController.initTrangThemBaiViet();
+            
+        });
+    </script>
+}
