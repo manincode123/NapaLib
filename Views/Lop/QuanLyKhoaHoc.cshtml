@@ -3,8 +3,11 @@
 }
 @Html.AntiForgeryToken()
 <link href="/Content/SiteCss/LopStyles.css" rel="stylesheet">
-<h2 class="bold-center">QUẢN LÝ KHÓA HỌC</h2>
-<hr />
+<div class="HeaderContainer">
+    <span class="Header">Lớp</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Quản lý khóa học</span>
+</div> <hr />
 <button id="themKhoaHoc" class="btn btn-primary " style="font-size: 2rem">Thêm khóa học</button>
 <hr />
 <table class="table table-bordered table-striped" id="danhSachKhoaHoc" style="width: 100%">

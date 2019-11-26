@@ -265,6 +265,7 @@ var QuanLySinhVienController = function (quanLySinhVienService) {
         $("#tonGiao-input").val(sinhVien.tonGiaoId).trigger("change");
         $("#anhBiaSv").attr("src", sinhVien.anhDaiDien);
         rawImg = sinhVien.anhDaiDien;
+        $("#gioiThieu-input").val(sinhVien.gioiThieu);
     }
     var hienThiModalSuaThongTin = function (e) {
         var button = $(e.target);
@@ -285,6 +286,7 @@ var QuanLySinhVienController = function (quanLySinhVienService) {
         sinhVienDto.tonGiaoId = $('#tonGiao-input').val();
         sinhVienDto.anhDaiDien = $("#anhBiaSv").attr("src");
         //Ảnh đại diện sẽ được bind ở phần uploadAnhDaiDien nhưng phải giữ cái phía trên phòng trường hợp không up
+        sinhVienDto.gioiThieu = $('#gioiThieu-input').val();
     }
     var updateAfterSaveSinhVien = function (xhr) {
         hideLoader();
@@ -305,7 +307,8 @@ var QuanLySinhVienController = function (quanLySinhVienService) {
             showLoader();
             bindSinhVienDto();
             uploadAnhDaiDien();
-            quanLySinhVienService.saveSinhVien(sinhVienDto, updateAfterSaveSinhVien);
+            console.log(sinhVienDto);
+            //quanLySinhVienService.saveSinhVien(sinhVienDto, updateAfterSaveSinhVien);
         } else alert("Hãy nhập chính xác các thông tin cần thiết.");
     }
     var initTrang = function () {
@@ -1160,6 +1163,7 @@ var QuanLyTrangCaNhanController = function (quanLyTrangCaNhanService, quanLySinh
         $("#ngaySinh-TrangCaNhan").html(returnNgay(sinhVien.ngaySinh));
         $("#khoa-TrangCaNhan").html(sinhVien.khoaHoc.tenKhoa);
         $("#anhTrangCaNhanSV").attr("src", sinhVien.anhDaiDien);
+        $("#gioiThieu-TrangCaNhan").html(sinhVien.gioiThieu);
         document.title = returnTenSinhVien(sinhVien);
         returnHoiVienStatus(sinhVien.hoiVien);
         returnDoanVienStatus(sinhVien.doanVien);
@@ -1253,6 +1257,7 @@ var QuanLyTrangCaNhanController = function (quanLyTrangCaNhanService, quanLySinh
         $('#tonGiao-input').val(sinhVien.tonGiaoId).trigger('change');
         $('#anhBiaSv').attr("src", sinhVien.anhDaiDien);
         rawImg = sinhVien.anhDaiDien;
+        $("#gioiThieu-input").val(sinhVien.gioiThieu);
     }
     var hienThiModalSuaThongTin = function () {
         updateInput();
@@ -1270,6 +1275,7 @@ var QuanLyTrangCaNhanController = function (quanLyTrangCaNhanService, quanLySinh
         sinhVienDto.tonGiaoId = $('#tonGiao-input').val();
         sinhVienDto.anhDaiDien = $("#anhBiaSv").attr("src");
         //Ảnh đại diện sẽ được bind ở phần uploadAnhDaiDien nhưng phải giữ cái phía trên phòng trường hợp không up
+        sinhVienDto.gioiThieu = $('#gioiThieu-input').val();
     }
     var updateAfterSaveSinhVien = function (xhr) {
         hideLoader();
@@ -1283,7 +1289,7 @@ var QuanLyTrangCaNhanController = function (quanLyTrangCaNhanService, quanLySinh
     var saveSinhVien = function () {
         if ($("#saveSinhVienForm").valid()) {
             showLoader();
-            bindSinhVienDto();
+            bindSinhVienDto();                                                      
             uploadAnhDaiDien();
             quanLyTrangCaNhanService.saveSinhVien(sinhVienDto, updateAfterSaveSinhVien);
         } else alert("Hãy nhập chính xác các thông tin cần thiết.");

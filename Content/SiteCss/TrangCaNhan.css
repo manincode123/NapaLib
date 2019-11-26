@@ -1,4 +1,4 @@
-﻿.container-TrangCaNhan {
+﻿/*.container-TrangCaNhan {
 
 }
 
@@ -33,8 +33,6 @@
     height: 100%;
     border-radius: 30px;
     padding: 25px;
-
-
 }
 .gioiThieuLabel-TrangCaNhan {
     text-align: center;
@@ -42,6 +40,11 @@
     font-weight: 600;
     text-decoration: underline;
     text-decoration-style: solid;
+}
+#gioiThieu-TrangCaNhan {
+    font-size: 1.3rem;
+    max-height: 100%;
+    overflow-y: auto;
 }
 .sdtDcContainer-TrangCaNhan {
     margin-left: 50px;
@@ -93,4 +96,4 @@
         margin-left: 50px
     }
 
-}
+}*/

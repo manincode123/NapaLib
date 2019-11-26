@@ -827,7 +827,8 @@ namespace NAPASTUDENT.Controllers.Api
                     sv.GioiTinhId,
                     sv.KhoaHocId,
                     sv.AnhDaiDien,
-                    sv.NgaySinh
+                    sv.NgaySinh,
+                    sv.GioiThieu
                 })                   
                 .SingleOrDefault(sv => sv.Id == sinhVienId);
             if (sinhVien == null) return NotFound();

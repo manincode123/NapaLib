@@ -28,6 +28,7 @@ namespace NAPASTUDENT.Models.DTOs.SinhVienDto
         public int KhoaHocId { get; set; }
         [Required]
         public string AnhDaiDien { get; set; }
+        public string GioiThieu { get; set; }
         public string CMND { get; set; }
     }
 }

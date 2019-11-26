@@ -90,6 +90,11 @@
     text-decoration: underline;
     text-decoration-style: solid;
 }
+#gioiThieu-TrangCaNhan {
+    font-size: 1.3rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
 .sdtDcContainer-TrangCaNhan {
     margin-left: 50px;
     margin-right: 20px;

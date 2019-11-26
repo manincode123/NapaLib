@@ -2,13 +2,14 @@
     var nav = $('#nav' + chuyenMucId);
     var navwidth = 0;
     var themButtonWidth = nav.find('.chuyenMucCon .themButton').outerWidth(true);
+    var margin = 10;
 
     $('#nav' + chuyenMucId + ' .chuyenMucCon > a:not(.themButton)').each(function () {
         navwidth += $(this).outerWidth(true);
     });
     //var availablespace = $('nav').outerWidth(true) - morewidth;
     var availablespace = nav.width()
-        - nav.find(' .chuyenMuc').width() - themButtonWidth;
+        - nav.find(' .chuyenMuc').width() - themButtonWidth - margin;
 
     if (navwidth > availablespace) {
         var lastItem = nav.find(' .chuyenMucCon > a:not(.themButton)').last();

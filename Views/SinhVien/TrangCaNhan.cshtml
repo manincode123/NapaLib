@@ -7,9 +7,13 @@
 
 <link href="/Content/SiteCss/TrangQuanLySinhVienLop.css" rel="stylesheet">
 <link href="/Content/croppie/croppie.css" rel="stylesheet">
-<h1 style="text-align: center; font-weight: bold">TRANG CÁ NHÂN</h1>
 <button id="chinhSuaSinhVien" class="btn btn-primary">Chỉnh sửa thông tin</button>
-<div style="margin-top: 80px" class="row">
+<div class="HeaderContainer">
+    <span class="Header">Sinh viên</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Trang cá nhân</span>
+</div>
+<div style="margin-top: 40px" class="row">
     <div class="col-12 col-md-6 col-lg-4">
         <img src="/Content/AnhBia/AnhSV/avatar.png" alt="Ảnh bìa sinh viên" id="anhTrangCaNhanSV" class="img-fluid" />
     </div>
@@ -176,12 +180,17 @@
                     <hr />
                     <div class="row">
                         <div class="form-group col-6 col-md-6 col-lg-6">
-                            <label for="gioiTinh-input" style="font-size: 30px;">Ảnh bìa</label>
+                            <label for="anhBiaSv_brower" style="font-size: 30px;">Ảnh bìa</label>
                             <img id="anhBiaSv" src="/Content/AnhBia/AnhSV/avatar.png" />
                             <input id="anhBiaSv_brower" type="file" />
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cropImagePop" id="editAnhBiaSvBtn">
                                 Chỉnh sửa ảnh
                             </button>
+                        </div>
+                        <div class="form-group col-6 col-md-6 col-lg-6">
+                            <label for="gioiThieu-input" style="font-size: 30px;">Giới thiệu</label>
+                            <textarea id="gioiThieu-input" cols="" rows="10" class="form-control" style="max-width: 80%;"></textarea>    
+                            <small id="gioiThieu-inputLimit"></small>
                         </div>
                     </div>
 

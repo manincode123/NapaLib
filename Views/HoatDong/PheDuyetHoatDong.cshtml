@@ -5,11 +5,15 @@
 @Html.AntiForgeryToken()
 <link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
 
-<a href="/HoatDong/QuanLyHoatDong" class="btn btn-primary" style="font-size: 25px">
+<a href="/HoatDong/QuanLyHoatDong" class="btn btn-primary" style="font-size: 25px; float: right">
     <i class="fas fa-arrow-alt-circle-left"></i>
     Về trang quản lý chung
 </a>
-
+<div class="HeaderContainer">
+    <span class="Header">Hoạt động</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Phê duyệt hoạt động</span>
+</div> 
 <div class="body_80percent">
     <h1 style="text-align: center">Phê duyệt hoạt động</h1>
     <table class="table table-bordered table-striped" id="hdChoPheDuyetTable-TrangPheDuyet">

@@ -4,7 +4,7 @@
 @Html.AntiForgeryToken()
 <link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
 <div class="HeaderContainer">
-    <span class="Header">Hoạt động</span>
+    <span class="Header">Sinh viên</span>
     <span class="HeaderText" style="color: lightgrey">|</span>
     <span class="HeaderText" style="color: coral">Hoạt động cá nhân</span>
 </div>
@@ -108,7 +108,7 @@
                             <span class="iconCardHoatDong">
                                 <i class="fas fa-calendar-alt"></i>
                             </span>
-                            <span><%= moment(hoatDong.ngayBatDau).format("HH[h]mm [ngày] DD [tháng] MM [năm] YYYY") %></span>
+                            <span style="display: contents"><%= moment(hoatDong.ngayBatDau).format("HH[h]mm [ngày] DD [tháng] MM [năm] YYYY") %></span>
                         </div>
                         <div>
                             <span class="iconCardHoatDong">
@@ -195,7 +195,7 @@
                             <span class="iconCardHoatDong">
                                 <i class="fas fa-calendar-alt"></i>
                             </span>
-                            <span><%= moment(hoatDong.ngayBatDau).format("HH[h]mm [ngày] DD [tháng] MM [năm] YYYY") %></span>
+                            <span style="display: contents"><%= moment(hoatDong.ngayBatDau).format("HH[h]mm [ngày] DD [tháng] MM [năm] YYYY") %></span>
                         </div>
                         <div>
                             <span class="iconCardHoatDong">

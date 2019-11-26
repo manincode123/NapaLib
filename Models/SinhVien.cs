@@ -188,6 +188,7 @@ namespace NAPASTUDENT.Models
             NgaySinh = sinhVienDto.NgaySinh;
             GioiTinhId = sinhVienDto.GioiTinhId;
             AnhDaiDien = sinhVienDto.AnhDaiDien;
+            GioiThieu = sinhVienDto.GioiThieu;
         }
 
         public void setNgaySinh(DateTime ngaySinh)

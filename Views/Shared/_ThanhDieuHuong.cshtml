@@ -1,12 +1,11 @@
 ﻿<div class="sidebarWrapper">
-<!-- Sidebar  -->
-    <nav id="sidebar" class="active">
-    <div class="sidebar-header">
-        <h3>NAPA ADMIN</h3>
-        <strong>ND</strong>
-    </div>
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>NAPA ADMIN</h3>
+            <strong>ND</strong>
+        </div>
         <div class="tab-content" id="nav-tabContent">
-
             <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <ul class="list-unstyled components">
                     <li>
@@ -55,10 +54,10 @@
                         <ul class="collapse list-unstyled" id="donViMenu">
                             <li>
                                 <a href="@Url.Action("DanhSachDonVi", "DonVi")">Danh sách đơn vị</a>
-                            </li>    
+                            </li>
                             <li>
                                 <a href="@Url.Action("DonViCuaToi","DonVi")">Đơn vị của tôi</a>
-                            </li> 
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -176,7 +175,7 @@
                             </li>
 
                         </ul>
-                    </li>                
+                    </li>
                     @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
                     {
                         <li>
@@ -187,15 +186,13 @@
                         </li>
                     }
                 </ul>
-
-
             </div>
-        </div>  
+        </div>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Cá nhân</a>
                 <a class="nav-item nav-link " id="nav-quanLy-tab" data-toggle="tab" href="#nav-quanLy" role="tab" aria-controls="nav-home" aria-selected="false">Quản lý</a>
-                </div>
+            </div>
         </nav>
     </nav>
 </div>

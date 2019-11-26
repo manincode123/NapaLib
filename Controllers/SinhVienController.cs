@@ -9,6 +9,7 @@ using NAPASTUDENT.Models;
 
 namespace NAPASTUDENT.Controllers
 {
+    [Authorize]
     public class SinhVienController : Controller
     {
         private readonly ApplicationDbContext _context;

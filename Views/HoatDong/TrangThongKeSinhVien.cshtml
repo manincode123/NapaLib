@@ -4,7 +4,13 @@
     ViewBag.Title = "Thống kê hoạt động sinh viên";
 }        
 @Html.AntiForgeryToken()
-<link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">
+<link href="/Content/SiteCss/HoatDongStyles.css" rel="stylesheet">          
+
+<div class="HeaderContainer">
+    <span class="Header">Hoạt động</span>
+    <span class="HeaderText" style="color: lightgrey">|</span>
+    <span class="HeaderText" style="color: coral">Thống kê hoạt động sinh viên</span>
+</div> 
 <div id="thongKeHoatDongSinhVien_body">
     <a href="" class="thongTinSvContainer_ThongKeHdSv">
         <img src="/Content/AnhBia/AnhSV/avatar.png" alt="Ảnh bìa sinh viên" id="anhBiaSv_ThongKeHdSv" class="img-fluid" />

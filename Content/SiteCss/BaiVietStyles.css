@@ -39,7 +39,7 @@
 .featured-wrap {
     display: flex;
     flex-wrap: wrap;
-    max-height: 725px;
+    height: 685px;
     width: 725px;
 }
 .featured-wrap .featured {
@@ -106,7 +106,7 @@
     border-top: 1px solid lightgrey;
     width: 250px;
     overflow: scroll;
-    height: 100%;
+    max-height: 100%;
 
 }
 .featured-wrap .sub-featured::-webkit-scrollbar { width: 5px !important }
@@ -176,6 +176,7 @@
     right: 0;
     background: gainsboro;
     border-top: 1px gray solid;
+    list-style-type: none;
     /*display: none;*/
 }
 .chuyenMucHeader ul li {
@@ -436,16 +437,17 @@
     text-decoration: underline;
 }
 /*Trang phê duyệt bài viết*/
-#baiVietPheDuyet .xemBaiViet-js {
-    margin-bottom: 5px
+#baiVietPheDuyet .xemBaiViet-js,
+#baiVietPheDuyet .pheDuyet-js,
+#quanLyBaiViet .xemBaiViet-js,
+#quanLyBaiViet .chinhSuaBaiViet-js
+{
+    margin-bottom: 5px;
+    margin-right: 5px;
 }
-#baiVietPheDuyet .pheDuyet-js {
-    margin-bottom: 5px
-}
-#quanLyBaiViet .xemBaiViet-js {
-    margin-bottom: 5px
-}
-#quanLyBaiViet .chinhSuaBaiViet-js {
+
+#baiVietPheDuyet .xoa-js,
+#quanLyBaiViet .xoa-js {
     margin-bottom: 5px
 }
 /*Trang quản lý chuyên mục*/

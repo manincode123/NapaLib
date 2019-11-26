@@ -38,6 +38,7 @@ namespace NAPASTUDENT.Models.DTOs.SinhVienDto
         public string AnhDaiDien { get; set; }
 
         public string MSSV { get; set; }
+        public string GioiThieu { get; set; }
 
         public HoiVienDoanVienDto DoanVien { get; set; }
 

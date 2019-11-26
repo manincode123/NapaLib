@@ -291,9 +291,9 @@ $(document).ready(function () {
 
     $("#sidebar-toggle").on("click",
         function() {
-            $("#sidebar").toggleClass("active");
-            $(".pageBody").toggleClass("active");
-            $(".navbar").toggleClass("active");
+            $("#sidebar").toggleClass("sidebar-actived");
+            $(".pageBody").toggleClass("sidebar-actived");
+            $(".navbar").toggleClass("sidebar-actived");
         });
     gioiThieuListener();
     setValidationDefault();

@@ -63,7 +63,7 @@ namespace NAPASTUDENT.Models
         {
             Mapper.Map(baiVietDto,this);
             Tag(baiVietDto);
-            NgayTao = DateTime.Now.Date;
+            NgayTao = DateTime.Now;
             NguoiTaoId = userSinhVienId;
         }
 
