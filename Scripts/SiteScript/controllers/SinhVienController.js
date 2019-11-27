@@ -38,7 +38,7 @@
 }
 var limitCharacter = function() {
     limitCharacterForInput("hoVaTenLotSinhVien-input");
-    limitCharacterForInput("ten-input");
+    limitCharacterForInput("tenSinhVien-input");
 }
 var QuanLySinhVienController = function (quanLySinhVienService) {
     //Biến chứa data ảnh bìa để save lên server
@@ -307,8 +307,7 @@ var QuanLySinhVienController = function (quanLySinhVienService) {
             showLoader();
             bindSinhVienDto();
             uploadAnhDaiDien();
-            console.log(sinhVienDto);
-            //quanLySinhVienService.saveSinhVien(sinhVienDto, updateAfterSaveSinhVien);
+            quanLySinhVienService.saveSinhVien(sinhVienDto, updateAfterSaveSinhVien);
         } else alert("Hãy nhập chính xác các thông tin cần thiết.");
     }
     var initTrang = function () {
